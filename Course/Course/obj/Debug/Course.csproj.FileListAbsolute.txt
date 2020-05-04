@@ -1,0 +1,15 @@
+D:\CourseRepos\Course\Course\bin\Debug\Course.exe.config
+D:\CourseRepos\Course\Course\bin\Debug\Course.exe
+D:\CourseRepos\Course\Course\bin\Debug\Course.pdb
+D:\CourseRepos\Course\Course\obj\Debug\Course.csprojAssemblyReference.cache
+D:\CourseRepos\Course\Course\obj\Debug\MainWindow.g.cs
+D:\CourseRepos\Course\Course\obj\Debug\App.g.cs
+D:\CourseRepos\Course\Course\obj\Debug\Course_MarkupCompile.cache
+D:\CourseRepos\Course\Course\obj\Debug\Course_MarkupCompile.lref
+D:\CourseRepos\Course\Course\obj\Debug\MainWindow.baml
+D:\CourseRepos\Course\Course\obj\Debug\Course.g.resources
+D:\CourseRepos\Course\Course\obj\Debug\Course.Properties.Resources.resources
+D:\CourseRepos\Course\Course\obj\Debug\Course.csproj.GenerateResource.cache
+D:\CourseRepos\Course\Course\obj\Debug\Course.csproj.CoreCompileInputs.cache
+D:\CourseRepos\Course\Course\obj\Debug\Course.exe
+D:\CourseRepos\Course\Course\obj\Debug\Course.pdb

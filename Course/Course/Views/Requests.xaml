@@ -1,0 +1,61 @@
+﻿<Window x:Class="Course.Requests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Course"
+        mc:Ignorable="d"
+        Title="Requests" Height="450" Width="800">
+    <Window.Background> <ImageBrush ImageSource="../Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush></Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31*"></RowDefinition>
+            <RowDefinition Height="42*"></RowDefinition>
+            <RowDefinition Height="44*"></RowDefinition>
+            <RowDefinition Height="302*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" >
+            <MenuItem Header="Файл">
+                <Separator/>
+                <MenuItem Header="Выход" ></MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBar Grid.Row="1" Grid.Column="1">
+            <ToggleButton ToolTip=" наименование и количество экземпляров всех изданий, получаемых отделением связи">
+                <Image Source="../Images/request.png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="По заданному адресу определить фамилию почтальона, обслуживающего подписчика">
+                <Image Source="../Images/request (1).png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Какие газеты выписывает гражданин с указанной фамилией, именем, отчеством">
+                <Image Source="../Images/request.png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Сколько почтальонов работает в почтовом отделении">
+                <Image Source="../Images/request (1).png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="На каком участке количество экземпляров подписных изданий максимально">
+                <Image Source="../Images/request.png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip=" средний срок подписки по каждому изданию">
+                <Image Source="../Images/request (1).png"></Image>
+            </ToggleButton>
+            <Separator/>
+
+         
+
+        </ToolBar>
+        <StackPanel Grid.Row="2" Background="White">
+            <Label Height="45" FontSize="30" HorizontalAlignment="Center" Content="Запрос:" ></Label>
+
+        </StackPanel>
+        <StackPanel Grid.Row="3" Margin="0,0,0,-9">
+            <DataGrid Name="dgvRequests" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></DataGrid>
+
+        </StackPanel>
+    </Grid>
+</Window>
