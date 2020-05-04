@@ -94,5 +94,24 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\244-2446538_svg-icon-free-shopping-list-icon-transparent.png" />
+    <Resource Include="Images\list.png" />
+    <Resource Include="Images\subscribe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Minus.png" />
+    <Resource Include="Images\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Space-red-galaxy-stars_2560x1600.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\request %281%29.png" />
+    <Resource Include="Images\request.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1200px-Add_document_icon_%28the_Noun_Project_27896%29_blue.svg.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

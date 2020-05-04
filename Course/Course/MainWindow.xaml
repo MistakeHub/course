@@ -5,8 +5,108 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="970"  >
+  <Window.Background> <ImageBrush ImageSource="Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush></Window.Background>
     <Grid>
-      
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="156*"/>
+            <RowDefinition Height="66*"/>
+            <RowDefinition Height="120*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="577*"/>
+            <ColumnDefinition Width="385*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2">
+            <MenuItem Header="Файл">
+               <Separator/>
+                <MenuItem Header="Выход" ></MenuItem>
+
+            </MenuItem>
+            <MenuItem Header="Изменить" >
+                <MenuItem Header="Принять почтальона"></MenuItem>
+                <MenuItem Header="Уволить Почтальона"></MenuItem>
+
+            </MenuItem>
+            <MenuItem Header="Подписки">
+<MenuItem Header="Оформить Подписку"></MenuItem>
+               <MenuItem Header="Добавить сведения о новой подписки в БД"></MenuItem>
+                
+
+            </MenuItem>
+            <MenuItem Header="Отчёт">
+<MenuItem Header="Доставка почтовых газет"></MenuItem>
+<MenuItem Header="Различность добавлений изданий "></MenuItem>
+
+            </MenuItem>
+            <MenuItem Header="О программе "></MenuItem>
+         
+        </Menu>
+        <ToolBar Grid.Column="0" Grid.Row="1">
+
+            <ToggleButton ToolTip="Принять почтальона"><Image Source="Images/Plus.png"></Image></ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Уволить почтальона"><Image Source="Images/Minus.png"></Image></ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Добавить подписку"><Image Source="Images/subscribe.png"></Image></ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Отчёт об доставки газет" ><Image Source="Images/list.png"></Image></ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Отчёт об Различности добавления газет"><Image Source="Images/244-2446538_svg-icon-free-shopping-list-icon-transparent.png"></Image></ToggleButton>
+        </ToolBar>
+        <ToolBar Grid.Row="1" Grid.Column="1">
+            <ToggleButton ToolTip=" наименование и количество экземпляров всех изданий, получаемых отделением связи"><Image Source="Images/request.png"></Image></ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="По заданному адресу определить фамилию почтальона, обслуживающего подписчика">
+                <Image Source="Images/request (1).png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Какие газеты выписывает гражданин с указанной фамилией, именем, отчеством">
+                <Image Source="Images/request.png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Сколько почтальонов работает в почтовом отделении">
+                <Image Source="Images/request (1).png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="На каком участке количество экземпляров подписных изданий максимально">
+                <Image Source="Images/request.png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip=" средний срок подписки по каждому изданию">
+                <Image Source="Images/request (1).png"></Image>
+            </ToggleButton>
+            <Separator/>
+            <ToggleButton ToolTip="Добавить сведения о новой подписки в БД"><Image Source="Images/1200px-Add_document_icon_(the_Noun_Project_27896)_blue.svg.png"></Image></ToggleButton>
+            
+
+        </ToolBar>
+<TabControl Name="tcl1" Grid.Column="0" Grid.Row="2">
+
+    <TabItem Name="Mail">
+        <TabItem.Header>
+            <TextBlock >Почтальоны</TextBlock>
+        </TabItem.Header>
+
+                <DataGrid  Name="dgvMail" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>
+
+    </TabItem>
+    <TabItem>
+        <TabItem.Header>
+            <TextBlock >Подписчики</TextBlock>
+        </TabItem.Header>
+                <DataGrid  Name="dgvSub" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>
+    </TabItem>
+</TabControl>
+        <DataGrid Grid.Row="4" Grid.Column="0"  Name="dgvEdition" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>
+        <StatusBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"></StatusBar>
+
+        <DataGrid Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Name="dgvDB" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+         
+        </DataGrid>
+       
     </Grid>
 </Window>
