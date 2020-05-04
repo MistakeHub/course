@@ -39,11 +39,13 @@
             </MenuItem>
             <MenuItem Header="Отчёт">
 <MenuItem Header="Доставка почтовых газет"></MenuItem>
-<MenuItem Header="Различность добавлений изданий "></MenuItem>
+
 
             </MenuItem>
             <MenuItem Header="О программе "></MenuItem>
-         
+         <MenuItem Header="Справка">
+                <MenuItem Header="о количестве подписчиков, газет и  журналов, выписанных на текущий момент подписчиками."></MenuItem>
+         </MenuItem>
         </Menu>
         <ToolBar Grid.Column="0" Grid.Row="1">
 
@@ -55,7 +57,7 @@
             <Separator/>
             <ToggleButton ToolTip="Отчёт об доставки газет" ><Image Source="Images/list.png"></Image></ToggleButton>
             <Separator/>
-            <ToggleButton ToolTip="Отчёт об Различности добавления газет"><Image Source="Images/244-2446538_svg-icon-free-shopping-list-icon-transparent.png"></Image></ToggleButton>
+    
         </ToolBar>
         <ToolBar Grid.Row="1" Grid.Column="1">
             <ToggleButton ToolTip=" наименование и количество экземпляров всех изданий, получаемых отделением связи"><Image Source="Images/request.png"></Image></ToggleButton>
