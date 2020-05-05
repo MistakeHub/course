@@ -93,7 +93,7 @@
             <TextBlock >Почтальоны</TextBlock>
         </TabItem.Header>
 
-                <DataGrid  Name="dgvMail" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>
+                <TextBlock  Name="dgvMail" ></TextBlock>
 
     </TabItem>
     <TabItem>
@@ -106,9 +106,9 @@
         <DataGrid Grid.Row="4" Grid.Column="0"  Name="dgvEdition" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>
         <StatusBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"></StatusBar>
 
-        <DataGrid Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Name="dgvDB" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ListBox Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Name="dgvDB" >
          
-        </DataGrid>
+        </ListBox>
        
     </Grid>
 </Window>

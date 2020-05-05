@@ -13,3 +13,14 @@ D:\CourseRepos\Course\Course\obj\Debug\Course.csproj.GenerateResource.cache
 D:\CourseRepos\Course\Course\obj\Debug\Course.csproj.CoreCompileInputs.cache
 D:\CourseRepos\Course\Course\obj\Debug\Course.exe
 D:\CourseRepos\Course\Course\obj\Debug\Course.pdb
+D:\CourseRepos\Course\Course\obj\Debug\Views\About.g.cs
+D:\CourseRepos\Course\Course\obj\Debug\Views\Reference.g.cs
+D:\CourseRepos\Course\Course\obj\Debug\Views\Report.g.cs
+D:\CourseRepos\Course\Course\obj\Debug\Views\Requests.g.cs
+D:\CourseRepos\Course\Course\bin\Debug\EntityFramework.dll
+D:\CourseRepos\Course\Course\bin\Debug\EntityFramework.xml
+D:\CourseRepos\Course\Course\obj\Debug\Views\About.baml
+D:\CourseRepos\Course\Course\obj\Debug\Views\Reference.baml
+D:\CourseRepos\Course\Course\obj\Debug\Views\Report.baml
+D:\CourseRepos\Course\Course\obj\Debug\Views\Requests.baml
+D:\CourseRepos\Course\Course\obj\Debug\Course.csproj.CopyComplete

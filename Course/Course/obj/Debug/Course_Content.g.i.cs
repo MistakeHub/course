@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/1200px-add_document_icon_(the_noun_project_27896)_blue.svg.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("db.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("db_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/modelmail.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/modelmail.edmx.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/modelmail.tt")]
 
 
