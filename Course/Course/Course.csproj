@@ -77,15 +77,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\ModelsMail.Context.cs">
+    <Compile Include="Model\ModelMail.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelsMail.Context.tt</DependentUpon>
+      <DependentUpon>ModelMail.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ModelsMail.Designer.cs">
+    <Compile Include="Model\ModelMail.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelsMail.edmx</DependentUpon>
+      <DependentUpon>ModelMail.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelMail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMail.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PostManDB.cs">
+      <DependentUpon>ModelMail.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RegionDB.cs">
+      <DependentUpon>ModelMail.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SubEditionDB.cs">
+      <DependentUpon>ModelMail.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SubscriberDB.cs">
+      <DependentUpon>ModelMail.tt</DependentUpon>
     </Compile>
     <Compile Include="PostMan.cs" />
     <Compile Include="Region.cs" />
@@ -150,12 +167,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\ModelsMail.edmx">
+    <EntityDeploy Include="Model\ModelMail.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelsMail.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelMail.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\ModelsMail.edmx.diagram">
-      <DependentUpon>ModelsMail.edmx</DependentUpon>
+    <None Include="Model\ModelMail.edmx.diagram">
+      <DependentUpon>ModelMail.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -186,20 +203,6 @@
     <Resource Include="Images\1200px-Add_document_icon_%28the_Noun_Project_27896%29_blue.svg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\ModelsMail.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelsMail.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\ModelsMail.edmx.sql" />
-    <Content Include="RegionDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="RegionDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>RegionDB.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 и x64%29</ProductName>
@@ -213,6 +216,26 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>DB.mdf</DependentUpon>
+    </Content>
+    <Content Include="Model\ModelMail.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelMail.Context.cs</LastGenOutput>
+      <DependentUpon>ModelMail.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\ModelMail.edmx.sql" />
+    <Content Include="Model\ModelMail.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelMail.cs</LastGenOutput>
+      <DependentUpon>ModelMail.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

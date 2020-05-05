@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelMail.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelMailStoreContainer">
+    <EntitySet Name="RegionDBSet" EntityType="ModelMail.Store.RegionDBSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PostManDBSet" EntityType="ModelMail.Store.PostManDBSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubEditionDBSet" EntityType="ModelMail.Store.SubEditionDBSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubscriberDBSet" EntityType="ModelMail.Store.SubscriberDBSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PostManDBRegionDB" Association="ModelMail.Store.PostManDBRegionDB">
+      <End Role="PostManDB" EntitySet="PostManDBSet" />
+      <End Role="RegionDB" EntitySet="RegionDBSet" />
+    </AssociationSet>
+    <AssociationSet Name="RegionDBPostManDB" Association="ModelMail.Store.RegionDBPostManDB">
+      <End Role="RegionDB" EntitySet="RegionDBSet" />
+      <End Role="PostManDB" EntitySet="PostManDBSet" />
+    </AssociationSet>
+    <AssociationSet Name="RegionDBSubscriberDB" Association="ModelMail.Store.RegionDBSubscriberDB">
+      <End Role="RegionDB" EntitySet="RegionDBSet" />
+      <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
+    </AssociationSet>
+    <AssociationSet Name="SubEditionDBSubscriberDB" Association="ModelMail.Store.SubEditionDBSubscriberDB">
+      <End Role="SubEditionDB" EntitySet="SubEditionDBSet" />
+      <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="RegionDBSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleReg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostManDB_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostManDBSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegionDB1_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubEditionDBSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubscriberDBSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SurnameNpSub" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateStart" Type="datetime" Nullable="false" />
+    <Property Name="DateEnd" Type="datetime" Nullable="false" />
+    <Property Name="RegionDB_Id" Type="int" Nullable="false" />
+    <Property Name="SubEditionDB_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PostManDBRegionDB">
+    <End Role="PostManDB" Type="ModelMail.Store.PostManDBSet" Multiplicity="1" />
+    <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostManDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegionDB">
+        <PropertyRef Name="PostManDB_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RegionDBPostManDB">
+    <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="1" />
+    <End Role="PostManDB" Type="ModelMail.Store.PostManDBSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegionDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostManDB">
+        <PropertyRef Name="RegionDB1_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RegionDBSubscriberDB">
+    <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="1" />
+    <End Role="SubscriberDB" Type="ModelMail.Store.SubscriberDBSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegionDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubscriberDB">
+        <PropertyRef Name="RegionDB_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubEditionDBSubscriberDB">
+    <End Role="SubEditionDB" Type="ModelMail.Store.SubEditionDBSet" Multiplicity="1" />
+    <End Role="SubscriberDB" Type="ModelMail.Store.SubscriberDBSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubEditionDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubscriberDB">
+        <PropertyRef Name="SubEditionDB_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModelMail" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelMailContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RegionDBSet" EntityType="ModelMail.RegionDB" />
+          <EntitySet Name="PostManDBSet" EntityType="ModelMail.PostManDB" />
+          <EntitySet Name="SubEditionDBSet" EntityType="ModelMail.SubEditionDB" />
+          <EntitySet Name="SubscriberDBSet" EntityType="ModelMail.SubscriberDB" />
+          <AssociationSet Name="PostManDBRegionDB" Association="ModelMail.PostManDBRegionDB">
+            <End Role="PostManDB" EntitySet="PostManDBSet" />
+            <End Role="RegionDB" EntitySet="RegionDBSet" />
+          </AssociationSet>
+          <AssociationSet Name="RegionDBPostManDB" Association="ModelMail.RegionDBPostManDB">
+            <End Role="RegionDB" EntitySet="RegionDBSet" />
+            <End Role="PostManDB" EntitySet="PostManDBSet" />
+          </AssociationSet>
+          <AssociationSet Name="RegionDBSubscriberDB" Association="ModelMail.RegionDBSubscriberDB">
+            <End Role="RegionDB" EntitySet="RegionDBSet" />
+            <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
+          </AssociationSet>
+          <AssociationSet Name="SubEditionDBSubscriberDB" Association="ModelMail.SubEditionDBSubscriberDB">
+            <End Role="SubEditionDB" EntitySet="SubEditionDBSet" />
+            <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RegionDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleReg" Type="String" Nullable="false" />
+          <NavigationProperty Name="PostManDB" Relationship="ModelMail.PostManDBRegionDB" FromRole="RegionDB" ToRole="PostManDB" />
+          <NavigationProperty Name="PostManDB1" Relationship="ModelMail.RegionDBPostManDB" FromRole="RegionDB" ToRole="PostManDB" />
+          <NavigationProperty Name="SubscriberDB" Relationship="ModelMail.RegionDBSubscriberDB" FromRole="RegionDB" ToRole="SubscriberDB" />
+        </EntityType>
+        <EntityType Name="PostManDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" Nullable="false" />
+          <NavigationProperty Name="RegionDB" Relationship="ModelMail.PostManDBRegionDB" FromRole="PostManDB" ToRole="RegionDB" />
+          <NavigationProperty Name="RegionDB1" Relationship="ModelMail.RegionDBPostManDB" FromRole="PostManDB" ToRole="RegionDB" />
+        </EntityType>
+        <EntityType Name="SubEditionDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="SubscriberDB" Relationship="ModelMail.SubEditionDBSubscriberDB" FromRole="SubEditionDB" ToRole="SubscriberDB" />
+        </EntityType>
+        <EntityType Name="SubscriberDB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurnameNpSub" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="RegionDB" Relationship="ModelMail.RegionDBSubscriberDB" FromRole="SubscriberDB" ToRole="RegionDB" />
+          <NavigationProperty Name="SubEditionDB" Relationship="ModelMail.SubEditionDBSubscriberDB" FromRole="SubscriberDB" ToRole="SubEditionDB" />
+        </EntityType>
+        <Association Name="PostManDBRegionDB">
+          <End Type="ModelMail.PostManDB" Role="PostManDB" Multiplicity="1" />
+          <End Type="ModelMail.RegionDB" Role="RegionDB" Multiplicity="*" />
+        </Association>
+        <Association Name="RegionDBPostManDB">
+          <End Type="ModelMail.RegionDB" Role="RegionDB" Multiplicity="1" />
+          <End Type="ModelMail.PostManDB" Role="PostManDB" Multiplicity="*" />
+        </Association>
+        <Association Name="RegionDBSubscriberDB">
+          <End Type="ModelMail.RegionDB" Role="RegionDB" Multiplicity="1" />
+          <End Type="ModelMail.SubscriberDB" Role="SubscriberDB" Multiplicity="*" />
+        </Association>
+        <Association Name="SubEditionDBSubscriberDB">
+          <End Type="ModelMail.SubEditionDB" Role="SubEditionDB" Multiplicity="1" />
+          <End Type="ModelMail.SubscriberDB" Role="SubscriberDB" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelMailStoreContainer" CdmEntityContainer="ModelMailContainer">
+    <EntitySetMapping Name="RegionDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.RegionDB)">
+        <MappingFragment StoreEntitySet="RegionDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TitleReg" ColumnName="TitleReg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostManDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.PostManDB)">
+        <MappingFragment StoreEntitySet="PostManDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubEditionDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.SubEditionDB)">
+        <MappingFragment StoreEntitySet="SubEditionDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubscriberDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.SubscriberDB)">
+        <MappingFragment StoreEntitySet="SubscriberDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SurnameNpSub" ColumnName="SurnameNpSub" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PostManDBRegionDB" TypeName="ModelMail.PostManDBRegionDB" StoreEntitySet="RegionDBSet">
+      <EndProperty Name="PostManDB">
+        <ScalarProperty Name="Id" ColumnName="PostManDB_Id" />
+      </EndProperty>
+      <EndProperty Name="RegionDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RegionDBPostManDB" TypeName="ModelMail.RegionDBPostManDB" StoreEntitySet="PostManDBSet">
+      <EndProperty Name="RegionDB">
+        <ScalarProperty Name="Id" ColumnName="RegionDB1_Id" />
+      </EndProperty>
+      <EndProperty Name="PostManDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RegionDBSubscriberDB" TypeName="ModelMail.RegionDBSubscriberDB" StoreEntitySet="SubscriberDBSet">
+      <EndProperty Name="RegionDB">
+        <ScalarProperty Name="Id" ColumnName="RegionDB_Id" />
+      </EndProperty>
+      <EndProperty Name="SubscriberDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SubEditionDBSubscriberDB" TypeName="ModelMail.SubEditionDBSubscriberDB" StoreEntitySet="SubscriberDBSet">
+      <EndProperty Name="SubEditionDB">
+        <ScalarProperty Name="Id" ColumnName="SubEditionDB_Id" />
+      </EndProperty>
+      <EndProperty Name="SubscriberDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

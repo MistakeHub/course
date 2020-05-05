@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a8cb72235dbb426bbe0d79a4647ff8b3" Name="Diagram1" >
+        <EntityTypeShape EntityType="ModelMail.RegionDB" Width="1.5" PointX="3.125" PointY="2.125" />
+        <EntityTypeShape EntityType="ModelMail.PostManDB" Width="1.5" PointX="6.375" PointY="3.25" />
+        <EntityTypeShape EntityType="ModelMail.SubEditionDB" Width="1.5" PointX="5.375" PointY="5.5" />
+        <EntityTypeShape EntityType="ModelMail.SubscriberDB" Width="1.5" PointX="1.375" PointY="6.125" />
+        <AssociationConnector Association="ModelMail.PostManDBRegionDB" />
+        <AssociationConnector Association="ModelMail.RegionDBPostManDB" />
+        <AssociationConnector Association="ModelMail.RegionDBSubscriberDB" />
+        <AssociationConnector Association="ModelMail.SubEditionDBSubscriberDB" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
