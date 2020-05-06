@@ -24,5 +24,6 @@ namespace Course.Model
     
         public virtual ICollection<RegionDB> RegionDB { get; set; }
         public virtual RegionDB RegionDB1 { get; set; }
+        public virtual PostalOfficeDB PostalOfficeDB { get; set; }
     }
 }

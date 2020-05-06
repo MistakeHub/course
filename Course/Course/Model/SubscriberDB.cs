@@ -14,13 +14,20 @@ namespace Course.Model
     
     public partial class SubscriberDB
     {
+        public SubscriberDB()
+        {
+            this.SubEditionDB = new HashSet<SubEditionDB>();
+        }
+    
         public int Id { get; set; }
         public string SurnameNpSub { get; set; }
         public string Address { get; set; }
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateEnd { get; set; }
+        public double Term { get; set; }
     
         public virtual RegionDB RegionDB { get; set; }
-        public virtual SubEditionDB SubEditionDB { get; set; }
+        public virtual ICollection<SubEditionDB> SubEditionDB { get; set; }
+        public virtual PostalOfficeDB PostalOfficeDB { get; set; }
     }
 }

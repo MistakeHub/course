@@ -39,7 +39,7 @@ namespace Course
         }
 
         //Индексы Подписного издания
-        public SubEdition[]   IndexEdition { get; set; }
+        public List<SubEdition>   IndexEdition { get; set; }
 
       
         //Дата Оформления Подписки
@@ -56,17 +56,26 @@ namespace Course
             get { return _dateEndSub; }
             set { _dateEndSub = value; }
         }
+        //Срок Подписки
+        public Double Term
+        {
+            get => DateStartSub.Day - DateEndSub.Day;
+        }
 
         //Конструктор с параметрами
-        public Subscriber(string surname, string homeaddress)
+        public Subscriber(string surname, string homeaddress,SubEdition sub, DateTime stadt, DateTime end)
         {
+            _dateStartSub = stadt;
+            _dateEndSub = end;
             _surnameNP = SurnameNP;
             _homeaddress = homeaddress;
-            
+            IndexEdition.Add(sub);
+
 
         }
+
         //Конструктор  Без параметров 
-        public Subscriber():this("ФИО", "Адресс") { }
+        public Subscriber():this("ФИО", "Адресс", new SubEdition(null,0), new DateTime(0), new DateTime(0)) { }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "") =>

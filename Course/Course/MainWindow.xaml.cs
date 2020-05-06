@@ -25,9 +25,13 @@ namespace Course
       
         public MainWindow()
         {
-       
+     
             InitializeComponent();
-       
+
+            DateTime d = new DateTime(19, 07, 2000);
+            DateTime c = new DateTime(19, 07, 1997);
+            DateTime a = d - c;
+
         }
     }
 }

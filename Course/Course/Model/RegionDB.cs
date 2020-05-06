@@ -26,5 +26,6 @@ namespace Course.Model
         public virtual PostManDB PostManDB { get; set; }
         public virtual ICollection<PostManDB> PostManDB1 { get; set; }
         public virtual ICollection<SubscriberDB> SubscriberDB { get; set; }
+        public virtual PostalOfficeDB PostalOfficeDB { get; set; }
     }
 }

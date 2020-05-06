@@ -14,15 +14,11 @@ namespace Course.Model
     
     public partial class SubEditionDB
     {
-        public SubEditionDB()
-        {
-            this.SubscriberDB = new HashSet<SubscriberDB>();
-        }
-    
         public int Id { get; set; }
         public string Title { get; set; }
         public double Price { get; set; }
     
-        public virtual ICollection<SubscriberDB> SubscriberDB { get; set; }
+        public virtual SubscriberDB SubscriberDB { get; set; }
+        public virtual PostalOfficeDB PostalOfficeDB { get; set; }
     }
 }

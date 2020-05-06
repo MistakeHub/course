@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
+using Course.Model;
 
 namespace Course
 {
@@ -14,7 +15,7 @@ namespace Course
     {
         //ФИО Почтальона
         private string _surnameNPPost;
-
+        
         public string SurnameNPPost
         {
             get { return _surnameNPPost; }
@@ -32,7 +33,6 @@ namespace Course
             Regions = regions;
 
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

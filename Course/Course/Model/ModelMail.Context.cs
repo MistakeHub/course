@@ -29,5 +29,6 @@ namespace Course.Model
         public DbSet<PostManDB> PostManDBSet { get; set; }
         public DbSet<SubEditionDB> SubEditionDBSet { get; set; }
         public DbSet<SubscriberDB> SubscriberDBSet { get; set; }
+        public DbSet<PostalOfficeDB> PostalOfficeDBSet { get; set; }
     }
 }

@@ -17,30 +17,78 @@ namespace Course
 
         public DbController()
         {
-            _db=new ModelMailContainer();
+            _db = new ModelMailContainer();
         }
+
+        public int AddSub(SubscriberDB sub)
+        {
+            _db.SubscriberDBSet.Add(sub);
+            _db.SaveChanges();
+
+            return 1; 
+        } 
+
+        public int AddPostMan(PostManDB postman)
+        {
+            _db.PostManDBSet.Add(postman);
+            _db.SaveChanges();
+
+            return 1; // количество добавленных записей
+        } 
+
+        public int AddSubEdition(SubEditionDB sbe)
+        {
+            _db.SubEditionDBSet.Add(sbe);
+            _db.SaveChanges();
+
+            return 1; 
+        } 
+
+        public int AddRegion(RegionDB region)
+        {
+            _db.RegionDBSet.Add(region);
+            _db.SaveChanges();
+
+            return 1; 
+        } 
+
+        public int AddPostalOffice(PostalOfficeDB posof)
+        {
+            _db.PostalOfficeDBSet.Add(posof);
+            _db.SaveChanges();
+
+            return 1; 
+        } 
+
+
         public IList GetSubscriber() => _db
-            .SubscriberDBSet.Select(c => new {
+            .SubscriberDBSet.Select(c => new
+            {
                 c.Id,
-               c.Address
+                c.Address
             }).ToList();
 
         public IList GetSubEdition() => _db
-            .SubEditionDBSet.Select(e => new {
+            .SubEditionDBSet.Select(e => new
+            {
                 e.Id,
-               
+
             }).ToList();
 
         // Получить менеджеров, наследников класса Employee
         // обратите внимание на метод OfType
         public IList GetPostMant() => _db
             .PostManDBSet
-            .Select(m => new {
+            .Select(m => new
+            {
                 m.Id,
-              
+
             }).ToList();
 
-        public IList GetRegion() => _db.RegionDBSet.Select(r=> new{ r.TitleReg ,r.SubscriberDB ,r.PostManDB   }).ToList();
+        public IList GetPostalOffi =>
+            _db.PostalOfficeDBSet.Select(o => new {o.RegionDB, o.SubscriberDB, o.PostManDB}).ToList();
+
+        public IList GetRegion() => _db.RegionDBSet.Select(r => new {r.TitleReg, r.SubscriberDB, r.PostManDB}).ToList();
         // Поиск города по названию в коллекции/таблице городов
 
         public void FihdPostmane(string Address)
@@ -49,24 +97,23 @@ namespace Course
                 .Select(p => new {p.PostManDB.Surname});
         }
 
-        public SubscriberDB FindMagazine(string Surname)
-        {
+        public IList FindMagazine(string Surname) => _db.SubscriberDBSet.Where(s => s.SurnameNpSub == Surname)
+                .Select(p => new {p.SubEditionDB}).ToList();
 
-            _db.SubscriberDBSet.Where(s=> s.SurnameNpSub == Surname).Select(p=> new { p.SubEditionDB = p.SubEditionDB. })
+        public IList NumberOfPostmans()=> _db.PostalOfficeDBSet.GroupBy(p => p.PostManDB).Select(p => new {numberofpostmans = p.Count()}).ToList();
 
-        }
+        public IList AvgDate()
+        => _db.SubscriberDBSet.GroupBy( p => p.SubEditionDB).Select(p => new {AveTerm = p.Average(a => a.Term)}).ToList();
 
 
 
 
-        // Средний возраст по городам
-        public IList AvgAgeByCity() => _db.Employees
-            .GroupBy(byAge => byAge.City.Name)
-            .Select(byAge => new {
-                City = byAge.Key,
-                AvgAge = byAge.Average(e => e.Age),
-                Amount = byAge.Count()
-            }).ToList();
+        public IList NumberOfSubEdition() => _db.PostalOfficeDBSet.GroupBy(p => p.SubEditionDB).Select(p => new { numberofsubEdition = p.Count() }).ToList();
+
+
+
+
+       
     } // class DbController
 }
 
