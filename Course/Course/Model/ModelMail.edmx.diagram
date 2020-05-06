@@ -12,7 +12,12 @@
         <AssociationConnector Association="ModelMail.PostManDBRegionDB" />
         <AssociationConnector Association="ModelMail.RegionDBPostManDB" />
         <AssociationConnector Association="ModelMail.RegionDBSubscriberDB" />
-        <AssociationConnector Association="ModelMail.SubEditionDBSubscriberDB" />
+        <AssociationConnector Association="ModelMail.SubscriberDBSubEditionDB" />
+        <EntityTypeShape EntityType="ModelMail.PostalOfficeDB" Width="1.5" PointX="9" PointY="5.875" />
+        <AssociationConnector Association="ModelMail.PostalOfficeDBSubEditionDB" />
+        <AssociationConnector Association="ModelMail.PostalOfficeDBPostManDB" />
+        <AssociationConnector Association="ModelMail.PostalOfficeDBRegionDB" />
+        <AssociationConnector Association="ModelMail.PostalOfficeDBSubscriberDB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -81,7 +81,7 @@
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DateStart" Type="datetime" Nullable="false" />
     <Property Name="DateEnd" Type="datetime" Nullable="false" />
-    <Property Name="Term" Type="time" Nullable="false" />
+    <Property Name="Term" Type="float" Nullable="false" />
     <Property Name="RegionDB_Id" Type="int" Nullable="false" />
     <Property Name="PostalOfficeDB_Id" Type="int" Nullable="false" />
   </EntityType>
