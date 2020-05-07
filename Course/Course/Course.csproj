@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="PostalOffice.cs" />
     <Compile Include="PostMan.cs" />
+    <Compile Include="Receipt.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="SubEdition.cs" />
     <Compile Include="Subscriber.cs" />
