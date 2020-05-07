@@ -25,7 +25,8 @@ namespace Course
         public List<Region> Regions;
         public List<Subscriber> Subscribers;
         public List<SubEdition> SubEditions;
-
+        public Dictionary<Subscriber, Receipt> SubRec;
+        
         public PostalOffice(string title, List<PostMan> postmans, List<Region> regions, List<Subscriber> subscribers,
             List<SubEdition> subEditions)
         {
@@ -68,7 +69,7 @@ namespace Course
 
         }
 
-        public void Subscribe(SubEdition subed,Subscriber sub, int Year, int mounth, int day)
+        public void Subscribe(SubEdition subed,Subscriber sub,  int daystart, int dateend)
         {
             foreach (var item in SubEditions)
             {
@@ -79,11 +80,12 @@ namespace Course
                     {
                         if (sub == item2)
                         {
-                            DateTime date= new DateTime(Year,mounth, day);
+                           
                             item2.IndexEdition.Add(subed);
-                            item2.DateStartSub.AddYears(Year);
-                            item2.DateStartSub.AddMonths(mounth);
-                            item2.DateStartSub.AddDays(day);
+                            item2.DateStartSub.AddDays(daystart);
+                            item2.DateEndSub.AddDays(dateend);
+                            Receipt rec=new Receipt(subed.Price,subed.Title,item.Price );
+                           SubRec.Add(sub,rec);
 
                         }
                     }
