@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Course"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <PropertyPath x:Key="index" />
     </Application.Resources>
 </Application>

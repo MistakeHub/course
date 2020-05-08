@@ -22,6 +22,7 @@ namespace Course
         public Report()
         {
             InitializeComponent();
+            
         }
     }
 }

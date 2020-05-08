@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Course
 {
     //Работа с Участком
-    class Region
+    public class Region
     {
         //Название Участка
         private string _titleReg;
@@ -27,11 +27,11 @@ namespace Course
         // Подписчики Участка
         public List<Subscriber> Subscribers { get; set; }
         //Конструктор с параметрами 
-        public Region(string title, PostMan postman, List<Subscriber> subscribers)
+        public Region(string title)
         {
             _titleReg = title;
-            Postman = postman;
-            Subscribers = subscribers;
+            Postman = null;
+            Subscribers = new List<Subscriber>();
 
         }
 

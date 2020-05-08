@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Course
 {
-    class Receipt
+    public class Receipt
     {
 
         private double _prices;

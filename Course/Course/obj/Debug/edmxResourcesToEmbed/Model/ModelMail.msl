@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelMailStoreContainer" CdmEntityContainer="ModelMailContainer">
+    <EntitySetMapping Name="RegionDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.RegionDB)">
+        <MappingFragment StoreEntitySet="RegionDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TitleReg" ColumnName="TitleReg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostManDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.PostManDB)">
+        <MappingFragment StoreEntitySet="PostManDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubEditionDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.SubEditionDB)">
+        <MappingFragment StoreEntitySet="SubEditionDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubscriberDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.SubscriberDB)">
+        <MappingFragment StoreEntitySet="SubscriberDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SurnameNpSub" ColumnName="SurnameNpSub" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="Term" ColumnName="Term" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostalOfficeDBSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMail.PostalOfficeDB)">
+        <MappingFragment StoreEntitySet="PostalOfficeDBSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TitlePostal" ColumnName="TitlePostal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PostManDBRegionDB" TypeName="ModelMail.PostManDBRegionDB" StoreEntitySet="RegionDBSet">
+      <EndProperty Name="PostManDB">
+        <ScalarProperty Name="Id" ColumnName="PostManDB_Id" />
+      </EndProperty>
+      <EndProperty Name="RegionDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RegionDBPostManDB" TypeName="ModelMail.RegionDBPostManDB" StoreEntitySet="PostManDBSet">
+      <EndProperty Name="RegionDB">
+        <ScalarProperty Name="Id" ColumnName="RegionDB1_Id" />
+      </EndProperty>
+      <EndProperty Name="PostManDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RegionDBSubscriberDB" TypeName="ModelMail.RegionDBSubscriberDB" StoreEntitySet="SubscriberDBSet">
+      <EndProperty Name="RegionDB">
+        <ScalarProperty Name="Id" ColumnName="RegionDB_Id" />
+      </EndProperty>
+      <EndProperty Name="SubscriberDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SubscriberDBSubEditionDB" TypeName="ModelMail.SubscriberDBSubEditionDB" StoreEntitySet="SubEditionDBSet">
+      <EndProperty Name="SubscriberDB">
+        <ScalarProperty Name="Id" ColumnName="SubscriberDB_Id" />
+      </EndProperty>
+      <EndProperty Name="SubEditionDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PostalOfficeDBSubEditionDB" TypeName="ModelMail.PostalOfficeDBSubEditionDB" StoreEntitySet="SubEditionDBSet">
+      <EndProperty Name="PostalOfficeDB">
+        <ScalarProperty Name="Id" ColumnName="PostalOfficeDB_Id" />
+      </EndProperty>
+      <EndProperty Name="SubEditionDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PostalOfficeDBPostManDB" TypeName="ModelMail.PostalOfficeDBPostManDB" StoreEntitySet="PostManDBSet">
+      <EndProperty Name="PostalOfficeDB">
+        <ScalarProperty Name="Id" ColumnName="PostalOfficeDB_Id" />
+      </EndProperty>
+      <EndProperty Name="PostManDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PostalOfficeDBRegionDB" TypeName="ModelMail.PostalOfficeDBRegionDB" StoreEntitySet="RegionDBSet">
+      <EndProperty Name="PostalOfficeDB">
+        <ScalarProperty Name="Id" ColumnName="PostalOfficeDB_Id" />
+      </EndProperty>
+      <EndProperty Name="RegionDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PostalOfficeDBSubscriberDB" TypeName="ModelMail.PostalOfficeDBSubscriberDB" StoreEntitySet="SubscriberDBSet">
+      <EndProperty Name="PostalOfficeDB">
+        <ScalarProperty Name="Id" ColumnName="PostalOfficeDB_Id" />
+      </EndProperty>
+      <EndProperty Name="SubscriberDB">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

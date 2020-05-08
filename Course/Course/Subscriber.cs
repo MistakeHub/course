@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Course
 {
     // Работа с подписчиками издания
-    class Subscriber
+    public class Subscriber
     {
         //Фамилия, имя и отчество подписчика
         private string _surnameNP;
@@ -39,43 +40,42 @@ namespace Course
         }
 
         //Индексы Подписного издания
-        public List<SubEdition>   IndexEdition { get; set; }
+       
+        public ObservableCollection<SubEdition>   IndexEdition { get  ; set; }
 
       
         //Дата Оформления Подписки
-        private DateTime _dateStartSub;
-        public DateTime DateStartSub
-        {
-            get { return _dateStartSub; }
-            set { _dateStartSub = value; }
-        }
+       
+        public DateTime DateStartSub { get; set; }
         //Дата окончание Подписки
-        private DateTime _dateEndSub;
+      
         public DateTime DateEndSub
         {
-            get { return _dateEndSub; }
-            set { _dateEndSub = value; }
+          get; set;  
         }
         //Срок Подписки
         public Double Term
         {
-            get => DateStartSub.Day - DateEndSub.Day;
+            get => DateEndSub.Day- DateStartSub.Day  ;
         }
 
         //Конструктор с параметрами
-        public Subscriber(string surname, string homeaddress,SubEdition sub, DateTime stadt, DateTime end)
+        public Subscriber(string surname, string homeaddress, DateTime datestart, DateTime end)
         {
-            _dateStartSub = stadt;
-            _dateEndSub = end;
-            _surnameNP = SurnameNP;
+            
+            _surnameNP = surname;
             _homeaddress = homeaddress;
-            IndexEdition.Add(sub);
+            DateStartSub = datestart;
+            DateEndSub = end;
 
+
+            IndexEdition = new ObservableCollection<SubEdition> { };
+            
 
         }
 
         //Конструктор  Без параметров 
-        public Subscriber():this("ФИО", "Адресс", new SubEdition(null,0), new DateTime(0), new DateTime(0)) { }
+        public Subscriber():this("ФИО", "Адресс", new DateTime(0,0,1),new DateTime(0,0,1) ) { }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "") =>

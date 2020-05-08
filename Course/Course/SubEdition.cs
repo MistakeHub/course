@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Course
 {
     //Работа с Подписным изданием 
-    class SubEdition
+    public class SubEdition
     {
        
 

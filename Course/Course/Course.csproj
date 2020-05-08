@@ -108,10 +108,11 @@
     <Compile Include="Model\SubscriberDB.cs">
       <DependentUpon>ModelMail.tt</DependentUpon>
     </Compile>
-    <Compile Include="PostalOffice.cs" />
+    <Compile Include="PostalOfficeViewModel.cs" />
     <Compile Include="PostMan.cs" />
     <Compile Include="Receipt.cs" />
     <Compile Include="Region.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="SubEdition.cs" />
     <Compile Include="Subscriber.cs" />
     <Compile Include="Views\About.xaml.cs">

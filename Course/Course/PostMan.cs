@@ -11,7 +11,7 @@ using Course.Model;
 namespace Course
 {
     //Работа с Почтальоном
-    class PostMan
+  public  class PostMan
     {
         //ФИО Почтальона
         private string _surnameNPPost;
@@ -27,12 +27,14 @@ namespace Course
         //Участок, Участки,  Обслуживаемые Почтальоном
         public List<Region> Regions { get; set; }
         //Конструктор с параметрами 
-        public PostMan(string surname, List<Region> regions)
+        public PostMan(string surname)
         {
             _surnameNPPost = surname;
-            Regions = regions;
+            Regions = new List<Region>();
 
         }
+
+        public PostMan() : this("Имя") { }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

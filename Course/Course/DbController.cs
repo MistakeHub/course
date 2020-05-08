@@ -23,7 +23,7 @@ namespace Course
         public int AddSub(SubscriberDB sub)
         {
             _db.SubscriberDBSet.Add(sub);
-            _db.SaveChanges();
+           
 
             return 1; 
         } 
@@ -31,7 +31,7 @@ namespace Course
         public int AddPostMan(PostManDB postman)
         {
             _db.PostManDBSet.Add(postman);
-            _db.SaveChanges();
+         
 
             return 1; // количество добавленных записей
         } 
@@ -39,7 +39,7 @@ namespace Course
         public int AddSubEdition(SubEditionDB sbe)
         {
             _db.SubEditionDBSet.Add(sbe);
-            _db.SaveChanges();
+           
 
             return 1; 
         } 
@@ -47,7 +47,7 @@ namespace Course
         public int AddRegion(RegionDB region)
         {
             _db.RegionDBSet.Add(region);
-            _db.SaveChanges();
+          
 
             return 1; 
         } 
@@ -55,17 +55,62 @@ namespace Course
         public int AddPostalOffice(PostalOfficeDB posof)
         {
             _db.PostalOfficeDBSet.Add(posof);
-            _db.SaveChanges();
+           
 
             return 1; 
-        } 
+        }
+
+
+        public int RemoveSub(SubscriberDB sub)
+        {
+            _db.SubscriberDBSet.Remove(sub);
+          
+
+            return 1;
+        }
+
+        public int RemovePostMan(PostManDB postman)
+        {
+            _db.PostManDBSet.Remove(postman);
+          
+
+            return 1; // количество добавленных записей
+        }
+
+        public int RemoveSubEdition(SubEditionDB sbe)
+        {
+            _db.SubEditionDBSet.Remove(sbe);
+           
+
+            return 1;
+        }
+
+        public int RemoveRegion(RegionDB region)
+        {
+            _db.RegionDBSet.Remove(region);
+           
+
+            return 1;
+        }
+
+        public int RemovePostalOffice(PostalOfficeDB posof)
+        {
+            _db.PostalOfficeDBSet.Remove(posof);
+            _db.SaveChanges();
+
+            return 1;
+        }
+
 
 
         public IList GetSubscriber() => _db
             .SubscriberDBSet.Select(c => new
             {
                 c.Id,
-                c.Address
+                c.SubEditionDB,
+                c.Address,
+                
+                
             }).ToList();
 
         public IList GetSubEdition() => _db

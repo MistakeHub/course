@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="970"  >
   <Window.Background> <ImageBrush ImageSource="Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush></Window.Background>
-    <Grid>
+   <Window.Resources>
+     
+          
+     
+    </Window.Resources>
+   <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24*"/>
             <RowDefinition Height="34*"/>
@@ -93,14 +98,55 @@
             <TextBlock >Почтальоны</TextBlock>
         </TabItem.Header>
 
-                <TextBlock  Name="dgvMail" ></TextBlock>
+        <ListBox Grid.Row="1" Grid.Column="0" 
+                 ItemsSource="{Binding Subscribers}"
+                 SelectedItem="{Binding SelectedSub}"
+              
+                 Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
 
-    </TabItem>
+                                <TextBlock Text="{Binding Path= IndexEdition}" />
+                                <TextBlock Text="{Binding Path=Title}"/>
+                                <TextBlock Text="{Binding Path=IndexEdition}"  />
+                            </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+            </TabItem>
     <TabItem>
         <TabItem.Header>
             <TextBlock >Подписчики</TextBlock>
         </TabItem.Header>
-                <DataGrid  Name="dgvSub" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>
+     
+                <DataGrid  Name="dgvSub" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
+                           HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Subscribers}" >
+
+                  
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Subscribe">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock  Text="{Binding Path=IndexEdition}"  >Подписки</TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Path=IndexEdition}" >
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Title}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid>
     </TabItem>
 </TabControl>
         <DataGrid Grid.Row="4" Grid.Column="0"  Name="dgvEdition" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>

@@ -21,18 +21,20 @@ namespace Course
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PostalOfficeViewModel _postalOfficeViewModel;
 
-      
+
         public MainWindow()
         {
      
             InitializeComponent();
 
-            DateTime d = new DateTime(19, 07, 2000);
-            DateTime c = new DateTime(19, 07, 1997);
-            TimeSpan a = d.Date - c.Date;
-            
+         _postalOfficeViewModel=new PostalOfficeViewModel("отдел 1");
+         DataContext = _postalOfficeViewModel;
+
 
         }
+
+     
     }
 }
