@@ -8,9 +8,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations.Model;
+using System.Diagnostics.Eventing.Reader;
 using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
+using System.Windows.Threading;
 using Course.Model;
 
 namespace Course
@@ -42,13 +44,27 @@ namespace Course
             }
         } // SelectedPhone
 
+        private PostMan _selectedPostMan;
+        public PostMan SelectedPostMan
+        {
+            get => _selectedPostMan;
+            set
+            {
+                _selectedPostMan = value;
+                OnPropertyChanged(); // "SelectedPhone"
+                OnPropertyChanged("RemoveCommandEnabled");
+            }
+        } // SelectedPhone
+
+  
+
         public SubEdition sb = new SubEdition("Комиксы ", 900);
      
         public ObservableCollection<PostMan> Postmans { get; set; }
         public ObservableCollection<Region> Regions { get; set; }
         public ObservableCollection<Subscriber> Subscribers { get; set; }
         public ObservableCollection<SubEdition> SubEditions { get; set; }
-        public Dictionary<Subscriber, Receipt> SubRec { get; set; }
+        public Dictionary<Receipt, Subscriber> SubRec { get; set; }
 
         public PostalOfficeViewModel(string title)
         {
@@ -66,7 +82,15 @@ namespace Course
 
 
                 };
-          
+                Regions = new ObservableCollection<Region>
+                {
+
+                    new Region("Участок 1" ),
+                    new Region("Участок 2" ),
+
+
+                };
+
             Subscribers = new ObservableCollection<Subscriber>
             {
                 new Subscriber("З.Ш Михайловна","ул. Михайловский проезд, дом 71, квартира 439" , new DateTime(1000,1,1),new DateTime(1000,1,1) ),
@@ -98,26 +122,10 @@ namespace Course
 
 
             };
-            SubRec = new Dictionary<Subscriber, Receipt>();
- 
-
-             
+            SubRec = new Dictionary<Receipt, Subscriber >();
 
 
-               GeneratePostMan(Postmans);
-     GenerateRegion(Regions);
-     GenerateSubEdit(SubEditions);
-     GenerateSub(Subscribers);
-
-
-            Subscribe(sb, new Subscriber("З.Ш Михайловна", "ул. Михайловский проезд, дом 71, квартира 439", new DateTime(1000, 1, 1), new DateTime(1000, 1, 1)), 13, 19);
-
-        }
-
-        public void GeneratePostMan(ObservableCollection<PostMan> post)
-        {
-
-            post = new ObservableCollection<PostMan>
+            Postmans = new ObservableCollection<PostMan>
             {
                 new PostMan{SurnameNPPost = "Горшков Эрик Авксентьевич"},
                 new PostMan{SurnameNPPost = "Сергеев Гарри Георгиевич"},
@@ -134,6 +142,22 @@ namespace Course
 
             };
 
+
+
+            GeneratePostMan(Postmans);
+     GenerateRegion(Regions);
+     GenerateSubEdit(SubEditions);
+     GenerateSub(Subscribers);
+
+
+           
+
+        }
+
+        public void GeneratePostMan(ObservableCollection<PostMan> post)
+        {
+
+
             
             foreach (var item in post)
             {
@@ -146,14 +170,7 @@ namespace Course
 
         public void GenerateRegion(ObservableCollection<Region> Reg)
         {
-            Reg = new ObservableCollection<Region>
-            {
-
-                new Region("Участок 1" ),
-                new Region("Участок 2" ),
-
-
-            };
+            int b = 0;
             foreach (var item in Reg)
             {
                 var rgdb=new RegionDB();
@@ -162,25 +179,33 @@ namespace Course
                 _db.AddRegion(rgdb);
             }
 
+           
+            foreach (var item in Reg)
+                if (item.Postman == null)
+                {
+               
+                    
+                    
+                    
+                        
+
+                        item.Postman = Postmans[b];
+                        Postmans[b].Regions.Add(Reg[b]);
+                    
+
+                    b++;
+
+                }
+
+            int d = 0;
             foreach (var item in Reg)
             {
-                foreach (var item2 in Postmans)
-                {
+               for(int i=0; i<Subscribers.Count; i++)
 
-                    if (item.Postman == null) item.Postman = item2;
-                    
-                }
-                
-            }
+                   if (i < 15) item.Subscribers.Add(Subscribers[i]);
+               else if (i>15) item.Subscribers.Add(Subscribers[i]);
 
-            for (int i = 0; i < Subscribers.Count ; i++)
-            {
-                foreach (var item in Subscribers)
-                {
-               
-                }
-               
-                
+
 
 
             }
@@ -212,99 +237,136 @@ namespace Course
                 subeddb.Price = item.Price;
                 _db.AddSubEdition(subeddb);
 
+
+               
             }
         }
-        public ObservableCollection<PostMan> AddPostMen(PostMan postMan)
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
         {
-            
-            Postmans.Add(postMan);
-            var postdb=new PostManDB();
-            postdb.Surname = postMan.SurnameNPPost;
-            return Postmans;
-        }
-        
-        
-
-        public void DeleTPostMen(PostMan postMan)
-        {
-
-            foreach (var item in Postmans)
+            get
             {
-                if (postMan == item)
-                {
-                   
-                    Postmans.Remove(item);
-                    var postrem=new PostManDB();
-                    postrem.Surname = item.SurnameNPPost;
-                    _db.RemovePostMan(postrem);
-
-                    
-
-                    foreach (var item2 in Regions)
-                    {
-                        if (item2.Postman == item) item2.Postman=null;
+                return addCommand ??
+                       (addCommand = new RelayCommand(obj => {
                         
-                    }
-                };
-
-                foreach (var item3 in Regions)
-                {
-                    if (item3.Postman == null)
-                    {
+                           PostMan post= post = new  PostMan("О.П Папич");
                         
-                        item3.Postman = item;
-                        item3.Postman.Regions.Add(item3);
-                        var postrem = new RegionDB();
-                        postrem.PostManDB.Surname= item3.Postman.SurnameNPPost;
-                      
-                        _db.AddRegion(postrem);
-
-                    }
-                   
-
-
-                }
-
-
-            }
-
-
-
-
-
-        }
-
-        public void Subscribe(SubEdition subed,Subscriber sub,  int daystart, int dateend)
-        {
-            foreach (var item in SubEditions)
-            {
-                if (subed.Title == item.Title)
-                {
-
-                    foreach (var item2 in Subscribers)
-                    {
-                        if (sub.SurnameNP == item2.SurnameNP)
-                        {
+                           Postmans.Insert(0,post);
                            
-                            
-                            item2.IndexEdition.Add(subed);
-
-                            
-                        item2.DateStartSub = new DateTime(1900,07,daystart);
-                          
-                            item2.DateEndSub = new DateTime(1900,07,dateend);
-                            Receipt rec=new Receipt(subed.Price,subed.Title,item.Price );
-                           SubRec.Add(sub,rec);
-                           SelectedSub = sub;
-
-                            
-                        }
-                    }
-
-                }
+                           
+                         
+                       }));
             }
+        } // AddCommand
 
-        }
+
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                       (removeCommand = new RelayCommand(obj => {
+                           
+                           
+                               PostMan postrem=obj as PostMan;
+                              
+
+                               if (postrem != null)
+                               {
+                                   Postmans.Remove(postrem);
+                                   var postrems = new PostManDB();
+                                   postrems.Surname = postrem.SurnameNPPost;
+                                   
+
+                                   foreach (var item2 in Regions)
+                                   {
+                                       if (item2.Postman == postrem) item2.Postman = null;
+
+                                   }
+
+                                   foreach (var item in Postmans)
+                                   {
+
+
+
+                                       foreach (var item3 in Regions)
+                                       {
+                                           if (item3.Postman == null)
+                                           {
+
+                                               item3.Postman = item;
+                                               item3.Postman.Regions.Add(item3);
+                                               var postremss = new RegionDB();
+                                   
+
+                                           }
+                                       }
+                                   }
+                               }
+                           },
+                           obj => Postmans.Count > 0 && _selectedPostMan != null));
+            }
+        } // RemoveCommand
+
+        public bool RemoveCommandEnabled => removeCommand.CanExecute(_selectedPostMan);
+
+
+        private  RelayCommand _subscribe;
+        public RelayCommand Subscribe
+        {
+            get
+            {
+                return _subscribe??
+                       (_subscribe = new RelayCommand(obj => {
+
+                              
+
+                               Subscriber sub= obj as Subscriber;
+
+                               foreach (var item in SubEditions)
+                               {
+
+                                           sub.IndexEdition.Add(item);
+
+
+                                           sub.DateStartSub = new DateTime(1900, 07, 28);
+
+                                           sub.DateEndSub = new DateTime(1900, 07, 30);
+                                           Receipt rec = new Receipt(item.Price, item.Title, item.Price);
+                                         
+                                    SubRec.Add(rec,sub);
+
+                               }
+                               ObservableCollection<Subscriber> subnew = new ObservableCollection<Subscriber>(Subscribers);
+                           Subscribers.Clear();
+                               foreach (var item in subnew)
+                               {
+                                Subscribers.Add(item);
+                               }
+                               
+
+
+                           },
+                           obj => Subscribers.Count > 0 && _selectedSub != null));
+                
+            }
+        } // RemoveCommand
+
+        private RelayCommand _quitCommand;
+        public RelayCommand QuitCommand
+        {
+            get
+            {
+                return _quitCommand ??
+                       (_quitCommand = new RelayCommand(obj => Application.Current.Shutdown()));
+            }
+        } // QuitCommand
+
+
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {

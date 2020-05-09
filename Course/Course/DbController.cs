@@ -69,13 +69,7 @@ namespace Course
             return 1;
         }
 
-        public int RemovePostMan(PostManDB postman)
-        {
-            _db.PostManDBSet.Remove(postman);
-          
-
-            return 1; // количество добавленных записей
-        }
+        
 
         public int RemoveSubEdition(SubEditionDB sbe)
         {

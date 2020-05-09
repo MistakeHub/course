@@ -54,9 +54,11 @@ namespace Course
           get; set;  
         }
         //Срок Подписки
+        public Double _term;
         public Double Term
         {
             get => DateEndSub.Day- DateStartSub.Day  ;
+            set => _term=value;
         }
 
         //Конструктор с параметрами

@@ -7,11 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="970"  >
   <Window.Background> <ImageBrush ImageSource="Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush></Window.Background>
-   <Window.Resources>
-     
-          
-     
-    </Window.Resources>
+ 
    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24*"/>
@@ -28,16 +24,16 @@
         <Menu Grid.Row="0"  VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2">
             <MenuItem Header="Файл">
                <Separator/>
-                <MenuItem Header="Выход" ></MenuItem>
+                <MenuItem Header="Выход" Command="{Binding QuitCommand}" ></MenuItem>
 
             </MenuItem>
             <MenuItem Header="Изменить" >
-                <MenuItem Header="Принять почтальона"></MenuItem>
-                <MenuItem Header="Уволить Почтальона"></MenuItem>
+                <MenuItem  Header="Принять почтальона" Command="{Binding AddCommand}"></MenuItem>
+                <MenuItem Header="Уволить Почтальона"  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}"></MenuItem>
 
             </MenuItem>
             <MenuItem Header="Подписки">
-<MenuItem Header="Оформить Подписку"></MenuItem>
+                <MenuItem Header="Оформить Подписку"  Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}"></MenuItem>
                <MenuItem Header="Добавить сведения о новой подписки в БД"></MenuItem>
                 
 
@@ -54,13 +50,13 @@
         </Menu>
         <ToolBar Grid.Column="0" Grid.Row="1">
 
-            <ToggleButton ToolTip="Принять почтальона"><Image Source="Images/Plus.png"></Image></ToggleButton>
+            <Button Command="{Binding AddCommand}" ToolTip="Принять почтальона"><Image Source="Images/Plus.png"   ></Image></Button>
             <Separator/>
-            <ToggleButton ToolTip="Уволить почтальона"><Image Source="Images/Minus.png"></Image></ToggleButton>
+            <ToggleButton  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}" ToolTip="Уволить почтальона"><Image Source="Images/Minus.png"></Image></ToggleButton>
             <Separator/>
-            <ToggleButton ToolTip="Добавить подписку"><Image Source="Images/subscribe.png"></Image></ToggleButton>
+            <Button Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}" ToolTip="Добавить подписку"><Image Source="Images/subscribe.png"></Image></Button>
             <Separator/>
-            <ToggleButton ToolTip="Отчёт об доставки газет" ><Image Source="Images/list.png"></Image></ToggleButton>
+            <Button ToolTip="Отчёт об доставки газет" ><Image Source="Images/list.png"></Image></Button>
             <Separator/>
     
         </ToolBar>
@@ -97,23 +93,32 @@
         <TabItem.Header>
             <TextBlock >Почтальоны</TextBlock>
         </TabItem.Header>
+        <DataGrid  Name="dgvPost" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
+                   HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Postmans}"  SelectedItem="{Binding SelectedPostMan}" >
 
-        <ListBox Grid.Row="1" Grid.Column="0" 
-                 ItemsSource="{Binding Subscribers}"
-                 SelectedItem="{Binding SelectedSub}"
-              
-                 Margin="5">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5">
 
-                                <TextBlock Text="{Binding Path= IndexEdition}" />
-                                <TextBlock Text="{Binding Path=Title}"/>
-                                <TextBlock Text="{Binding Path=IndexEdition}"  />
-                            </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Regions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                                    <TextBlock  Text="{Binding Path=Regions}"  >Участки</TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Path=Regions}" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                                <TextBlock Text="{Binding Path=TitleReg}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
 
             </TabItem>
     <TabItem>
@@ -122,7 +127,8 @@
         </TabItem.Header>
      
                 <DataGrid  Name="dgvSub" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
-                           HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Subscribers}" >
+                           HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Subscribers}"
+                           SelectedItem="{Binding SelectedSub}">
 
                   
                     <DataGrid.Columns>
@@ -149,12 +155,10 @@
                 </DataGrid>
     </TabItem>
 </TabControl>
-        <DataGrid Grid.Row="4" Grid.Column="0"  Name="dgvEdition" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></DataGrid>
+        <DataGrid Grid.Row="4" Grid.Column="0"  Name="dgvEdition" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding SubEditions}"></DataGrid>
         <StatusBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"></StatusBar>
 
-        <ListBox Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Name="dgvDB" >
-         
-        </ListBox>
-       
+       <DataGrid Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"  Name="dgvDb" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></DataGrid>
+
     </Grid>
 </Window>

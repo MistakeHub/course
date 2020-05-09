@@ -29,3 +29,5 @@ D:\CourseRepos\Course\Course\bin\Debug\DB_log.ldf
 D:\CourseRepos\Course\Course\bin\Debug\ru\EntityFramework.resources.dll
 D:\CourseRepos\Course\Course\obj\Debug\Course_Content.g.cs
 D:\CourseRepos\Course\Course\obj\Debug\App.baml
+D:\CourseRepos\Course\Course\obj\Debug\Views\NewFolder1\LogInForm.g.cs
+D:\CourseRepos\Course\Course\obj\Debug\Views\NewFolder1\LogInForm.baml

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,13 +29,19 @@ namespace Course
         {
      
             InitializeComponent();
-
+            
+          LogInForm log=new LogInForm();
+          log.Show();
          _postalOfficeViewModel=new PostalOfficeViewModel("отдел 1");
          DataContext = _postalOfficeViewModel;
 
 
+        
+         // Инициализация цветом выделения
+      
         }
 
-     
+        
+
     }
 }
