@@ -241,7 +241,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>DB.mdf</DependentUpon>
     </Content>
-    <Resource Include="Images\mail-icon.png" />
+    <Resource Include="Images\275-2754806_photo-logo-email-resume-email-icon-png-transparent.png" />
+    <Resource Include="Images\compute-ea4c57a4.png" />
     <Content Include="Model\ModelMail.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelMail.Context.cs</LastGenOutput>

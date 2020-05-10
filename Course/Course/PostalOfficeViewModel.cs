@@ -12,6 +12,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Threading;
 using Course.Model;
 
@@ -22,6 +23,8 @@ namespace Course
         private DbController _db;
         private string _title;
 
+
+        public ObservableCollection<User> Users;
         public string Title
         {
             get { return _title; }
@@ -44,6 +47,30 @@ namespace Course
             }
         } // SelectedPhone
 
+        private string _usernamelog;
+
+        public string UsernameLog
+        {
+            get => _usernamelog;
+            set
+            {
+                _usernamelog = value;
+
+                OnPropertyChanged();
+            }
+        }
+        private string _passwordLog;
+        public string PasswordLog
+        {
+            get => _passwordLog;
+            set
+            {
+                _passwordLog = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         private PostMan _selectedPostMan;
         public PostMan SelectedPostMan
         {
@@ -56,6 +83,21 @@ namespace Course
             }
         } // SelectedPhone
 
+      private string _names;
+
+      public string Names
+      {
+
+          get => _names;
+          set
+          {
+              _names= value;
+
+              OnPropertyChanged();
+          }
+
+        }
+        
   
 
         public SubEdition sb = new SubEdition("Комиксы ", 900);
@@ -148,17 +190,24 @@ namespace Course
      GenerateRegion(Regions);
      GenerateSubEdit(SubEditions);
      GenerateSub(Subscribers);
+     
+
+           Users =new ObservableCollection<User>
+           {
+
+               new User("qwerty123123","131313"),
+               new User("rofl","151515")
+
+           };
 
 
-           
 
         }
+
 
         public void GeneratePostMan(ObservableCollection<PostMan> post)
         {
 
-
-            
             foreach (var item in post)
             {
                 var postdb=new PostManDB();
@@ -183,17 +232,10 @@ namespace Course
             foreach (var item in Reg)
                 if (item.Postman == null)
                 {
-               
-                    
-                    
-                    
-                        
-
+         
                         item.Postman = Postmans[b];
                         Postmans[b].Regions.Add(Reg[b]);
-                    
-
-                    b++;
+                        b++;
 
                 }
 
@@ -248,13 +290,23 @@ namespace Course
             {
                 return addCommand ??
                        (addCommand = new RelayCommand(obj => {
-                        
-                           PostMan post= post = new  PostMan("О.П Папич");
-                        
-                           Postmans.Insert(0,post);
+                          
                            
+                               if (UsernameLog == "qwerty123123" && PasswordLog == "131313")
+                               {
+
+
+                                   PostMan post = post = new PostMan("О.П Папич");
+
+                                   Postmans.Insert(0, post);
+                               }
+                               else
+                               {
+                                   MessageBox.Show("Недостаточно прав", "Ошибка",  MessageBoxButton.OK,
+                                       MessageBoxImage.Warning);
+                               }
                            
-                         
+
                        }));
             }
         } // AddCommand
@@ -270,41 +322,48 @@ namespace Course
                            
                            
                                PostMan postrem=obj as PostMan;
-                              
-
-                               if (postrem != null)
+                               if (UsernameLog == "qwerty123123" && PasswordLog == "131313")
                                {
-                                   Postmans.Remove(postrem);
-                                   var postrems = new PostManDB();
-                                   postrems.Surname = postrem.SurnameNPPost;
-                                   
 
-                                   foreach (var item2 in Regions)
+                                   if (postrem != null)
                                    {
-                                       if (item2.Postman == postrem) item2.Postman = null;
-
-                                   }
-
-                                   foreach (var item in Postmans)
-                                   {
+                                       Postmans.Remove(postrem);
+                                       var postrems = new PostManDB();
+                                       postrems.Surname = postrem.SurnameNPPost;
 
 
-
-                                       foreach (var item3 in Regions)
+                                       foreach (var item2 in Regions)
                                        {
-                                           if (item3.Postman == null)
+                                           if (item2.Postman == postrem) item2.Postman = null;
+
+                                       }
+
+                                       foreach (var item in Postmans)
+                                       {
+
+
+
+                                           foreach (var item3 in Regions)
                                            {
+                                               if (item3.Postman == null)
+                                               {
 
-                                               item3.Postman = item;
-                                               item3.Postman.Regions.Add(item3);
-                                               var postremss = new RegionDB();
-                                   
+                                                   item3.Postman = item;
+                                                   item3.Postman.Regions.Add(item3);
+                                                   var postremss = new RegionDB();
 
+
+                                               }
                                            }
                                        }
                                    }
                                }
-                           },
+                               else
+                               {
+                                   MessageBox.Show("Недостаточно прав", "Ошибка", MessageBoxButton.OK,
+                                       MessageBoxImage.Warning);
+                               }
+                       },
                            obj => Postmans.Count > 0 && _selectedPostMan != null));
             }
         } // RemoveCommand
@@ -320,31 +379,39 @@ namespace Course
                 return _subscribe??
                        (_subscribe = new RelayCommand(obj => {
 
-                              
-
-                               Subscriber sub= obj as Subscriber;
-
-                               foreach (var item in SubEditions)
+                               if (UsernameLog == "rofl" && PasswordLog == "151515")
                                {
 
-                                           sub.IndexEdition.Add(item);
+                                   Subscriber sub = obj as Subscriber;
+
+                                   foreach (var item in SubEditions)
+                                   {
+
+                                       sub.IndexEdition.Add(item);
 
 
-                                           sub.DateStartSub = new DateTime(1900, 07, 28);
+                                       sub.DateStartSub = new DateTime(1900, 07, 28);
 
-                                           sub.DateEndSub = new DateTime(1900, 07, 30);
-                                           Receipt rec = new Receipt(item.Price, item.Title, item.Price);
-                                         
-                                    SubRec.Add(rec,sub);
+                                       sub.DateEndSub = new DateTime(1900, 07, 30);
+                                       Receipt rec = new Receipt(item.Price, item.Title, item.Price);
 
+                                       SubRec.Add(rec, sub);
+
+                                   }
+
+                                   ObservableCollection<Subscriber> subnew =
+                                       new ObservableCollection<Subscriber>(Subscribers);
+                                   Subscribers.Clear();
+                                   foreach (var item in subnew)
+                                   {
+                                       Subscribers.Add(item);
+                                   }
                                }
-                               ObservableCollection<Subscriber> subnew = new ObservableCollection<Subscriber>(Subscribers);
-                           Subscribers.Clear();
-                               foreach (var item in subnew)
+                               else
                                {
-                                Subscribers.Add(item);
+                                   MessageBox.Show("Недостаточно прав", "Ошибка", MessageBoxButton.OK,
+                                       MessageBoxImage.Warning);
                                }
-                               
 
 
                            },
@@ -362,10 +429,6 @@ namespace Course
                        (_quitCommand = new RelayCommand(obj => Application.Current.Shutdown()));
             }
         } // QuitCommand
-
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

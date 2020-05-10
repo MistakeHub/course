@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Course
 {
-    class User
+   public class User
     {
 
         private string _username;

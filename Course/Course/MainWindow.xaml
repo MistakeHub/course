@@ -6,24 +6,26 @@
         xmlns:local="clr-namespace:Course"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="970"  >
-  <Window.Background> <ImageBrush ImageSource="Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush></Window.Background>
- 
-   <Grid>
+    <Window.Background>
+        <ImageBrush ImageSource="Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush>
+    </Window.Background>
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24*"/>
             <RowDefinition Height="34*"/>
             <RowDefinition Height="156*"/>
             <RowDefinition Height="66*"/>
-            <RowDefinition Height="120*"/>
-            <RowDefinition Height="19*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="23*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="577*"/>
             <ColumnDefinition Width="385*"/>
         </Grid.ColumnDefinitions>
-        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2">
+        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <MenuItem Header="Файл">
-               <Separator/>
+                <Separator/>
                 <MenuItem Header="Выход" Command="{Binding QuitCommand}" ></MenuItem>
 
             </MenuItem>
@@ -34,34 +36,44 @@
             </MenuItem>
             <MenuItem Header="Подписки">
                 <MenuItem Header="Оформить Подписку"  Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}"></MenuItem>
-               <MenuItem Header="Добавить сведения о новой подписки в БД"></MenuItem>
-                
+                <MenuItem Header="Добавить сведения о новой подписки в БД"></MenuItem>
+
 
             </MenuItem>
             <MenuItem Header="Отчёт">
-<MenuItem Header="Доставка почтовых газет"></MenuItem>
+                <MenuItem Header="Доставка почтовых газет"></MenuItem>
 
 
             </MenuItem>
             <MenuItem Header="О программе "></MenuItem>
-         <MenuItem Header="Справка">
+            <MenuItem Header="Справка">
                 <MenuItem Header="о количестве подписчиков, газет и  журналов, выписанных на текущий момент подписчиками."></MenuItem>
-         </MenuItem>
+            </MenuItem>
         </Menu>
         <ToolBar Grid.Column="0" Grid.Row="1">
 
-            <Button Command="{Binding AddCommand}" ToolTip="Принять почтальона"><Image Source="Images/Plus.png"   ></Image></Button>
+            <Button Command="{Binding AddCommand}" ToolTip="Принять почтальона">
+                <Image Source="Images/Plus.png"   ></Image>
+            </Button>
             <Separator/>
-            <ToggleButton  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}" ToolTip="Уволить почтальона"><Image Source="Images/Minus.png"></Image></ToggleButton>
+            <ToggleButton  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}" ToolTip="Уволить почтальона">
+                <Image Source="Images/Minus.png"></Image>
+            </ToggleButton>
             <Separator/>
-            <Button Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}" ToolTip="Добавить подписку"><Image Source="Images/subscribe.png"></Image></Button>
+            <Button Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}" ToolTip="Добавить подписку">
+                <Image Source="Images/subscribe.png"></Image>
+            </Button>
             <Separator/>
-            <Button ToolTip="Отчёт об доставки газет" ><Image Source="Images/list.png"></Image></Button>
+            <Button ToolTip="Отчёт об доставки газет" >
+                <Image Source="Images/list.png"></Image>
+            </Button>
             <Separator/>
-    
+
         </ToolBar>
         <ToolBar Grid.Row="1" Grid.Column="1">
-            <ToggleButton ToolTip=" наименование и количество экземпляров всех изданий, получаемых отделением связи"><Image Source="Images/request.png"></Image></ToggleButton>
+            <ToggleButton ToolTip=" наименование и количество экземпляров всех изданий, получаемых отделением связи">
+                <Image Source="Images/request.png"></Image>
+            </ToggleButton>
             <Separator/>
             <ToggleButton ToolTip="По заданному адресу определить фамилию почтальона, обслуживающего подписчика">
                 <Image Source="Images/request (1).png"></Image>
@@ -83,54 +95,56 @@
                 <Image Source="Images/request (1).png"></Image>
             </ToggleButton>
             <Separator/>
-            <ToggleButton ToolTip="Добавить сведения о новой подписки в БД"><Image Source="Images/1200px-Add_document_icon_(the_Noun_Project_27896)_blue.svg.png"></Image></ToggleButton>
-            
+            <ToggleButton ToolTip="Добавить сведения о новой подписки в БД">
+                <Image Source="Images/1200px-Add_document_icon_(the_Noun_Project_27896)_blue.svg.png"></Image>
+            </ToggleButton>
+
 
         </ToolBar>
-<TabControl Name="tcl1" Grid.Column="0" Grid.Row="2">
+        <TabControl Name="tcl1" Grid.Column="0" Grid.Row="2">
 
-    <TabItem Name="Mail">
-        <TabItem.Header>
-            <TextBlock >Почтальоны</TextBlock>
-        </TabItem.Header>
-        <DataGrid  Name="dgvPost" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
+            <TabItem Name="Mail">
+                <TabItem.Header>
+                    <TextBlock >Почтальоны</TextBlock>
+                </TabItem.Header>
+                <DataGrid  Name="dgvPost" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
                    HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Postmans}"  SelectedItem="{Binding SelectedPostMan}" >
 
 
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Regions">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Regions">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
                                     <TextBlock  Text="{Binding Path=Regions}"  >Участки</TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
                                     <ComboBox ItemsSource="{Binding Path=Regions}" >
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
                                                 <TextBlock Text="{Binding Path=TitleReg}" />
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
 
-        </DataGrid>
+                </DataGrid>
 
             </TabItem>
-    <TabItem>
-        <TabItem.Header>
-            <TextBlock >Подписчики</TextBlock>
-        </TabItem.Header>
-     
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock >Подписчики</TextBlock>
+                </TabItem.Header>
+
                 <DataGrid  Name="dgvSub" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
                            HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Subscribers}"
                            SelectedItem="{Binding SelectedSub}">
 
-                  
+
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Subscribe">
                             <DataGridTemplateColumn.CellTemplate>
@@ -153,12 +167,15 @@
                     </DataGrid.Columns>
 
                 </DataGrid>
-    </TabItem>
-</TabControl>
+            </TabItem>
+        </TabControl>
         <DataGrid Grid.Row="4" Grid.Column="0"  Name="dgvEdition" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding SubEditions}"></DataGrid>
-        <StatusBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"></StatusBar>
+        <StatusBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"     >
+            <TextBlock Width="494" Text="{Binding   Names, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" Height="21"  VerticalAlignment="Top"></TextBlock>
 
-       <DataGrid Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"  Name="dgvDb" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></DataGrid>
+        </StatusBar>
+
+        <DataGrid Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"  Name="dgvDb" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></DataGrid>
 
     </Grid>
 </Window>

@@ -20,13 +20,19 @@ namespace Course
     /// </summary>
     public partial class LogInForm : Window
     {
+        private PostalOfficeViewModel _postalOfficeViewModel;
         private LoginModelView _LoginModel;
         public LogInForm()
         {
             
             InitializeComponent();
-            _LoginModel=new LoginModelView();
-            DataContext = _LoginModel;
+           
+
+
         }
+
+      
+
+
     }
 }

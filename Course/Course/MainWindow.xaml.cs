@@ -23,22 +23,34 @@ namespace Course
     public partial class MainWindow : Window
     {
         private PostalOfficeViewModel _postalOfficeViewModel;
-
+        private LoginModelView _logindModelView;
 
         public MainWindow()
         {
-     
-            InitializeComponent();
+          
+           
+          
             
-          LogInForm log=new LogInForm();
-          log.Show();
-         _postalOfficeViewModel=new PostalOfficeViewModel("отдел 1");
-         DataContext = _postalOfficeViewModel;
+ 
+                InitializeComponent();
 
 
-        
-         // Инициализация цветом выделения
-      
+            LogInForm log=new LogInForm();
+            _logindModelView=new LoginModelView();
+            _postalOfficeViewModel = new PostalOfficeViewModel("отдел 1");
+            _logindModelView.Users = _postalOfficeViewModel.Users;
+            log.DataContext = _logindModelView;
+            log.ShowDialog();
+            _postalOfficeViewModel.UsernameLog = _logindModelView.UserName;
+            _postalOfficeViewModel.PasswordLog = _logindModelView.Password;
+            if (_postalOfficeViewModel.UsernameLog == "qwerty123123")
+                _postalOfficeViewModel.Names = "Авторизован как:Заведующий почтового отдела";
+            else if (_postalOfficeViewModel.UsernameLog == "rofl")
+                _postalOfficeViewModel.Names = "Авторизован как:Оператор почтового отдела";
+            DataContext = _postalOfficeViewModel;
+               
+
+
         }
 
         

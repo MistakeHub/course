@@ -4,66 +4,79 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course"
+       
         mc:Ignorable="d"
-        Title="LogInForm" Height="546" Width="466.4">
+        Title="LogInForm" Height="546" Width="466.4" 
+       >
     <Window.Background>
-        <ImageBrush ImageSource="../../Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush>
+        <ImageBrush ImageSource="../../Images/compute-ea4c57a4.png"></ImageBrush>
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="157*"/>
             <RowDefinition Height="26*"/>
             <RowDefinition Height="28*"/>
-            <RowDefinition Height="55*"/>
+            <RowDefinition Height="54*"/>
             <RowDefinition Height="44*"/>
             <RowDefinition Height="25*"/>
             <RowDefinition Height="54*"/>
-            <RowDefinition Height="125*"/>
-            <RowDefinition/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="101*"/>
+            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
 
-        <StackPanel Grid.Row="0">
-            <Label >
-                <Image Source="/Images/mail-icon.png" Height="150"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="451" ></Image>
-            </Label>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Margin="0,0,0,0">
+            <Button Height="39" Background="Red" FontFamily="Verdana" Foreground="Black" Content="Выход" FontSize="20" Grid.Column="1" Margin="141,2,0,0" VerticalAlignment="Top" Command="{Binding ClosedAll}" ></Button>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Background="White" Margin="154,22,166,0" >
+            <Image Source="/Images/275-2754806_photo-logo-email-resume-email-icon-png-transparent.png" Height="136"  VerticalAlignment="Center" Margin="-60,0,-65,0"   />
 
         </StackPanel>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Вход" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="23" Foreground="White" ></Label>
-        </StackPanel>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Логин" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="Red" ></Label>
-        </StackPanel>
-        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"  >
 
-            <TextBox   Text = "{Binding UserName,Mode = TwoWay}" Margin="0,3,0,1" Background="White" Width="289" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Verdana">
+
+
+        <StackPanel Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="38" Margin="192,151,192,22" Grid.RowSpan="3" Width="74">
+            <Label Content="Вход" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="23" Foreground="White" Width="75" ></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="28" Margin="201,0" Width="56">
+            <Label Content="Логин" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="BlueViolet" ></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="28" Margin="84,13" Width="290"  >
+
+            <TextBox   Text = "{Binding UserName,Mode = TwoWay}" Margin="0,3,0,1" Background="White" Width="289" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Verdana" >
                 <TextBox.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="1" Color="Black" />
                 </TextBox.Effect>
             </TextBox>
 
         </StackPanel>
-        <StackPanel Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="4" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="28" Margin="196,43,196,52" Grid.RowSpan="3" Width="66">
             <Label Content="Пароль" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="Yellow" ></Label>
         </StackPanel>
 
-        <StackPanel Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Margin="84,14" Width="290">
             <TextBox  Text = "{Binding Password,Mode = TwoWay}" Margin="0,3,0,1" Background="White"  Width="289" Height="23"  HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" >
-                
+
                 <TextBox.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="1" Color="Black" />
                 </TextBox.Effect>
-                
+
             </TextBox>
 
         </StackPanel>
-        <StackPanel Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Margin="99,30,93,50" Width="266" >
+        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
 
-            <Border Background="GhostWhite" BorderBrush="Silver" BorderThickness="1" CornerRadius="8,8,3,3" Height="57" Width="278">
-                <StackPanel Margin="10,-3,6,-15" Width="250" RenderTransformOrigin="0.514,0.386" Height="62" VerticalAlignment="Top">
-                    <Button  Command="{Binding Login}"  Content="Вход" Foreground="Black" Background="GhostWhite" Height="52" FontSize="15" Margin="-26,1,-10,1"  FontFamily="Verdana"  />
-                </StackPanel>
-            </Border>
+            <Label Height="26"  >
+                <TextBlock Width="456" Height="24" Text="{Binding Right,Mode=TwoWay}"  Foreground="Red" FontFamily="Verdana" FontSize="20" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Label>
+        </StackPanel>
+        <StackPanel  Grid.Row="8" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="42" Margin="99,31,93,28" Width="266"  Grid.ColumnSpan="2">
+
+            <Button Height="45" Background="Aqua" FontFamily="Verdana" Foreground="Black" Content="Вход" FontSize="30" Command="{Binding Login}"  ></Button>
 
         </StackPanel>
 
