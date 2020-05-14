@@ -16,18 +16,19 @@ namespace Course.Model
     {
         public SubscriberDB()
         {
+            this.Id = 1;
             this.SubEditionDB = new HashSet<SubEditionDB>();
         }
     
         public int Id { get; set; }
         public string SurnameNpSub { get; set; }
         public string Address { get; set; }
-        public System.DateTime DateStart { get; set; }
-        public System.DateTime DateEnd { get; set; }
+        public System.DateTimeOffset DateStart { get; set; }
+        public System.DateTimeOffset DateEnd { get; set; }
         public double Term { get; set; }
     
-        public virtual RegionDB RegionDB { get; set; }
-        public virtual ICollection<SubEditionDB> SubEditionDB { get; set; }
         public virtual PostalOfficeDB PostalOfficeDB { get; set; }
+        public virtual ICollection<SubEditionDB> SubEditionDB { get; set; }
+        public virtual RegionDB RegionDB { get; set; }
     }
 }

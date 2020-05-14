@@ -16,14 +16,14 @@ namespace Course.Model
     {
         public PostManDB()
         {
+            this.Id = 1;
             this.RegionDB = new HashSet<RegionDB>();
         }
     
         public int Id { get; set; }
         public string Surname { get; set; }
     
-        public virtual ICollection<RegionDB> RegionDB { get; set; }
-        public virtual RegionDB RegionDB1 { get; set; }
         public virtual PostalOfficeDB PostalOfficeDB { get; set; }
+        public virtual ICollection<RegionDB> RegionDB { get; set; }
     }
 }

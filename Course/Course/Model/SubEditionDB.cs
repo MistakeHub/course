@@ -14,11 +14,17 @@ namespace Course.Model
     
     public partial class SubEditionDB
     {
+        public SubEditionDB()
+        {
+            this.Id = 1;
+        }
+    
         public int Id { get; set; }
         public string Title { get; set; }
         public double Price { get; set; }
     
-        public virtual SubscriberDB SubscriberDB { get; set; }
         public virtual PostalOfficeDB PostalOfficeDB { get; set; }
+        public virtual SubscriberDB SubscriberDB { get; set; }
+        public virtual RegionDB RegionDB { get; set; }
     }
 }

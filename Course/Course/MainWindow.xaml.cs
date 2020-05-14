@@ -48,7 +48,8 @@ namespace Course
             else if (_postalOfficeViewModel.UsernameLog == "rofl")
                 _postalOfficeViewModel.Names = "Авторизован как:Оператор почтового отдела";
             DataContext = _postalOfficeViewModel;
-               
+           
+
 
 
         }

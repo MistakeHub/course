@@ -9,15 +9,15 @@
         <EntityTypeShape EntityType="ModelMail.PostManDB" Width="1.5" PointX="6.375" PointY="3.25" />
         <EntityTypeShape EntityType="ModelMail.SubEditionDB" Width="1.5" PointX="5.375" PointY="5.5" />
         <EntityTypeShape EntityType="ModelMail.SubscriberDB" Width="1.5" PointX="1.375" PointY="6.125" />
-        <AssociationConnector Association="ModelMail.PostManDBRegionDB" />
-        <AssociationConnector Association="ModelMail.RegionDBPostManDB" />
-        <AssociationConnector Association="ModelMail.RegionDBSubscriberDB" />
-        <AssociationConnector Association="ModelMail.SubscriberDBSubEditionDB" />
         <EntityTypeShape EntityType="ModelMail.PostalOfficeDB" Width="1.5" PointX="9" PointY="5.875" />
         <AssociationConnector Association="ModelMail.PostalOfficeDBSubEditionDB" />
         <AssociationConnector Association="ModelMail.PostalOfficeDBPostManDB" />
-        <AssociationConnector Association="ModelMail.PostalOfficeDBRegionDB" />
         <AssociationConnector Association="ModelMail.PostalOfficeDBSubscriberDB" />
+        <AssociationConnector Association="ModelMail.PostalOfficeDBRegionDB" />
+        <AssociationConnector Association="ModelMail.SubscriberDBSubEditionDB" />
+        <AssociationConnector Association="ModelMail.PostManDBRegionDB" />
+        <AssociationConnector Association="ModelMail.RegionDBSubEditionDB" />
+        <AssociationConnector Association="ModelMail.RegionDBSubscriberDB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

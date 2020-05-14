@@ -6,22 +6,6 @@
     <EntitySet Name="SubEditionDBSet" EntityType="ModelMail.Store.SubEditionDBSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SubscriberDBSet" EntityType="ModelMail.Store.SubscriberDBSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PostalOfficeDBSet" EntityType="ModelMail.Store.PostalOfficeDBSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="PostManDBRegionDB" Association="ModelMail.Store.PostManDBRegionDB">
-      <End Role="PostManDB" EntitySet="PostManDBSet" />
-      <End Role="RegionDB" EntitySet="RegionDBSet" />
-    </AssociationSet>
-    <AssociationSet Name="RegionDBPostManDB" Association="ModelMail.Store.RegionDBPostManDB">
-      <End Role="RegionDB" EntitySet="RegionDBSet" />
-      <End Role="PostManDB" EntitySet="PostManDBSet" />
-    </AssociationSet>
-    <AssociationSet Name="RegionDBSubscriberDB" Association="ModelMail.Store.RegionDBSubscriberDB">
-      <End Role="RegionDB" EntitySet="RegionDBSet" />
-      <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
-    </AssociationSet>
-    <AssociationSet Name="SubscriberDBSubEditionDB" Association="ModelMail.Store.SubscriberDBSubEditionDB">
-      <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
-      <End Role="SubEditionDB" EntitySet="SubEditionDBSet" />
-    </AssociationSet>
     <AssociationSet Name="PostalOfficeDBSubEditionDB" Association="ModelMail.Store.PostalOfficeDBSubEditionDB">
       <End Role="PostalOfficeDB" EntitySet="PostalOfficeDBSet" />
       <End Role="SubEditionDB" EntitySet="SubEditionDBSet" />
@@ -30,12 +14,28 @@
       <End Role="PostalOfficeDB" EntitySet="PostalOfficeDBSet" />
       <End Role="PostManDB" EntitySet="PostManDBSet" />
     </AssociationSet>
+    <AssociationSet Name="PostalOfficeDBSubscriberDB" Association="ModelMail.Store.PostalOfficeDBSubscriberDB">
+      <End Role="PostalOfficeDB" EntitySet="PostalOfficeDBSet" />
+      <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
+    </AssociationSet>
     <AssociationSet Name="PostalOfficeDBRegionDB" Association="ModelMail.Store.PostalOfficeDBRegionDB">
       <End Role="PostalOfficeDB" EntitySet="PostalOfficeDBSet" />
       <End Role="RegionDB" EntitySet="RegionDBSet" />
     </AssociationSet>
-    <AssociationSet Name="PostalOfficeDBSubscriberDB" Association="ModelMail.Store.PostalOfficeDBSubscriberDB">
-      <End Role="PostalOfficeDB" EntitySet="PostalOfficeDBSet" />
+    <AssociationSet Name="SubscriberDBSubEditionDB" Association="ModelMail.Store.SubscriberDBSubEditionDB">
+      <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
+      <End Role="SubEditionDB" EntitySet="SubEditionDBSet" />
+    </AssociationSet>
+    <AssociationSet Name="PostManDBRegionDB" Association="ModelMail.Store.PostManDBRegionDB">
+      <End Role="PostManDB" EntitySet="PostManDBSet" />
+      <End Role="RegionDB" EntitySet="RegionDBSet" />
+    </AssociationSet>
+    <AssociationSet Name="RegionDBSubEditionDB" Association="ModelMail.Store.RegionDBSubEditionDB">
+      <End Role="RegionDB" EntitySet="RegionDBSet" />
+      <End Role="SubEditionDB" EntitySet="SubEditionDBSet" />
+    </AssociationSet>
+    <AssociationSet Name="RegionDBSubscriberDB" Association="ModelMail.Store.RegionDBSubscriberDB">
+      <End Role="RegionDB" EntitySet="RegionDBSet" />
       <End Role="SubscriberDB" EntitySet="SubscriberDBSet" />
     </AssociationSet>
   </EntityContainer>
@@ -43,88 +43,100 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TitleReg" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostManDB_Id" Type="int" Nullable="false" />
-    <Property Name="PostalOfficeDB_Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" DefaultValue="1" />
+    <Property Name="TitleReg" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PostManDB_Id" Type="int" DefaultValue="1" Nullable="true" />
   </EntityType>
   <EntityType Name="PostManDBSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" DefaultValue="1" />
     <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RegionDB1_Id" Type="int" Nullable="false" />
-    <Property Name="PostalOfficeDB_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SubEditionDBSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" DefaultValue="1" />
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="SubscriberDB_Id" Type="int" Nullable="false" />
-    <Property Name="PostalOfficeDB_Id" Type="int" Nullable="false" />
+    <Property Name="SubscriberDB_Id" Type="int" DefaultValue="1" Nullable="true" />
+    <Property Name="RegionDB_Id" Type="int" DefaultValue="1" Nullable="true" />
   </EntityType>
   <EntityType Name="SubscriberDBSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" DefaultValue="1" />
     <Property Name="SurnameNpSub" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DateStart" Type="datetime" Nullable="false" />
-    <Property Name="DateEnd" Type="datetime" Nullable="false" />
+    <Property Name="DateStart" Type="datetimeoffset" Nullable="false" />
+    <Property Name="DateEnd" Type="datetimeoffset" Nullable="false" />
     <Property Name="Term" Type="float" Nullable="false" />
-    <Property Name="RegionDB_Id" Type="int" Nullable="false" />
-    <Property Name="PostalOfficeDB_Id" Type="int" Nullable="false" />
+    <Property Name="RegionDB_Id" Type="int" DefaultValue="1" Nullable="true" />
   </EntityType>
   <EntityType Name="PostalOfficeDBSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" DefaultValue="1" />
     <Property Name="TitlePostal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SubEditionDB_Id" Type="int" DefaultValue="1" Nullable="false" />
+    <Property Name="PostManDB_Id" Type="int" DefaultValue="1" Nullable="false" />
+    <Property Name="SubscriberDB_Id" Type="int" DefaultValue="1" Nullable="false" />
+    <Property Name="RegionDB_Id" Type="int" DefaultValue="1" Nullable="false" />
   </EntityType>
-  <Association Name="PostManDBRegionDB">
+  <Association Name="PostalOfficeDBSubEditionDB">
+    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="*" />
+    <End Role="SubEditionDB" Type="ModelMail.Store.SubEditionDBSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SubEditionDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostalOfficeDB">
+        <PropertyRef Name="SubEditionDB_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PostalOfficeDBPostManDB">
+    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="*" />
     <End Role="PostManDB" Type="ModelMail.Store.PostManDBSet" Multiplicity="1" />
-    <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PostManDB">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="RegionDB">
+      <Dependent Role="PostalOfficeDB">
         <PropertyRef Name="PostManDB_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RegionDBPostManDB">
-    <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="1" />
-    <End Role="PostManDB" Type="ModelMail.Store.PostManDBSet" Multiplicity="*" />
+  <Association Name="PostalOfficeDBSubscriberDB">
+    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="*" />
+    <End Role="SubscriberDB" Type="ModelMail.Store.SubscriberDBSet" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="RegionDB">
+      <Principal Role="SubscriberDB">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PostManDB">
-        <PropertyRef Name="RegionDB1_Id" />
+      <Dependent Role="PostalOfficeDB">
+        <PropertyRef Name="SubscriberDB_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="RegionDBSubscriberDB">
+  <Association Name="PostalOfficeDBRegionDB">
+    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="*" />
     <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="1" />
-    <End Role="SubscriberDB" Type="ModelMail.Store.SubscriberDBSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RegionDB">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="SubscriberDB">
+      <Dependent Role="PostalOfficeDB">
         <PropertyRef Name="RegionDB_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="SubscriberDBSubEditionDB">
-    <End Role="SubscriberDB" Type="ModelMail.Store.SubscriberDBSet" Multiplicity="1" />
+    <End Role="SubscriberDB" Type="ModelMail.Store.SubscriberDBSet" Multiplicity="0..1" />
     <End Role="SubEditionDB" Type="ModelMail.Store.SubEditionDBSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubscriberDB">
@@ -135,51 +147,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PostalOfficeDBSubEditionDB">
-    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="1" />
-    <End Role="SubEditionDB" Type="ModelMail.Store.SubEditionDBSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PostalOfficeDB">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SubEditionDB">
-        <PropertyRef Name="PostalOfficeDB_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PostalOfficeDBPostManDB">
-    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="1" />
-    <End Role="PostManDB" Type="ModelMail.Store.PostManDBSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PostalOfficeDB">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PostManDB">
-        <PropertyRef Name="PostalOfficeDB_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PostalOfficeDBRegionDB">
-    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="1" />
+  <Association Name="PostManDBRegionDB">
+    <End Role="PostManDB" Type="ModelMail.Store.PostManDBSet" Multiplicity="0..1" />
     <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PostalOfficeDB">
+      <Principal Role="PostManDB">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="RegionDB">
-        <PropertyRef Name="PostalOfficeDB_Id" />
+        <PropertyRef Name="PostManDB_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PostalOfficeDBSubscriberDB">
-    <End Role="PostalOfficeDB" Type="ModelMail.Store.PostalOfficeDBSet" Multiplicity="1" />
+  <Association Name="RegionDBSubEditionDB">
+    <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="0..1" />
+    <End Role="SubEditionDB" Type="ModelMail.Store.SubEditionDBSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegionDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubEditionDB">
+        <PropertyRef Name="RegionDB_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RegionDBSubscriberDB">
+    <End Role="RegionDB" Type="ModelMail.Store.RegionDBSet" Multiplicity="0..1" />
     <End Role="SubscriberDB" Type="ModelMail.Store.SubscriberDBSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PostalOfficeDB">
+      <Principal Role="RegionDB">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SubscriberDB">
-        <PropertyRef Name="PostalOfficeDB_Id" />
+        <PropertyRef Name="RegionDB_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +10,35 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations.Model;
 using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
 using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
 using Course.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Course
 {
     public class PostalOfficeViewModel
     {
+        public SubscriberDB _subscriberDb { get; set; }
+        public SubEditionDB _subEditionDb { get; set; }
+        public PostManDB _postManDb { get; set; }
+        public RegionDB _regionDb { get; set; }
+        public List<SubscriberDB> _subscriberDbs { get; set; }
+        public List<SubEditionDB> _subEditionDbs { get; set; }
+        public List<PostManDB> _postManDbs{ get; set; }
+        public List<RegionDB> _regionDbs { get; set; }
+        public PostalOfficeDB PostalOfficeDb { get; set; }
+        public ObservableCollection<PostalOfficeDB> PostalOfficeDbs { get; set; }
         private DbController _db;
         private string _title;
+        public PostalOfficeDB _selectePostalOfficeDb;
+       public  IList sadsada { get; set; }
+       public IList sadsadas { get; set; }
 
 
         public ObservableCollection<User> Users;
@@ -35,6 +52,18 @@ namespace Course
             }
         }
 
+       
+        public PostalOfficeDB SelectedPostOffice
+        {
+            get => _selectePostalOfficeDb;
+            set
+            {
+                _selectePostalOfficeDb = value;
+                OnPropertyChanged(); // "SelectedPhone"
+                OnPropertyChanged("RemoveCommandEnabled");
+            }
+        } // SelectedPhone
+
         private Subscriber _selectedSub;
         public Subscriber SelectedSub
         {
@@ -46,6 +75,8 @@ namespace Course
                 OnPropertyChanged("RemoveCommandEnabled");
             }
         } // SelectedPhone
+
+        
 
         private string _usernamelog;
 
@@ -107,10 +138,15 @@ namespace Course
         public ObservableCollection<Subscriber> Subscribers { get; set; }
         public ObservableCollection<SubEdition> SubEditions { get; set; }
         public Dictionary<Receipt, Subscriber> SubRec { get; set; }
+        public PostalOfficeDB postalOffice;
+        private SubscriberDB sub;
 
         public PostalOfficeViewModel(string title)
         {
-            _db=new DbController();
+
+            
+            
+            _db =new DbController();
                 _title = title;
                 Postmans=new ObservableCollection<PostMan>();
                 Regions = new ObservableCollection<Region>();
@@ -132,6 +168,13 @@ namespace Course
 
 
                 };
+                PostalOfficeDB postalOffice = new PostalOfficeDB();
+                postalOffice.TitlePostal = "отдел1";
+            _subEditionDbs =new List<SubEditionDB>();
+                _subscriberDbs=new List<SubscriberDB>();
+                _regionDbs=new List<RegionDB>();
+                _postManDbs=new List<PostManDB>();
+                PostalOfficeDbs=new ObservableCollection<PostalOfficeDB>();
 
             Subscribers = new ObservableCollection<Subscriber>
             {
@@ -164,6 +207,7 @@ namespace Course
 
 
             };
+
             SubRec = new Dictionary<Receipt, Subscriber >();
 
 
@@ -184,36 +228,99 @@ namespace Course
 
             };
 
+            _postManDb=new PostManDB{  Surname = "dasdassadasda", };
+           
+
+            _subEditionDb =new SubEditionDB();
+            _subscriberDb = new SubscriberDB();
+            _regionDb =  new RegionDB { TitleReg = "Название", SubscriberDB =new List<SubscriberDB>(), PostManDB = new PostManDB{Surname = "dasdasssssssss",}, SubEditionDB = new List<SubEditionDB>(), PostalOfficeDB = PostalOfficeDb };
+
+            PostalOfficeDb = new PostalOfficeDB { TitlePostal = "отдел 1", SubscriberDB = _subscriberDb, RegionDB = _regionDb, PostManDB = _postManDb, SubEditionDB = _subEditionDb };
 
 
-            GeneratePostMan(Postmans);
-     GenerateRegion(Regions);
-     GenerateSubEdit(SubEditions);
-     GenerateSub(Subscribers);
-     
 
-           Users =new ObservableCollection<User>
+
+
+          
+
+            
+            _regionDb.PostalOfficeDB = PostalOfficeDb;
+            _regionDb.PostManDB.PostalOfficeDB = PostalOfficeDb;
+            GenerateRegion(Regions);
+           
+         
+
+            Users =new ObservableCollection<User>
            {
 
                new User("qwerty123123","131313"),
                new User("rofl","151515")
 
            };
+          
+            sadsada = new ObservableCollection<PostalOfficeDB>();
+            GeneratePostaffice();
+         
+           
 
-
+            
+                sadsada=_db.GetPostalOffice();
+          
+   
 
         }
 
 
-        public void GeneratePostMan(ObservableCollection<PostMan> post)
+        public void GeneratePostaloficeSubeditionDB()
         {
 
-            foreach (var item in post)
+
+            PostalOfficeDb.SubEditionDB=_subEditionDb;
+          
+
+        }
+
+        public void GeneratePostaloficeSubscriber()
+        {
+
+            
+            
+                PostalOfficeDb.SubscriberDB=_subscriberDb;
+               
+
+
+        }
+
+        public void GeneratePostaloficePostman()
+        {
+
+            PostalOfficeDbs.Add(PostalOfficeDb);
+                PostalOfficeDb.PostManDB=_postManDb;
+
+
+        }
+
+        public void GeneratePostaloficeRegionDB()
+        {
+
+            
+                PostalOfficeDb.RegionDB=_regionDb;
+
+        
+
+        }
+        public void GeneratePostaloficeDB()
+        {
+
+
+            foreach (var item in PostalOfficeDbs)
             {
-                var postdb=new PostManDB();
-                postdb.Surname = item.SurnameNPPost;
-                _db.AddPostMan(postdb);
+                _db.AddPostalOffice(item);
+                break;
             }
+           
+
+           
 
         }
 
@@ -225,7 +332,7 @@ namespace Course
                 var rgdb=new RegionDB();
                
                 rgdb.TitleReg = item.TitleReg;
-                _db.AddRegion(rgdb);
+              
             }
 
            
@@ -254,35 +361,9 @@ namespace Course
 
         }
 
-        public void GenerateSub(ObservableCollection<Subscriber> sub)
-        {
-
-         
-            foreach (var item in sub)
-            {
-             var subdb=new SubscriberDB();
-             subdb.SurnameNpSub = item.SurnameNP;
-             _db.AddSub(subdb);
-            }
-
-        }
-
-        public void GenerateSubEdit(ObservableCollection<SubEdition> se)
-        {
-
+     
 
         
-            foreach (var item in se)
-            {
-                var subeddb=new SubEditionDB();
-                subeddb.Title = item.Title;
-                subeddb.Price = item.Price;
-                _db.AddSubEdition(subeddb);
-
-
-               
-            }
-        }
         private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
@@ -296,9 +377,13 @@ namespace Course
                                {
 
 
-                                   PostMan post = post = new PostMan("О.П Папич");
+                                   PostMan post  = new PostMan("О.П Папич");
 
                                    Postmans.Insert(0, post);
+                              PostManDB postManDbnew=new PostManDB( );
+                              postManDbnew.Surname = post.SurnameNPPost;
+                              SubEditionDB sb=new SubEditionDB();
+                               _subscriberDb= sb.SubscriberDB;
                                }
                                else
                                {
@@ -329,19 +414,22 @@ namespace Course
                                    {
                                        Postmans.Remove(postrem);
                                        var postrems = new PostManDB();
-                                       postrems.Surname = postrem.SurnameNPPost;
 
+                                    
+                                       
+                                   
 
                                        foreach (var item2 in Regions)
                                        {
                                            if (item2.Postman == postrem) item2.Postman = null;
+                                          
+
+                                               
 
                                        }
 
                                        foreach (var item in Postmans)
                                        {
-
-
 
                                            foreach (var item3 in Regions)
                                            {
@@ -350,20 +438,22 @@ namespace Course
 
                                                    item3.Postman = item;
                                                    item3.Postman.Regions.Add(item3);
-                                                   var postremss = new RegionDB();
+                                                   RegionDB postremss = new RegionDB();
+                                               postremss.PostManDB=new PostManDB{Surname = item.SurnameNPPost, RegionDB = new List<RegionDB>{ new RegionDB{TitleReg = item3.TitleReg }}};
 
-
+                                               _db.AddRegion(postremss);
                                                }
                                            }
                                        }
+
+                                   
                                    }
                                }
                                else
                                {
                                    MessageBox.Show("Недостаточно прав", "Ошибка", MessageBoxButton.OK,
                                        MessageBoxImage.Warning);
-                               }
-                       },
+                               } },
                            obj => Postmans.Count > 0 && _selectedPostMan != null));
             }
         } // RemoveCommand
@@ -383,29 +473,37 @@ namespace Course
                                {
 
                                    Subscriber sub = obj as Subscriber;
+                                   SubscriberDB subdb=new SubscriberDB();
 
                                    foreach (var item in SubEditions)
                                    {
 
                                        sub.IndexEdition.Add(item);
 
-
+                                   
                                        sub.DateStartSub = new DateTime(1900, 07, 28);
 
                                        sub.DateEndSub = new DateTime(1900, 07, 30);
                                        Receipt rec = new Receipt(item.Price, item.Title, item.Price);
-
+                                     
+                                     
+                                      
                                        SubRec.Add(rec, sub);
 
                                    }
 
                                    ObservableCollection<Subscriber> subnew =
                                        new ObservableCollection<Subscriber>(Subscribers);
+                                   SubscriberDB subscriberDbs=_subscriberDb;
+
                                    Subscribers.Clear();
                                    foreach (var item in subnew)
                                    {
                                        Subscribers.Add(item);
+                                       
                                    }
+
+                                  
                                }
                                else
                                {
@@ -429,6 +527,198 @@ namespace Course
                        (_quitCommand = new RelayCommand(obj => Application.Current.Shutdown()));
             }
         } // QuitCommand
+
+
+       
+
+
+
+        public void GeneratePostaffice()
+        {
+            int i = 0;
+
+            foreach (var item2 in Postmans)
+            {
+
+                _postManDb = new PostManDB { Id = i++, Surname = item2.SurnameNPPost, };
+
+                _db.AddPostMan(_postManDb);
+                PostalOfficeDb.PostManDB = _postManDb;
+                _postManDbs.Add(_postManDb);
+            }
+
+
+            foreach (var item in Regions)
+            {
+
+                    _regionDb = new RegionDB
+                    {
+                        Id = i++,
+                        SubEditionDB = new List<SubEditionDB>(),
+                        SubscriberDB = new List<SubscriberDB>(),
+                        TitleReg = item.TitleReg,
+                    };
+
+
+                int coundt = 0;
+                foreach (var item2 in _postManDbs)
+                {
+                    if (coundt == 2) break;
+                    _regionDb.PostManDB = item2;
+                    coundt++;
+                    
+                }
+                _regionDbs.Add(_regionDb);
+                
+            }
+
+            int count = 0;
+
+           
+
+              
+               
+             
+              
+
+
+                    foreach (var item2 in SubEditions)
+                    {
+                        _subEditionDb = new SubEditionDB
+                        {
+                            Id = i++,
+                            Price = item2.Price,
+                            Title = item2.Title,
+
+                        };
+                        _db.AddSubEdition(_subEditionDb);
+                        
+                        _subEditionDbs.Add(_subEditionDb);
+                    }
+                   
+         
+
+                
+
+                
+                    
+                foreach (var item2 in Subscribers) 
+                {
+                      
+                        
+                        
+                      
+                           
+                            
+                                _subscriberDb = new SubscriberDB
+                                {
+                                    Id = i++,
+                                    SurnameNpSub = item2.SurnameNP,
+                                    Address = item2.HomeAddress,
+                                    DateEnd = item2.DateEndSub,
+                                    DateStart = item2.DateStartSub,
+                                    SubEditionDB = new List<SubEditionDB>(),
+                                    Term = item2.Term,
+                                    
+
+                                };
+                              
+                               
+                                _db.AddSubscriber(_subscriberDb);
+                                _subscriberDbs.Add(_subscriberDb);
+                            
+
+                          
+                    
+                }
+
+                foreach (var item in SubEditions)
+                {
+                    _subEditionDb = new SubEditionDB
+                    {
+                        Id = i++,
+                        Price = item.Price,
+                        Title = item.Title,
+
+
+                    };
+
+                }
+
+
+
+            int coutnt = 0;
+            foreach (var item in _subscriberDbs)
+            {
+
+               
+
+                foreach (var item2 in _regionDbs)
+                {
+                    if (coutnt <= 15)
+                    {
+                        PostalOfficeDb.RegionDB = _regionDbs[0];
+                        
+                        break;
+
+
+                    }
+                    else
+                    {
+                        PostalOfficeDb.RegionDB = _regionDbs[1];
+                        break;
+
+                    }
+                    
+                }
+
+               
+                foreach (var item2 in _postManDbs)
+                {
+
+                    if (coutnt <= 15)
+                    {
+                        PostalOfficeDb.PostManDB = _postManDbs[0];
+                        break;
+
+                    }
+                    else if (coutnt > 15)
+                    {
+                        PostalOfficeDb.PostManDB = _postManDbs[1];
+                        break;
+
+                    }
+                }
+
+                foreach (var item2 in _subEditionDbs)
+                {
+                    if (coutnt <= 15)
+                    {
+                        PostalOfficeDb.SubEditionDB = item2;
+                        break;
+
+                    }
+                    else if (coutnt > 15)
+                    {
+                        PostalOfficeDb.SubEditionDB = item2;
+                        break;
+
+                    }
+                }
+                PostalOfficeDb.SubscriberDB = item;
+                PostalOfficeDb.TitlePostal = "Отдел1";
+
+                PostalOfficeDbs.Add(PostalOfficeDb);
+                GeneratePostaloficeDB();
+
+
+
+                coutnt++;
+
+            }
+
+            
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

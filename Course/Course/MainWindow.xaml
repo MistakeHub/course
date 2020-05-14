@@ -175,7 +175,8 @@
 
         </StatusBar>
 
-        <DataGrid Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"  Name="dgvDb" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></DataGrid>
-
+       <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvDB" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+        HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsada}"  SelectedItem="{Binding SelectedPostOffice}"  >
+       </DataGrid>
     </Grid>
 </Window>

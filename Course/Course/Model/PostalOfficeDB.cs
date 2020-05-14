@@ -16,18 +16,15 @@ namespace Course.Model
     {
         public PostalOfficeDB()
         {
-            this.SubEditionDB = new HashSet<SubEditionDB>();
-            this.PostManDB = new HashSet<PostManDB>();
-            this.RegionDB = new HashSet<RegionDB>();
-            this.SubscriberDB = new HashSet<SubscriberDB>();
+            this.Id = 1;
         }
     
         public int Id { get; set; }
         public string TitlePostal { get; set; }
     
-        public virtual ICollection<SubEditionDB> SubEditionDB { get; set; }
-        public virtual ICollection<PostManDB> PostManDB { get; set; }
-        public virtual ICollection<RegionDB> RegionDB { get; set; }
-        public virtual ICollection<SubscriberDB> SubscriberDB { get; set; }
+        public virtual SubEditionDB SubEditionDB { get; set; }
+        public virtual PostManDB PostManDB { get; set; }
+        public virtual SubscriberDB SubscriberDB { get; set; }
+        public virtual RegionDB RegionDB { get; set; }
     }
 }

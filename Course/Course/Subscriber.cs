@@ -71,6 +71,7 @@ namespace Course
             DateEndSub = end;
 
 
+
             IndexEdition = new ObservableCollection<SubEdition> { };
             
 
