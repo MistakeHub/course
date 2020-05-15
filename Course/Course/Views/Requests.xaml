@@ -20,41 +20,95 @@
                 <MenuItem Header="Выход" ></MenuItem>
             </MenuItem>
         </Menu>
-        <ToolBar Grid.Row="1" Grid.Column="1">
-            <ToggleButton ToolTip=" наименование и количество экземпляров всех изданий, получаемых отделением связи">
-                <Image Source="../Images/request.png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="По заданному адресу определить фамилию почтальона, обслуживающего подписчика">
-                <Image Source="../Images/request (1).png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="Какие газеты выписывает гражданин с указанной фамилией, именем, отчеством">
-                <Image Source="../Images/request.png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="Сколько почтальонов работает в почтовом отделении">
-                <Image Source="../Images/request (1).png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="На каком участке количество экземпляров подписных изданий максимально">
-                <Image Source="../Images/request.png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip=" средний срок подписки по каждому изданию">
-                <Image Source="../Images/request (1).png"></Image>
-            </ToggleButton>
-            <Separator/>
-
-         
-
-        </ToolBar>
-        <StackPanel Grid.Row="2" Background="White">
-            <Label Height="45" FontSize="30" HorizontalAlignment="Center" Content="Запрос:" ></Label>
+        
+        <StackPanel Grid.Row="1" Background="White" Margin="193,0,252,0">
+            <Label Height="45" FontSize="30" HorizontalAlignment="Center" Content="Запросы К базе Данных:" ></Label>
 
         </StackPanel>
-        <StackPanel Grid.Row="3" Margin="0,0,0,-9">
-            <DataGrid Name="dgvRequests" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></DataGrid>
+        <StackPanel Grid.Row="2" Grid.RowSpan="2" Margin="0,0,0,-9" >
+            <TabControl Name="tcl2" Grid.Column="1" Grid.Row="2" Grid.RowSpan="3">
+                <TabItem Name="DBmain">
+                    <TabItem.Header>
+                        <TextBlock >Основной</TextBlock>
+                    </TabItem.Header>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvDBmain" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsada,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"  >
+
+                    </DataGrid>
+                </TabItem>
+                <TabItem Name="DBreques1">
+                    <TabItem.Header>
+                        <TextBlock >Запрос1</TextBlock>
+                    </TabItem.Header>
+                    
+                        <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest1" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+                         <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+
+<TextBlock>запросс 1</TextBlock>
+                        </DataTemplate>
+                         </DataGrid.RowDetailsTemplate>
+                    </DataGrid>
+
+                    
+                </TabItem>
+
+                <TabItem Name="DBreques2">
+                    <TabItem.Header>
+                        <TextBlock >Запрос2</TextBlock>
+                    </TabItem.Header>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest2" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+
+                    </DataGrid>
+                </TabItem>
+
+                <TabItem Name="DBreques3">
+                    <TabItem.Header>
+                        <TextBlock >Запрос3</TextBlock>
+                    </TabItem.Header>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest3" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+
+                    </DataGrid>
+                </TabItem>
+
+
+                <TabItem Name="DBreques4">
+                    <TabItem.Header>
+                        <TextBlock >Запрос4</TextBlock>
+                    </TabItem.Header>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest4" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+
+                    </DataGrid>
+                </TabItem>
+
+
+               
+
+                <TabItem Name="DBreques5">
+                    <TabItem.Header>
+                        <TextBlock >Запрос5</TextBlock>
+                    </TabItem.Header>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest5" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+
+                    </DataGrid>
+                </TabItem>
+
+                <TabItem Name="DBreques6">
+                    <TabItem.Header>
+                        <TextBlock >Запрос6</TextBlock>
+                    </TabItem.Header>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest6" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadadada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+
+                    </DataGrid>
+                </TabItem>
+
+            </TabControl>
 
         </StackPanel>
     </Grid>

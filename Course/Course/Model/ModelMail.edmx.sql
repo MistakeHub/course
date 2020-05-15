@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/14/2020 14:02:39
+-- Date Created: 05/15/2020 00:29:00
 -- Generated from EDMX file: D:\CourseRepos\Course\Course\Model\ModelMail.edmx
 -- --------------------------------------------------
 
@@ -32,11 +32,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SubscriberDBSubEditionDB]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SubEditionDBSet] DROP CONSTRAINT [FK_SubscriberDBSubEditionDB];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PostManDBRegionDB_PostManDB]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PostManDBRegionDB] DROP CONSTRAINT [FK_PostManDBRegionDB_PostManDB];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PostManDBRegionDB_RegionDB]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PostManDBRegionDB] DROP CONSTRAINT [FK_PostManDBRegionDB_RegionDB];
+IF OBJECT_ID(N'[dbo].[FK_PostManDBRegionDB]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RegionDBSet] DROP CONSTRAINT [FK_PostManDBRegionDB];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RegionDBSubEditionDB]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SubEditionDBSet] DROP CONSTRAINT [FK_RegionDBSubEditionDB];
@@ -63,9 +60,6 @@ IF OBJECT_ID(N'[dbo].[SubscriberDBSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PostalOfficeDBSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PostalOfficeDBSet];
-GO
-IF OBJECT_ID(N'[dbo].[PostManDBRegionDB]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PostManDBRegionDB];
 GO
 
 -- --------------------------------------------------

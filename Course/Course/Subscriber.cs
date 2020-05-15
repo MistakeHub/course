@@ -57,7 +57,7 @@ namespace Course
         public Double _term;
         public Double Term
         {
-            get => DateEndSub.Day- DateStartSub.Day  ;
+            get => DateEndSub.DayOfYear-DateStartSub.DayOfYear ;
             set => _term=value;
         }
 

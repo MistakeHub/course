@@ -109,7 +109,30 @@ namespace Course
             }
 
             return 1; 
-        } 
+        }
+
+        public int UptadePostalOffice(PostalOfficeDB posof)
+        {
+            _db.PostalOfficeDBSet.AddOrUpdate(posof);
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                        MessageBox.Show("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                    }
+                }
+            }
+
+            return 1;
+        }
+
 
         public int AddPostalOffice(PostalOfficeDB posof)
         {
@@ -264,7 +287,8 @@ namespace Course
                 {
                     Region = o.RegionDB.TitleReg,
                     Subscriber = o.SubscriberDB.SurnameNpSub,
-                    Postman = o.PostManDB.Surname
+                    Postman = o.PostManDB.Surname,
+                    Subedition=o.SubEditionDB.Title
                 }).ToList();
                 
             
@@ -275,24 +299,25 @@ namespace Course
         public IList GetRegion() => _db.RegionDBSet.Select( r => new {r.TitleReg,  r.SubscriberDB, Postman= r.PostManDB.Surname}).ToList();
         // Поиск города по названию в коллекции/таблице городов
 
-        public void FihdPostmane(string Address)
+        public IList FihdPostmane(string Address)
         {
-            _db.RegionDBSet.Where(c => c.SubscriberDB.ToList().Exists(a => a.Address == Address))
-                .Select(p => new {p.PostManDB.Surname});
+            return _db.PostalOfficeDBSet.Where(p => p.SubscriberDB.Address == Address).Select(c => new {c.PostManDB.Surname})
+                .ToList();
+
         }
 
-        public IList FindMagazine(string Surname) => _db.SubscriberDBSet.Where(s => s.SurnameNpSub == Surname)
-                .Select(p => new {p.SubEditionDB}).ToList();
+        public IList FindMagazine(string Surname) => _db.PostalOfficeDBSet
+            .Where(p => p.SubscriberDB.SurnameNpSub == Surname).Select(c => new {c.SubEditionDB.Title, c.SubscriberDB.SurnameNpSub}).ToList();
 
-        public IList NumberOfPostmans()=> _db.PostalOfficeDBSet.GroupBy(p => p.PostManDB).Select(p => new {numberofpostmans = p.Count()}).ToList();
+        public IList NumberOfPostmans()=> _db.PostManDBSet.GroupBy(p => p.Surname).Select(p => new { SurnamePost= p.Key, key=p.Count() }).ToList();
 
         public IList AvgDate()
-        => _db.SubscriberDBSet.GroupBy( p => p.SubEditionDB).Select(p => new {AveTerm = p.Average(a => a.Term)}).ToList();
+        => _db.PostalOfficeDBSet.GroupBy( p => p.SubscriberDB.Term).Select(d => new {AveTerm = d.Average(c=>c.SubscriberDB.Term)}).ToList();
 
 
+        public IList MaxSub() => _db.PostalOfficeDBSet.Where(d=> d.SubEditionDB.Title !="0").GroupBy( d=> d.RegionDB.TitleReg ).Select(p => new {Post=p.Key, Posds=p.Count()}).ToList();
 
-
-        public IList NumberOfSubEdition() => _db.PostalOfficeDBSet.GroupBy(p => p.SubEditionDB).Select(p => new { numberofsubEdition = p.Count() }).ToList();
+        public IList NumberOfSubEdition() => _db.PostalOfficeDBSet.GroupBy(p => p.SubEditionDB.Title).Select(p => new {  numberofsubEdition = p.Count(), Books=p.Key  }).ToList();
 
 
 

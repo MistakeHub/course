@@ -174,9 +174,26 @@
             <TextBlock Width="494" Text="{Binding   Names, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" Height="21"  VerticalAlignment="Top"></TextBlock>
 
         </StatusBar>
+        <TabControl Name="tcl2" Grid.Column="1" Grid.Row="2" Grid.RowSpan="3">
+            <TabItem Name="DBmain">
+                <TabItem.Header>
+                    <TextBlock >Основной</TextBlock>
+                </TabItem.Header>
+                <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvDBmain" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+        HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsada,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"  >
 
-       <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvDB" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-        HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsada}"  SelectedItem="{Binding SelectedPostOffice}"  >
-       </DataGrid>
+            </DataGrid>
+                </TabItem>
+            <TabItem Name="DBreques1">
+                <TabItem.Header>
+                    <TextBlock >Запрос1</TextBlock>
+                </TabItem.Header>
+                <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                          HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+
+                </DataGrid>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </Window>
