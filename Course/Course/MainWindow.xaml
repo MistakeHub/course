@@ -30,31 +30,31 @@
 
             </MenuItem>
             <MenuItem Header="Изменить" >
-                <MenuItem  Header="Принять почтальона" Command="{Binding AddCommand}"></MenuItem>
+                <MenuItem  Header="Принять почтальона" Command="{Binding AddCommand}" CommandParameter="{Binding SelectedPostManRequest}" ></MenuItem>
                 <MenuItem Header="Уволить Почтальона"  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}"></MenuItem>
 
             </MenuItem>
             <MenuItem Header="Подписки">
                 <MenuItem Header="Оформить Подписку"  Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}"></MenuItem>
-                <MenuItem Header="Добавить сведения о новой подписки в БД"></MenuItem>
+             
 
 
             </MenuItem>
             <MenuItem Header="Отчёт">
-                <MenuItem Header="Доставка почтовых газет"></MenuItem>
+                <MenuItem Header="Доставка почтовых газет" Command="{Binding Rep}"></MenuItem>
 
 
             </MenuItem>
-            <MenuItem Header="О программе "></MenuItem>
+            <MenuItem Header="О программе " Command="{Binding About}"></MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="о количестве подписчиков, газет и  журналов, выписанных на текущий момент подписчиками." Command="{ Binding Ref}"></MenuItem>
             </MenuItem>
         </Menu>
         <ToolBar Grid.Column="0" Grid.Row="1">
 
-            <Button Command="{Binding AddCommand}" ToolTip="Принять почтальона">
+            <ToggleButton Command="{Binding AddCommand}" CommandParameter="{Binding SelectedPostManRequest}" ToolTip="Принять почтальона">
                 <Image Source="Images/Plus.png"   ></Image>
-            </Button>
+            </ToggleButton>
             
             <Separator/>
             <ToggleButton  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}" ToolTip="Уволить почтальона">
@@ -64,50 +64,37 @@
             <Button Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}" ToolTip="Добавить подписку">
                 <Image Source="Images/subscribe.png"></Image>
             </Button>
-            <ComboBox SelectedValue="{Binding SubEditionChoose }" SelectedValuePath="Content">
-                <ComboBoxItem>Книга</ComboBoxItem>
-                <ComboBoxItem>Журнал</ComboBoxItem>
-                <ComboBoxItem>Комиксы</ComboBoxItem>
-                <ComboBoxItem>8</ComboBoxItem>
-                <ComboBoxItem>16</ComboBoxItem>
+            <ComboBox SelectedValue="{Binding SubEditionChoose }" SelectedValuePath="Content" Margin="0,4,0,5" Width="68">
+                <ComboBoxItem>Журнал 1-го издания</ComboBoxItem>
+                <ComboBoxItem>Журнал 2-го издания</ComboBoxItem>
+                <ComboBoxItem>Журнал 3-го издания</ComboBoxItem>
+                <ComboBoxItem>Журнал 4-го издания</ComboBoxItem>
+                <ComboBoxItem>Газета 1-го издания</ComboBoxItem>
+                <ComboBoxItem>Газета 2-го издания</ComboBoxItem>
+                <ComboBoxItem>Газета 3-го издания</ComboBoxItem>
+                <ComboBoxItem>Газета 4-го издания</ComboBoxItem>
+               
             </ComboBox>
             <Separator/>
-            <Button ToolTip="Отчёт об доставки газет" >
-                <Image Source="Images/list.png"></Image>
+            <Button ToolTip="Отчёт об доставки газет" Command="{Binding Rep}" >
+                <Image Source="Images/list.png" Width="37"></Image>
             </Button>
             <Separator/>
 
         </ToolBar>
         <ToolBar Grid.Row="1" Grid.Column="1">
-            <ToggleButton ToolTip=" наименование и количество экземпляров всех изданий, получаемых отделением связи">
-                <Image Source="Images/request.png"></Image>
+            <ToggleButton ToolTip=" открыть Базу данных" Command="{Binding Database}">
+                <Image Source="Images/database.png"></Image>
             </ToggleButton>
             <Separator/>
-            <ToggleButton ToolTip="По заданному адресу определить фамилию почтальона, обслуживающего подписчика">
-                <Image Source="Images/request (1).png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="Какие газеты выписывает гражданин с указанной фамилией, именем, отчеством">
-                <Image Source="Images/request.png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="Сколько почтальонов работает в почтовом отделении">
-                <Image Source="Images/request (1).png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="На каком участке количество экземпляров подписных изданий максимально">
-                <Image Source="Images/request.png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip=" средний срок подписки по каждому изданию">
-                <Image Source="Images/request (1).png"></Image>
-            </ToggleButton>
-            <Separator/>
-            <ToggleButton ToolTip="Добавить сведения о новой подписки в БД">
-                <Image Source="Images/1200px-Add_document_icon_(the_Noun_Project_27896)_blue.svg.png"></Image>
-            </ToggleButton>
+<Label>Адресс:</Label>
 
+            <TextBox Width="78" Margin="0,4,0,3" Text = "{Binding Address,Mode = TwoWay}"></TextBox>
+           
+            <Separator/>
+            <Label>ФИО:</Label>
 
+            <TextBox Width="78" Margin="0,4,0,3" Text = "{Binding Surname,Mode = TwoWay}"></TextBox>
         </ToolBar>
         <TabControl Name="tcl1" Grid.Column="0" Grid.Row="2">
 
@@ -145,7 +132,7 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock >Подписчики</TextBlock>
+                    <TextBlock >Заявки на подписку</TextBlock>
                 </TabItem.Header>
 
                 <DataGrid  Name="dgvSub" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
@@ -154,7 +141,7 @@
 
 
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Subscribe">
+                        <DataGridTemplateColumn Header="SubEdition">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock  Text="{Binding Path=IndexEdition}"  >Подписки</TextBlock>
@@ -176,32 +163,30 @@
 
                 </DataGrid>
             </TabItem>
+            <TabItem Name="RequestPost">
+                <TabItem.Header>
+                    <TextBlock >Заявки почтальонов</TextBlock>
+                </TabItem.Header>
+                <DataGrid  Name="dgvRequestPost" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
+                           HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding RequestPostMen}"  SelectedItem="{Binding SelectedPostManRequest}" >
+
+
+
+                </DataGrid>
+
+            </TabItem>
         </TabControl>
         <DataGrid Grid.Row="4" Grid.Column="0"  Name="dgvEdition" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding SubEditions}"></DataGrid>
         <StatusBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"     >
             <TextBlock Width="494" Text="{Binding   Names, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" Height="21"  VerticalAlignment="Top"></TextBlock>
 
         </StatusBar>
-        <TabControl Name="tcl2" Grid.Column="1" Grid.Row="2" Grid.RowSpan="3">
-            <TabItem Name="DBmain">
-                <TabItem.Header>
-                    <TextBlock >Основной</TextBlock>
-                </TabItem.Header>
-               <Label Target="{Binding ElementName= txtbox}" >
-                    <TextBox   Name="txtbox" Text="{Binding countBooks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-               </Label>
 
-            </TabItem>
-            <TabItem Name="DBreques1">
-                <TabItem.Header>
-                    <TextBlock >Запрос1</TextBlock>
-                </TabItem.Header>
-                <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                          HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+        <DataGrid  Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
+                  HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  Receipts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"   >
 
-                </DataGrid>
-            </TabItem>
+        </DataGrid>
 
-        </TabControl>
+
     </Grid>
 </Window>

@@ -11,15 +11,13 @@
             <RowDefinition Height="31*"></RowDefinition>
             <RowDefinition Height="174*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" >
-            <MenuItem Header="Файл">
-                <Separator/>
-                <MenuItem Header="Выход" ></MenuItem>
-            </MenuItem>
-            </Menu>
-            <StackPanel Grid.Row="2" >
+        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" />
+        <StackPanel Grid.Row="1" >
 
-            <TextBlock Height="173" ></TextBlock>
+            <TextBlock Height="170" Margin="0,0,0,0"  ><Run Text=" Программная система, предназначеннуа для работников почтового отделения. "/><LineBreak/><Run Text="Такая система  обеспечивает хранение сведений о подписчиках газет и журналов, обслуживаемых отделением связи, "/><LineBreak/><Run Text="Возможны следующие запросы к БД: "/><LineBreak/><Run Text="-Определить наименование и количество экземпляров всех изданий, получаемых отделением связи."/><LineBreak/><Run Text="-По заданному адресу определить фамилию почтальона, обслуживающего подписчика. "/><LineBreak/><Run Text="-Какие газеты выписывает гражданин с указанной фамилией, именем, отчеством? "/><LineBreak/><Run Text="-Сколько почтальонов работает в почтовом отделении? "/><LineBreak/><Run Text="-На каком участке количество экземпляров подписных изданий максимально? "/><LineBreak/><Run Text="-Каков средний срок подписки по каждому изданию? "/><Run Text="и о почтальонах."/></TextBlock>
+
         </StackPanel>
+
+     
     </Grid>
 </Window>

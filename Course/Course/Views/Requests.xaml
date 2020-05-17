@@ -14,13 +14,8 @@
             <RowDefinition Height="44*"></RowDefinition>
             <RowDefinition Height="302*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" >
-            <MenuItem Header="Файл">
-                <Separator/>
-                <MenuItem Header="Выход" ></MenuItem>
-            </MenuItem>
-        </Menu>
-        
+        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" />
+
         <StackPanel Grid.Row="1" Background="White" Margin="193,0,252,0">
             <Label Height="45" FontSize="30" HorizontalAlignment="Center" Content="Запросы К базе Данных:" ></Label>
 
@@ -32,7 +27,7 @@
                         <TextBlock >Основной</TextBlock>
                     </TabItem.Header>
                     <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvDBmain" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsada,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"  >
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  PostalOfficeRequest,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"  >
 
                     </DataGrid>
                 </TabItem>
@@ -42,14 +37,8 @@
                     </TabItem.Header>
                     
                         <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest1" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
-                         <DataGrid.RowDetailsTemplate>
-                        <DataTemplate>
-
-<TextBlock>запросс 1</TextBlock>
-                        </DataTemplate>
-                         </DataGrid.RowDetailsTemplate>
-                    </DataGrid>
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  RequestFindPostman, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+                        </DataGrid>
 
                     
                 </TabItem>
@@ -59,7 +48,7 @@
                         <TextBlock >Запрос2</TextBlock>
                     </TabItem.Header>
                     <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest2" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  RequestNumberOfSubEdition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
 
                     </DataGrid>
                 </TabItem>
@@ -69,7 +58,7 @@
                         <TextBlock >Запрос3</TextBlock>
                     </TabItem.Header>
                     <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest3" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  RequestAVGDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
 
                     </DataGrid>
                 </TabItem>
@@ -80,7 +69,7 @@
                         <TextBlock >Запрос4</TextBlock>
                     </TabItem.Header>
                     <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest4" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  RequestFindMagazine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
 
                     </DataGrid>
                 </TabItem>
@@ -93,7 +82,7 @@
                         <TextBlock >Запрос5</TextBlock>
                     </TabItem.Header>
                     <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest5" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadadad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding RequestMaxSub, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
 
                     </DataGrid>
                 </TabItem>
@@ -103,7 +92,7 @@
                         <TextBlock >Запрос6</TextBlock>
                     </TabItem.Header>
                     <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvrequest6" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsadadadada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
+                              HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  RequestNumberOfPostmans, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"   >
 
                     </DataGrid>
                 </TabItem>

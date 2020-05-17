@@ -13,6 +13,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
@@ -22,19 +23,53 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Course
 {
+
+    // Работа с Основным ViewModel Приложения
     public class PostalOfficeViewModel
     {
-        public SubscriberDB _subscriberDb { get; set; }
-        public SubEditionDB _subEditionDb { get; set; }
-        public PostManDB _postManDb { get; set; }
-        public RegionDB _regionDb { get; set; }
-        public List<SubscriberDB> _subscriberDbs { get; set; }
-        public List<SubEditionDB> _subEditionDbs { get; set; }
-        public List<PostManDB> _postManDbs{ get; set; }
-        public List<RegionDB> _regionDbs { get; set; }
-        public PostalOfficeDB PostalOfficeDBnew { get; set; }
+        // Переменные, для работы с БД
+        public SubscriberDB SubscriberDb { get; set; }
+        public SubEditionDB SubEditionDb { get; set; }
+        public PostManDB PostManDb { get; set; }
+        public RegionDB RegionDb { get; set; }
+        public List<SubscriberDB> SubscriberDbs { get; set; }
+        public List<SubEditionDB> SubEditionDbs { get; set; }
+        public List<PostManDB> PostManDbs{ get; set; }
+        public List<RegionDB> RegionDbs { get; set; }
+        public PostalOfficeDB PostalOfficeDBNew { get; set; }
         public ObservableCollection<PostalOfficeDB> PostalOfficeDbs { get; set; }
-        public Result Results { get; set; }
+        //Переменные для работы с отчётами< справкой, заявками
+        public ObservableCollection<Result> Results { get; set; }
+        public ObservableCollection<Receipt> Receipts { get; set; }
+        public ObservableCollection<PostMan> RequestPostMen { get; set; }
+        private PostMan _selectedPostManRequest;
+
+        // Переменная, для ввода данных в бп
+        private string _address;
+        public string Address
+        {
+            get => _address;
+            set
+            {
+                _address = value;
+
+                OnPropertyChanged();
+            }
+
+        }
+        // Переменная, для ввода данных в бп
+        private string _surname;
+
+        public string Surname
+        {
+            get => _surname;
+            set
+            {
+                _surname = value; OnPropertyChanged();
+            }
+
+        }
+        
         private string _subeditionchoose;
 
         public string SubEditionChoose
@@ -48,14 +83,25 @@ namespace Course
 
         }
 
+        // Контролллер БД, Для работы с самой БД
         private DbController _db;
-        private string _title;
-        public PostalOfficeDB _selectePostalOfficeDb;
+        // Переменная для получения данных авторизации
+        private string _names;
+
+        public string Names
+        {
+            get { return _names;}
+            set { _names = value; OnPropertyChanged(); }
+        }
+      
+        private PostalOfficeDB _selectePostalOfficeDb;
      
 
 
-
+        // Коолекция, для работы с авторизацией 
         public ObservableCollection<User> Users;
+        // Названия Почтового отдела
+        private string _title;
         public string Title
         {
             get { return _title; }
@@ -74,9 +120,20 @@ namespace Course
             {
                 _selectePostalOfficeDb = value;
                 OnPropertyChanged(); // "SelectedPhone"
-                OnPropertyChanged("RemoveCommandEnabled");
+             
             }
-        } // SelectedPhone
+        }
+
+        public PostMan SelectedPostManRequest
+        {
+            get => _selectedPostManRequest;
+            set
+            {
+                _selectedPostManRequest = value;
+                OnPropertyChanged(); // 
+                OnPropertyChanged("AddCommandEnabled");
+            }
+        } 
 
 
 
@@ -87,15 +144,15 @@ namespace Course
             set
             {
                 _selectedSub = value;
-                OnPropertyChanged(); // "SelectedPhone"
-                OnPropertyChanged("RemoveCommandEnabled");
+                OnPropertyChanged(); 
+               
             }
-        } // SelectedPhone
+        } 
 
    
 
 
-
+        // Логин Пользователя 
         private string _usernamelog;
 
         public string UsernameLog
@@ -108,6 +165,7 @@ namespace Course
                 OnPropertyChanged();
             }
         }
+        // пароль пользователя
         private string _passwordLog;
         public string PasswordLog
         {
@@ -127,38 +185,22 @@ namespace Course
             set
             {
                 _selectedPostMan = value;
-                OnPropertyChanged(); // "SelectedPhone"
+                OnPropertyChanged(); 
                 OnPropertyChanged("RemoveCommandEnabled");
             }
-        } // SelectedPhone
+        } 
 
-      private string _names;
-
-      public string Names
-      {
-
-          get => _names;
-          set
-          {
-              _names= value;
-
-              OnPropertyChanged();
-          }
-
-        }
-        
-  
-
-        public SubEdition sb = new SubEdition("Комиксы ", 900);
      
+      
+     // Коллекции, для работы с основными данными приложения 
         public ObservableCollection<PostMan> Postmans { get; set; }
         public ObservableCollection<Region> Regions { get; set; }
         public ObservableCollection<Subscriber> Subscribers { get; set; }
         public ObservableCollection<SubEdition> SubEditions { get; set; }
-        public Dictionary<Receipt, Subscriber> SubRec { get; set; }
+      
        
-        public PostalOfficeDB postalOffice;
-        private SubscriberDB sub;
+    
+       // счётчик Газет
         private int _countBooks;
 
         public int countBooks
@@ -172,12 +214,14 @@ namespace Course
             }
         }
 
+        // счётский журналов
         public int countJurnal { get; set; }
        public int countSub { get; set; }
+       // Конструктор ViewModela
         public PostalOfficeViewModel(string title)
         {
 
-          
+          // Установка значений по умолчанию
             countBooks = 0;
             countJurnal = 0;
            
@@ -187,13 +231,20 @@ namespace Course
                 _title = title;
                 Postmans=new ObservableCollection<PostMan>();
                 Regions = new ObservableCollection<Region>();
+                // Заполнение данными 
                 SubEditions = new ObservableCollection<SubEdition>
                 {
 
-                    new SubEdition("Книга", 3000),
-                    new SubEdition("Журнал", 2100),
-                    new SubEdition("Газета", 1000),
-                    new SubEdition("Комиксы", 900),
+                 
+                    new SubEdition("Журнал 1-го издания", 2100),
+                    new SubEdition("Журнал 2-го издания", 300),
+                    new SubEdition("Журнал 3-го издания", 1500),
+                    new SubEdition("Журнал 4-го издания", 2543),
+                    new SubEdition("Газета 1-го издания",2252),
+                    new SubEdition("Газета 2-го издания", 500),
+                    new SubEdition("Газета 3-го издания", 4322),
+                    new SubEdition("Газета 4-го издания", 1123),
+
 
 
                 };
@@ -205,19 +256,20 @@ namespace Course
 
 
                 };
+                // Установка значений по умолчанию
                 PostalOfficeDB postalOffice = new PostalOfficeDB();
                 postalOffice.TitlePostal = "отдел1";
-            _subEditionDbs =new List<SubEditionDB>();
-                _subscriberDbs=new List<SubscriberDB>();
-                _regionDbs=new List<RegionDB>();
-                _postManDbs=new List<PostManDB>();
+            SubEditionDbs =new List<SubEditionDB>();
+                SubscriberDbs=new List<SubscriberDB>();
+                RegionDbs=new List<RegionDB>();
+                PostManDbs=new List<PostManDB>();
                 PostalOfficeDbs=new ObservableCollection<PostalOfficeDB>();
-
+                // Заполнение данными 
             Subscribers = new ObservableCollection<Subscriber>
             {
                 new Subscriber("З.Ш Михайловна","ул. Михайловский проезд, дом 71, квартира 439" , new DateTime(1000,1,1),new DateTime(1000,1,1) ),
                 new Subscriber("Б.С Валентинович","ул. Скобелевская, дом 34, квартира 371", new DateTime(1000,1,1),new DateTime(1000,1,1)),
-                new Subscriber("Крымская.А Юрьевна","ул. Первомайский район тер, дом 26, квартира 19", new DateTime(1000,1,1),new DateTime(1000,1,1) ),
+                new Subscriber("К.А Юрьевна","ул. Первомайский район тер, дом 26, квартира 19", new DateTime(1000,1,1),new DateTime(1000,1,1) ),
                 new Subscriber("П.М Данилович","ул. Сосновский лесопарк парк, дом 20, квартира 250", new DateTime(1000,1,1),new DateTime(1000,1,1)),
                 new Subscriber("В.Т Евгеньевич","ул. Фадеева 2-й пер, дом 31, квартира 451", new DateTime(1000,1,1),new DateTime(1000,1,1) ),
                 new Subscriber("Х.Й Ярославовна","ул. Комсомольская, дом 34, квартира 391", new DateTime(1000,1,1),new DateTime(1000,1,1) ),
@@ -245,9 +297,9 @@ namespace Course
 
             };
 
-            SubRec = new Dictionary<Receipt, Subscriber >();
 
 
+           
             Postmans = new ObservableCollection<PostMan>
             {
                 new PostMan{SurnameNPPost = "Горшков Эрик Авксентьевич"},
@@ -265,42 +317,86 @@ namespace Course
 
             };
 
-            _postManDb=new PostManDB{  Surname = "dasdassadasda", };
+
+            RequestPostMen=new ObservableCollection<PostMan>
+            {
+                new PostMan{SurnameNPPost = "Павлов Азарий Станиславович"},
+                new PostMan{SurnameNPPost = "Сидоров Владислав Серапионович"},
+                new PostMan{SurnameNPPost = "Бирюков Лавр Адольфович"},
+                new PostMan{SurnameNPPost = "Игнатьев Иннокентий Дмитрьевич"},
+                new PostMan{SurnameNPPost = "Орлов Антон Павлович"},
+                new PostMan{SurnameNPPost = "Киселёв Филипп Григорьевич"},
+                new PostMan{SurnameNPPost = "Петров Нелли Платонович"},
+                new PostMan{SurnameNPPost = "Беляев Павел Валентинович"},
+                new PostMan{SurnameNPPost = "Титов Николай Тимофеевич"},
+                new PostMan{SurnameNPPost = "Молчанов Иван Вячеславович"},
+
+
+            };
+            // Установка значений по умолчанию
+             SubEditionDb =new SubEditionDB();
+            SubscriberDb = new SubscriberDB();
            
-
-            _subEditionDb =new SubEditionDB();
-            _subscriberDb = new SubscriberDB();
-           
-
-
-
-          
-
-            
-          
+            // Генерация региона, а точнее заполнение региона Почтальонами
             GenerateRegion(Regions);
            
          
-
+            // Данные для авторизации 
             Users =new ObservableCollection<User>
            {
 
-               new User("qwerty123123","131313"),
-               new User("rofl","151515")
+               new User("qwertyqwerty","131313"),
+               new User("Mag1824","151515")
 
            };
-
-          
+            Results=new ObservableCollection<Result>();
+            Receipts=new ObservableCollection<Receipt>();
 
         }
+        // Генерация отчёта 
+        public void GenerateResults()
+        {
+            foreach (var item in Postmans)
+            {
 
-      
+                // Основная логика, Ходим по коллекциии Почтальонов, и через коллекцию регионов происходит заполнения данными 
+                Result result=new Result();
+                result.SurnamePostmanst = item.SurnameNPPost;
+                result.CountPostmansRegions = item.Regions.Count;
+                foreach (var item2 in item.Regions)
+                {
+                   
+                    foreach (var item3 in item2.Subscribers)
+                    {
+                        result.AddressesSubscribers.Add( item3.HomeAddress);
+                        result.TermSubscribers += item3.Term;
+                       
+                        result.AnySubEdition += item3.IndexEdition.Count;
+                        foreach (var item4 in item3.IndexEdition)
+                        {
+                           
+                            result.SubeditionsTitles.Add(item4.Title);
+                        }
+                       
+                        
+                    }
+                    
+                }
+                // Добавления нового элемента отчёта 
+                Results.Add(result);
+                
+
+
+            }
+
+
+        }
         
        
         public  void GeneratePostaloficeDB()
         {
 
-
+            //Добавление Данных Коллекции PoststalOfficeDbs в БД
             foreach (var item in PostalOfficeDbs)
             {
                 _db.AddPostalOffice(item);
@@ -314,16 +410,9 @@ namespace Course
 
         public void GenerateRegion(ObservableCollection<Region> Reg)
         {
-            int b = 0;
-            foreach (var item in Reg)
-            {
-                var rgdb=new RegionDB();
-               
-                rgdb.TitleReg = item.TitleReg;
-              
-            }
 
-           
+            // Заполение Регионов Почтальонами 
+            int b = 0;
             foreach (var item in Reg)
                 if (item.Postman == null)
                 {
@@ -334,14 +423,14 @@ namespace Course
 
                 }
 
-            int d = 0;
+        
          
 
         }
 
      
 
-        
+       // Комманда  Добавления Почтальона 
         private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
@@ -349,52 +438,31 @@ namespace Course
             {
                 return addCommand ??
                        (addCommand = new RelayCommand(obj => {
-                          
-                           
-                               if (UsernameLog == "qwerty123123" && PasswordLog == "131313")
-                               {
+                           // Переменная, полученная в результате клика 
+                           PostMan post = obj as PostMan;
+                           // Валидация пароля и логина 
+                           if (UsernameLog == "qwertyqwerty" && PasswordLog == "131313")
+                           {
+                                   if (post != null)
+                                   {
+                                       // Вставка Почтальона, 
+                                       Postmans.Insert(0, post);
+                                       // Удаление Почтальона из заявки 
+                                       RequestPostMen.Remove(post);
+                                   }
 
+         
+                           }
 
-                                   PostMan post  = new PostMan("О.П Папич");
-
-                                   Postmans.Insert(0, post);
-
-                                   PostalOfficeDB pod=new PostalOfficeDB();
-                                   pod.TitlePostal = "отдел1";
-                                   pod.SubscriberDB = new SubscriberDB();
-                                   pod.SubscriberDB.SurnameNpSub = "0";
-                                   pod.SubscriberDB.Address = "0";
-                                   pod.RegionDB = new RegionDB();
-                                   pod.SubEditionDB=new SubEditionDB();
-                                   pod.SubEditionDB.Title = PostalOfficeDBnew.SubEditionDB.Title;
-                                   pod.PostManDB =new PostManDB();
-                                   pod.PostManDB.Surname = post.SurnameNPPost;
-                                   PostalOfficeDbs.Insert(0,pod);
-                                   GeneratePostaloficeDB();
-                                   _db.AddPostalOffice(pod);
-                                   PostManDB postManDb=new PostManDB();
-                                   postManDb.Surname = post.SurnameNPPost;
-                                   postManDb.PostalOfficeDB = PostalOfficeDBnew;
-                                   postManDb.RegionDB = _regionDbs;
-                                 
-                               _postManDbs.Insert(0,postManDb);
-
-                               TasksOpen task = new TasksOpen();
-                                   task.OpenReq();
-
-                               }
-                               else
-                               {
-                                   MessageBox.Show("Недостаточно прав", "Ошибка",  MessageBoxButton.OK,
-                                       MessageBoxImage.Warning);
-                               }
-                           
-
-                       }));
+                           },
+                           // Команда будет работать при эти условиях
+                obj => _selectedPostManRequest != null && RequestPostMen.Count>0 ));
             }
-        } // AddCommand
+        } 
 
+        public bool AddCommandEnabled => AddCommand.CanExecute(_selectedPostManRequest);
 
+        // Команда Удалающая почтальонов из основной коллекции 
         private RelayCommand removeCommand;
         public RelayCommand RemoveCommand
         {
@@ -402,21 +470,23 @@ namespace Course
             {
                 return removeCommand ??
                        (removeCommand = new RelayCommand(obj => {
-                           
-                           
-                               PostMan postrem=obj as PostMan;
-                               if (UsernameLog == "qwerty123123" && PasswordLog == "131313")
-                               {
 
+                           // Переменная, полученная в результате клика 
+                           PostMan postrem =obj as PostMan;
+                           // Валидация пароля и логина 
+                           if (UsernameLog == "qwertyqwerty" && PasswordLog == "131313")
+                               {
+                               // Проверка на нулл значение 
                                    if (postrem != null)
                                    {
+                                       // Удаление почтальона по задданому обьекту
                                        Postmans.Remove(postrem);
-                                       var postrems = new PostManDB();
-                                       postrems.Surname = postrem.SurnameNPPost;
-                                       _db.RemovePostMan(postrems);
+                                      
+                                
+                                     
 
   
-
+                                   // Изьятие из участка почтальона
                                        foreach (var item2 in Regions)
                                        {
                                            if (item2.Postman == postrem) item2.Postman = null;
@@ -425,7 +495,7 @@ namespace Course
                                                
 
                                        }
-
+                                       // Участко не может быть пустым, по этому добавляем след почтальона 
                                        foreach (var item in Postmans)
                                        {
 
@@ -433,13 +503,10 @@ namespace Course
                                            {
                                                if (item3.Postman == null)
                                                {
-
+                                                   // Добавление почтальона в участок 
                                                    item3.Postman = item;
                                                    item3.Postman.Regions.Add(item3);
-                                                   RegionDB postremss = new RegionDB();
-                                               postremss.PostManDB=new PostManDB{Surname = item.SurnameNPPost, RegionDB = new List<RegionDB>{ new RegionDB{TitleReg = item3.TitleReg }}};
-
-                                               _db.AddRegion(postremss);
+                                                 
                                                }
                                            }
                                        }
@@ -447,18 +514,14 @@ namespace Course
                                    
                                    }
                                }
-                               else
-                               {
-                                   MessageBox.Show("Недостаточно прав", "Ошибка", MessageBoxButton.OK,
-                                       MessageBoxImage.Warning);
-                               } },
+                           },
                            obj => Postmans.Count > 0 && _selectedPostMan != null));
             }
         } // RemoveCommand
 
         public bool RemoveCommandEnabled => removeCommand.CanExecute(_selectedPostMan);
 
-
+        // Оформление подписки 
         private  RelayCommand _subscribe;
         public RelayCommand Subscribe
         {
@@ -466,28 +529,34 @@ namespace Course
             {
                 return _subscribe??
                        (_subscribe = new RelayCommand(obj => {
-
+                           // Валидация пароля и логина
                                
-                           if (UsernameLog == "rofl" && PasswordLog == "151515")
+                           if (UsernameLog == "Mag1824" && PasswordLog == "151515")
                            {
-
+                               // Переменная в результате клика 
                                    Subscriber sub = obj as Subscriber;
                                    
-
+                               // ОСновная логика приложения
                                foreach (var item in SubEditions)
                                    {
                                        if (item.Title == SubEditionChoose)
                                        {
+                                           // переменная для пометки состояния цыкла
                                            bool flag = false;
-
+                                           Random rand = new Random();
+                                           
                                            sub.IndexEdition.Add(item);
 
 
-                                           sub.DateStartSub = new DateTime(1900, 07, 01);
+                                           sub.DateStartSub = new DateTime(2020, rand.Next(01,06) , rand.Next(01,28));
 
-                                           sub.DateEndSub = new DateTime(1900, 09, 30);
-                                           Receipt rec = new Receipt(item.Price, item.Title, item.Price);
-
+                                           sub.DateEndSub = new DateTime(2020, rand.Next(07, 12), rand.Next(01, 28));
+                                           sub.Term += sub.DateEndSub.DayOfYear - sub.DateStartSub.DayOfYear;
+                                           // Создания чека
+                                           Receipt rec = new Receipt(item.Price, item.Title, sub.Term, sub.SurnameNP);
+                                           // Добавления чека в Коллекцию
+                                         Receipts.Add(rec);
+                                         // Расппределение подписчиков по региону
                                            foreach (var item2 in Regions)
                                            {
                                                for (int i = 0; i < Subscribers.Count; i++)
@@ -521,18 +590,21 @@ namespace Course
 
 
                                                }
-
+                                               // Проверка того, какое издание было выбрато,
                                                foreach (var item3 in sub.IndexEdition)
                                                {
-                                                   if (item3.Title == "Книга")
+                                                
+                                                   Regex rex = new Regex(@"Журнал.\d");
+                                                   if (rex.IsMatch(item3.Title) )
                                                    {
-                                                       countBooks += 1;
+                                                       
+                                                       countJurnal += 1;
                                                        countSub++;
                                                    }
-
-                                                   if (item3.Title == "Журнал")
+                                                   rex=new Regex(@"Газета.\d");
+                                                   if (rex.IsMatch(item3.Title))
                                                    {
-                                                       countJurnal += 1;
+                                                       countBooks += 1;
                                                        countSub++;
                                                    }
 
@@ -545,19 +617,19 @@ namespace Course
                                                }
 
                                            }
-
+                                     
                                            break;
-                                           SubRec.Add(rec, sub);
+                                           
 
                                        }
                                    }
 
+                               // Создание новой коллекции для перерисовки DataGrid
                                    ObservableCollection<Subscriber> subnew =
                                        new ObservableCollection<Subscriber>(Subscribers);
-
-                                 
-
+                               // Очистка Основной коллекции
                                Subscribers.Clear();
+                               // Добавление переменных из копиии коллекции в основую коллекцию
                                    foreach (var item in subnew)
                                    {
                                        Subscribers.Add(item);
@@ -565,18 +637,13 @@ namespace Course
                                    }
 
                                    
-                                   TasksOpen task = new TasksOpen();
-                                   task.OpenReq();
+                                  
                                   
 
                                    
 
                            }
-                               else
-                               {
-                                   MessageBox.Show("Недостаточно прав", "Ошибка", MessageBoxButton.OK,
-                                       MessageBoxImage.Warning);
-                               }
+                             
 
 
                            },
@@ -584,7 +651,7 @@ namespace Course
                 
             }
         } // RemoveCommand
-
+        // Выход
         private RelayCommand _quitCommand;
         public RelayCommand QuitCommand
         {
@@ -594,7 +661,7 @@ namespace Course
                        (_quitCommand = new RelayCommand(obj => Application.Current.Shutdown()));
             }
         } // QuitCommand
-
+        // Команда для ввывода справки 
         private RelayCommand _ref;
         public RelayCommand Ref
         {
@@ -604,17 +671,64 @@ namespace Course
                        (_ref = new RelayCommand(obj =>
                        {
                            TasksOpen tasks=new TasksOpen();
-                           tasks.OpenReport(countBooks, countJurnal, countSub);
+                           tasks.OpenReference(countBooks, countJurnal, countSub);
 
                        }));
             }
-        } // QuitCommand
+        }
+        // Команда открытвающая окно About
+        private RelayCommand _about;
+        public RelayCommand About
+        {
+            get
+            {
+                return _about ??
+                       (_about = new RelayCommand(obj =>
+                       {
+                           TasksOpen tasks = new TasksOpen();
+                           tasks.OpenAbout();
+
+                       }));
+            }
+        }
+
+        // Команда для ввывода Отчёта 
+        private RelayCommand _rep;
+        public RelayCommand Rep
+        {
+            get
+            {
+                return _rep ??
+                       (_rep = new RelayCommand(obj =>
+                       {
+                           TasksOpen tasks = new TasksOpen();
+                           Results.Clear();
+                           GenerateResults();
+                           tasks.OpenRep(Results);
+
+                       }));
+            }
+        }
+        // Команда для ввывода БД
+        private RelayCommand _database;
+        public RelayCommand Database
+        {
+            get
+            {
+                return _database ??
+                       (_database = new RelayCommand(obj =>
+                       {
+                           TasksOpen task = new TasksOpen();
+                           task.OpenReq(Address, Surname);
+                       }));
+            }
+        } 
 
 
 
 
 
-
+        // Основная геннерация Данных для БД
         public  void GeneratePostaffice(Subscriber sub)
         {
 
@@ -622,29 +736,41 @@ namespace Course
             {
                 int i = 0;
 
-                PostalOfficeDBnew=new PostalOfficeDB();
+                // Создание, и добавление Издания в БД
+                PostalOfficeDBNew = new PostalOfficeDB();
                 foreach (var item2 in sub.IndexEdition)
                 {
                     
-                        _subEditionDb = new SubEditionDB
+                        SubEditionDb = new SubEditionDB
                         {
                             Id = i++,
                             Price = item2.Price,
                             Title = item2.Title,
-
+                           
 
                         };
+                        SubEditionDb.SubscriberDB=new SubscriberDB();
+                        SubEditionDb.SubscriberDB.SurnameNpSub = "-";
+                        SubEditionDb.SubscriberDB.PostalOfficeDB = null;
+                        SubEditionDb.SubscriberDB.SubEditionDB=new List<SubEditionDB>();
+                        SubEditionDb.SubscriberDB.Address = "";
+                        SubEditionDb.SubscriberDB.DateStart = new DateTime(1000,01,01);
+                        SubEditionDb.SubscriberDB.DateEnd=new DateTime(1000,01,01);
+                        SubEditionDb.SubscriberDB.RegionDB = null;
 
-                        _db.AddSubEdition(_subEditionDb);
-                        PostalOfficeDBnew.SubEditionDB = _subEditionDb;
+
+                        SubEditionDb.SubscriberDB.Term = SubscriberDb.Term;
+
+                        _db.AddSubEdition(SubEditionDb);
+                        PostalOfficeDBNew.SubEditionDB = SubEditionDb;
                         break;
 
                 }
 
 
 
-
-                _subscriberDb = new SubscriberDB
+                // Создание, и добавление подписчика в БД
+                SubscriberDb = new SubscriberDB
                 {
                     Id = i++,
                     SurnameNpSub = sub.SurnameNP,
@@ -656,17 +782,17 @@ namespace Course
 
 
                 };
-                _db.AddSubscriber(_subscriberDb);
-                PostalOfficeDBnew.SubscriberDB = _subscriberDb;
+                _db.AddSubscriber(SubscriberDb);
+                PostalOfficeDBNew.SubscriberDB = SubscriberDb;
 
 
 
-
+                // Создание, и добавление Почтальона в БД
                 foreach (var item2 in Postmans)
                 {
 
 
-                    _postManDb = new PostManDB
+                    PostManDb = new PostManDB
                     {
                         Id = i++,
                         Surname = item2.SurnameNPPost,
@@ -675,20 +801,21 @@ namespace Course
 
                     };
 
-                    _db.AddPostMan(_postManDb);
-                    PostalOfficeDBnew.PostManDB = _postManDb;
-                    _postManDbs.Add(_postManDb);
+                    _db.AddPostMan(PostManDb);
+                    PostalOfficeDBNew.PostManDB = PostManDb;
+                    PostManDbs.Add(PostManDb);
 
 
 
-                    _db.AddPostMan(_postManDb);
+                    _db.AddPostMan(PostManDb);
                    
                     break;
                 }
 
-
-                 if (item.Subscribers.Count  <Region.Max )
-                    _regionDb = new RegionDB
+                // Создание, и добавление подписчика в БД
+                // проверка количества подписчиков, Для определения участка
+                if (item.Subscribers.Count  <Region.Max )
+                    RegionDb = new RegionDB
                     {
                         Id = i++,
                         SubEditionDB = new List<SubEditionDB>(),
@@ -698,27 +825,28 @@ namespace Course
 
                 else if(item.Subscribers.Count ==Region.Max)
                 {
-                    _regionDb = null;
-                    _regionDb = new RegionDB
+                    RegionDb = null;
+                    RegionDb = new RegionDB
                     {
                         Id = i++,
                         SubEditionDB = new List<SubEditionDB>(),
                         SubscriberDB = new List<SubscriberDB>(),
-                        TitleReg = Regions[1].TitleReg,
+                        TitleReg =Regions[1].TitleReg,
                     };
                 }
 
 
 
-
-                 _regionDbs.Add(_regionDb);
-                    _db.AddRegion(_regionDb);
-                PostalOfficeDBnew.RegionDB = _regionDb;
-                PostalOfficeDBnew.TitlePostal = "Отдел1";
+                
+                RegionDbs.Add(RegionDb);
+                    _db.AddRegion(RegionDb);
+                PostalOfficeDBNew.RegionDB = RegionDb;
+                PostalOfficeDBNew.TitlePostal = "Отдел1";
               
                 break;
             }
-            PostalOfficeDbs.Insert(0, PostalOfficeDBnew);
+            PostalOfficeDbs.Insert(0, PostalOfficeDBNew);
+            // Добавление PostalOfficeDbs в БД
             GeneratePostaloficeDB();
            
 

@@ -347,6 +347,7 @@
     <Compile Include="TasksOpen.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ViewModelReference.cs" />
+    <Compile Include="ViewModelReport.cs" />
     <Compile Include="ViewModelRequest.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -357,8 +358,8 @@
     <Compile Include="Views\Reference.xaml.cs">
       <DependentUpon>Reference.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Report.xaml.cs">
-      <DependentUpon>Report.xaml</DependentUpon>
+    <Compile Include="Views\Phantetic.xaml.cs">
+      <DependentUpon>Phantetic.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Requests.xaml.cs">
       <DependentUpon>Requests.xaml</DependentUpon>
@@ -387,7 +388,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Report.xaml">
+    <Page Include="Views\Phantetic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -474,6 +475,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>DB.mdf</DependentUpon>
     </Content>
+    <Resource Include="Images\database.png" />
     <Content Include="Model\ModelMail.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelMail.Context.cs</LastGenOutput>

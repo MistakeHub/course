@@ -11,33 +11,43 @@ namespace Course
 {
     class ViewModelRequest
     {
-        public IList sadsada { get; set; }
-        public IList sadsadad { get; set; }
-        public IList sadsadada { get; set; }
-        public IList sadsadadad { get; set; }
-        public IList sadsadadada { get; set; }
-        public IList sadsadadadad { get; set; }
-        public IList sadsadadadada { get; set; }
+        // Коллекции для заполения запросами
+        public IList PostalOfficeRequest { get; set; }
+        public IList RequestFindPostman { get; set; }
+        public IList RequestNumberOfSubEdition { get; set; }
+        public IList RequestAVGDate { get; set; }
+        public IList RequestFindMagazine { get; set; }
+        public IList RequestMaxSub { get; set; }
+        public IList RequestNumberOfPostmans { get; set; }
 
         private DbController _db;
-        public ViewModelRequest()
+        public ViewModelRequest(string address, string surname)
         {
-
+            // Контроллер с работами с запросами
             _db = new DbController();
-            sadsada =new ObservableCollection<PostalOfficeDB>();
-            sadsada = _db.GetPostalOffice();
-            sadsadad = new ObservableCollection<PostalOfficeDB>();
-            sadsadad = _db.FihdPostmane("ул. Поселковая дор, дом 25, квартира 316");
-            sadsadada=new ObservableCollection<PostalOfficeDB>();
-            sadsadada = _db.NumberOfSubEdition();
-            sadsadadad = new ObservableCollection<PostalOfficeDB>();
-            sadsadadad = _db.AvgDate();
-            sadsadadada = new ObservableCollection<PostalOfficeDB>();
-            sadsadadada = _db.FindMagazine("Л.Т Эльдарович");
-            sadsadadadad = new ObservableCollection<PostalOfficeDB>();
-            sadsadadadad = _db.MaxSub();
-            sadsadadadada = new ObservableCollection<PostalOfficeDB>();
-            sadsadadadada = _db.NumberOfPostmans();
+            // Заполение Коллекции запросами
+            
+            //Запрос Отделов почты
+            PostalOfficeRequest =new ObservableCollection<PostalOfficeDB>();
+            PostalOfficeRequest = _db.GetPostalOffice();
+            //Запрос 1
+            RequestFindPostman = new ObservableCollection<PostalOfficeDB>();
+            RequestFindPostman = _db.FindPostman(address);
+            //Запрос 2
+            RequestNumberOfSubEdition = new ObservableCollection<PostalOfficeDB>();
+            RequestNumberOfSubEdition = _db.NumberOfSubEdition();
+            //Запрос 3
+            RequestAVGDate = new ObservableCollection<PostalOfficeDB>();
+            RequestAVGDate = _db.AvgDate();
+            //Запрос 4
+            RequestFindMagazine = new ObservableCollection<PostalOfficeDB>();
+            RequestFindMagazine = _db.FindMagazine(surname);
+            //Запрос 5
+            RequestMaxSub = new ObservableCollection<PostalOfficeDB>();
+            RequestMaxSub = _db.MaxSub();
+            //Запрос 6
+            RequestNumberOfPostmans = new ObservableCollection<PostalOfficeDB>();
+            RequestNumberOfPostmans = _db.NumberOfPostmans();
 
         }
 

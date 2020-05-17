@@ -57,8 +57,8 @@ namespace Course
         public Double _term;
         public Double Term
         {
-            get => DateEndSub.DayOfYear-DateStartSub.DayOfYear ;
-            set => _term=value;
+            get  ;
+            set;
         }
 
         //Конструктор с параметрами

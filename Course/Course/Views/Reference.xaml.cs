@@ -19,11 +19,13 @@ namespace Course
     /// </summary>
     public partial class Reference : Window
     {
+        // ViewModel для окна Reference
         public ViewModelReference _vmref;
         public Reference(int countbooks, int countjurnal, int countsub)
         {
             
             InitializeComponent();
+            // Заполение Данными для VM
             _vmref = new ViewModelReference();
             _vmref.CountBooks = countbooks;
             _vmref.CountJurnal = countjurnal;

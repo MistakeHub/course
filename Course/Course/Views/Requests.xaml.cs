@@ -20,13 +20,13 @@ namespace Course
     public partial class Requests : Window
     {
         private ViewModelRequest _viewModelRequest;
-        public Requests()
+        public Requests(string address, string surname)
         {
 
             
             InitializeComponent();
             
-            _viewModelRequest=new ViewModelRequest();
+            _viewModelRequest=new ViewModelRequest(address, surname);
             DataContext = _viewModelRequest;
         }
     }

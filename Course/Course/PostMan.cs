@@ -33,7 +33,7 @@ namespace Course
             Regions = new List<Region>();
 
         }
-
+        // Конструктор по умолчанию
         public PostMan() : this("Имя") { }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "") =>

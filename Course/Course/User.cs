@@ -8,7 +8,8 @@ namespace Course
 {
    public class User
     {
-
+        // Класс, для работы с данными авторизации 
+        // Логин
         private string _username;
 
         public string UserName
@@ -17,7 +18,7 @@ namespace Course
             set => _username = value;
 
         }
-
+        // Пароль
         private string _password;
 
         public string  Password
@@ -26,7 +27,7 @@ namespace Course
             set => _password = value;
 
         }
-
+        // Конструктор с парамметрами 
         public User(string username, string password)
         {
             _username = username;

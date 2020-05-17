@@ -20,8 +20,11 @@ using Course.Views;
 
 namespace Course
 {
+    // Работа с логирование в Приложение
     class LoginModelView
     {
+
+        // Логин
         private string _username;
 
         public string UserName
@@ -35,7 +38,7 @@ namespace Course
             }
 
         }
-
+        // Пароль
         private string _password;
 
         public string Password
@@ -48,7 +51,7 @@ namespace Course
 
         }
 
-
+        // Коллекция данных для получения 
         public ObservableCollection<User> Users;
 
         public LoginModelView()
@@ -58,7 +61,7 @@ namespace Course
 
 
         }
-
+        // Команда для вадилации пароля, Логина
         private RelayCommand _login ;
         public RelayCommand Login
         {
@@ -77,13 +80,7 @@ namespace Course
 
                                    
                                }
-                               else if(UserName != Users[0].UserName && Password!=Users[0].Password && UserName != Users[1].UserName && Password != Users[1].Password)
-                               {
-
-                                   MessageBox.Show("Неверный логин или пароль", "ошибка доступа", MessageBoxButton.OK,
-                                       MessageBoxImage.Warning);
-                                   
-                               }
+                            
 
                        }
                        ));
@@ -91,7 +88,7 @@ namespace Course
 
         }
 
-
+        // закрывает все текущие , и входящие окна
         private RelayCommand _closedAll;
         public RelayCommand ClosedAll
         {
