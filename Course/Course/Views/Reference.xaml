@@ -5,32 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course"
         mc:Ignorable="d"
-        Title="Reference" Height="450" Width="800">
+        Title="Reference" Height="348.6" Width="392.3">
     <Window.Background>
         <ImageBrush ImageSource="../Images/Space-red-galaxy-stars_2560x1600.jpg"></ImageBrush>
     </Window.Background>
-    <Grid>
+    <Grid >
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="34*"></RowDefinition>
-            <RowDefinition Height="45*"></RowDefinition>
-            <RowDefinition Height="340*"></RowDefinition>
+
+            <RowDefinition Height="32*"></RowDefinition>
+            <RowDefinition Height="27*"></RowDefinition>
+            <RowDefinition Height="83*"></RowDefinition>
+            <RowDefinition Height="114*"></RowDefinition>
+            <RowDefinition Height="51*"></RowDefinition>
+            <RowDefinition Height="11*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="247*"/>
+            <ColumnDefinition Width="45*"></ColumnDefinition>
+            <ColumnDefinition Width="0*"/>
+
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" Grid.RowSpan="2" >
             <MenuItem Header="Файл">
                 <Separator/>
                 <MenuItem Header="Выход" ></MenuItem>
             </MenuItem>
 
         </Menu>
-        <StackPanel Grid.Row="1" Background="White" Margin="200,0,150,0">
-            <Label Height="45" FontSize="30" HorizontalAlignment="Center" Content="Справка" ></Label>
-
+        <StackPanel Grid.Row="1"   >
+            <Label Background="White" Height="22" Margin="54,0,33,0">
+                <TextBlock VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" Height="17" Width="175">Справка:</TextBlock>
+            </Label>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Margin="0,0,0,-9">
-            <DataGrid Name="dgvReport" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></DataGrid>
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="0,0,0,43">
+            <Label Target="{Binding ElementName=TextBox1}" FontSize="20" Height="41">Количество Газет:</Label>
+        </StackPanel>
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0,3,43" Text="{Binding CountBooks}"></TextBlock>
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="0,0,0,70">
+            <Label Target="{Binding ElementName=TextBox1}" FontSize="20" Height="42">Количество Журналов:</Label>
 
         </StackPanel>
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0,3,70" Text="{Binding CountJurnal}"></TextBlock>
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Margin="0,0,0,13">
+            <Label Target="{Binding ElementName=TextBox1}" FontSize="20" Height="37">Количество Подписчиков:</Label>
+        </StackPanel>
+        <TextBlock Grid.Row="4" Grid.Column="1" Margin="3,0,0,14" Text="{Binding CountSubs}"></TextBlock>
+
+
     </Grid>
 </Window>

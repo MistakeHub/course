@@ -48,16 +48,6 @@ namespace Course
 
         }
 
-        private string _right;
-        public string Right
-        {
-            get => _right;
-            set
-            {
-                _right = value; OnPropertyChanged();
-            }
-
-        }
 
         public ObservableCollection<User> Users;
 

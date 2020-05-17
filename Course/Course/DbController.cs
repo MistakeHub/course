@@ -243,6 +243,13 @@ namespace Course
 
             return 1;
         }
+        public int RemovePostMan(PostManDB posof)
+        {
+            _db.PostManDBSet.Remove(posof);
+            _db.SaveChanges();
+
+            return 1;
+        }
 
 
 

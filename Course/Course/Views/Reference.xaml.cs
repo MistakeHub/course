@@ -19,9 +19,16 @@ namespace Course
     /// </summary>
     public partial class Reference : Window
     {
-        public Reference()
+        public ViewModelReference _vmref;
+        public Reference(int countbooks, int countjurnal, int countsub)
         {
+            
             InitializeComponent();
+            _vmref = new ViewModelReference();
+            _vmref.CountBooks = countbooks;
+            _vmref.CountJurnal = countjurnal;
+            _vmref.CountSubs = countsub;
+            DataContext = _vmref;
         }
     }
 }

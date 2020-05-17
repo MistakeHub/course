@@ -47,7 +47,7 @@
             </MenuItem>
             <MenuItem Header="О программе "></MenuItem>
             <MenuItem Header="Справка">
-                <MenuItem Header="о количестве подписчиков, газет и  журналов, выписанных на текущий момент подписчиками."></MenuItem>
+                <MenuItem Header="о количестве подписчиков, газет и  журналов, выписанных на текущий момент подписчиками." Command="{ Binding Ref}"></MenuItem>
             </MenuItem>
         </Menu>
         <ToolBar Grid.Column="0" Grid.Row="1">
@@ -55,6 +55,7 @@
             <Button Command="{Binding AddCommand}" ToolTip="Принять почтальона">
                 <Image Source="Images/Plus.png"   ></Image>
             </Button>
+            
             <Separator/>
             <ToggleButton  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}" ToolTip="Уволить почтальона">
                 <Image Source="Images/Minus.png"></Image>
@@ -63,6 +64,13 @@
             <Button Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}" ToolTip="Добавить подписку">
                 <Image Source="Images/subscribe.png"></Image>
             </Button>
+            <ComboBox SelectedValue="{Binding SubEditionChoose }" SelectedValuePath="Content">
+                <ComboBoxItem>Книга</ComboBoxItem>
+                <ComboBoxItem>Журнал</ComboBoxItem>
+                <ComboBoxItem>Комиксы</ComboBoxItem>
+                <ComboBoxItem>8</ComboBoxItem>
+                <ComboBoxItem>16</ComboBoxItem>
+            </ComboBox>
             <Separator/>
             <Button ToolTip="Отчёт об доставки газет" >
                 <Image Source="Images/list.png"></Image>
@@ -179,11 +187,11 @@
                 <TabItem.Header>
                     <TextBlock >Основной</TextBlock>
                 </TabItem.Header>
-                <DataGrid Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  Name="dgvDBmain" AutoGenerateColumns="True"  VerticalScrollBarVisibility="Auto" 
-        HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding  sadsada,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedPostOffice}"  >
+               <Label Target="{Binding ElementName= txtbox}" >
+                    <TextBox   Name="txtbox" Text="{Binding countBooks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+               </Label>
 
-            </DataGrid>
-                </TabItem>
+            </TabItem>
             <TabItem Name="DBreques1">
                 <TabItem.Header>
                     <TextBlock >Запрос1</TextBlock>

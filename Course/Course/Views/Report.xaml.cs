@@ -17,9 +17,9 @@ namespace Course
     /// <summary>
     /// Логика взаимодействия для Report.xaml
     /// </summary>
-    public partial class Report : Window
+    public partial class ResultReport : Window
     {
-        public Report()
+        public ResultReport()
         {
             InitializeComponent();
             
