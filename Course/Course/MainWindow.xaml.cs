@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Course.Model;
+using Course.Views;
+
 
 namespace Course
 {
@@ -37,10 +39,12 @@ namespace Course
 
             // Окно логирования
             LogInForm log=new LogInForm();
-            _logindModelView=new LoginModelView();
+           
+            _logindModelView =new LoginModelView();
             _postalOfficeViewModel = new PostalOfficeViewModel("отдел 1");
             _logindModelView.Users = _postalOfficeViewModel.Users;
             log.DataContext = _logindModelView;
+            About ab=new About();
             log.ShowDialog();
             _postalOfficeViewModel.UsernameLog = _logindModelView.UserName;
             _postalOfficeViewModel.PasswordLog = _logindModelView.Password;
@@ -50,8 +54,8 @@ namespace Course
             else if (_postalOfficeViewModel.UsernameLog == "Mag1824")
                 _postalOfficeViewModel.Names = "Авторизован как:Оператор почтового отдела";
             DataContext = _postalOfficeViewModel;
-           
 
+           
 
 
         }

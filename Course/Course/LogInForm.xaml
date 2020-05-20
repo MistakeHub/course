@@ -4,12 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course"
-       
         mc:Ignorable="d"
-        Title="LogInForm" Height="546" Width="466.4" 
+      Title="LogInForm" Height="546" Width="466.4" 
        >
     <Window.Background>
-        <ImageBrush ImageSource="../../Images/compute-ea4c57a4.png"></ImageBrush>
+        <ImageBrush ImageSource="Images/compute-ea4c57a4.png"></ImageBrush>
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
@@ -32,7 +31,7 @@
         <StackPanel Grid.Column="1" Margin="0,0,0,0">
             <Button Height="39" Background="Red" FontFamily="Verdana" Foreground="Black" Content="Выход" FontSize="20" Grid.Column="1" Margin="141,2,0,0" VerticalAlignment="Top" Command="{Binding ClosedAll}" ></Button>
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Background="White" Margin="154,22,166,0" >
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  Margin="154,22,166,0" >
             <Image Source="/Images/275-2754806_photo-logo-email-resume-email-icon-png-transparent.png" Height="136"  VerticalAlignment="Center" Margin="-60,0,-65,0"   />
 
         </StackPanel>
@@ -47,7 +46,7 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="28" Margin="84,13" Width="290"  >
 
-            <TextBox   Text = "{Binding UserName,Mode = TwoWay}" Margin="0,3,0,1" Background="White" Width="289" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Verdana" >
+            <TextBox   Text = "{Binding UserName,Mode = TwoWay}" Margin="0,3,0,1" Width="290" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Verdana" >
                 <TextBox.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="1" Color="Black" />
                 </TextBox.Effect>
@@ -59,7 +58,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Margin="84,14" Width="290">
-            <TextBox  Text = "{Binding Password,Mode = TwoWay}" Margin="0,3,0,1" Background="White"  Width="289" Height="23"  HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" >
+            <TextBox  Text = "{Binding Password,Mode = TwoWay}" Margin="0,3,0,1"   Width="290" Height="26"  HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" >
 
                 <TextBox.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="1" Color="Black" />
@@ -76,7 +75,7 @@
         </StackPanel>
         <StackPanel  Grid.Row="8" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="42" Margin="99,31,93,28" Width="266"  Grid.ColumnSpan="2">
 
-            <Button Height="45" Background="Aqua" FontFamily="Verdana" Foreground="Black" Content="Вход" FontSize="30" Command="{Binding Login}"  ></Button>
+            <Button Height="43" Background="Aqua" FontFamily="Verdana" Foreground="Black" Content="Вход" FontSize="30" Command="{Binding Login}"  ></Button>
 
         </StackPanel>
 

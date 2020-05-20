@@ -36,7 +36,7 @@
             </MenuItem>
             <MenuItem Header="Подписки">
                 <MenuItem Header="Оформить Подписку"  Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}"></MenuItem>
-             
+
 
 
             </MenuItem>
@@ -55,7 +55,7 @@
             <ToggleButton Command="{Binding AddCommand}" CommandParameter="{Binding SelectedPostManRequest}" ToolTip="Принять почтальона">
                 <Image Source="Images/Plus.png"   ></Image>
             </ToggleButton>
-            
+
             <Separator/>
             <ToggleButton  Command="{Binding RemoveCommand}"  CommandParameter="{Binding SelectedPostMan}" ToolTip="Уволить почтальона">
                 <Image Source="Images/Minus.png"></Image>
@@ -64,7 +64,7 @@
             <Button Command="{Binding Subscribe}" CommandParameter="{Binding SelectedSub}" ToolTip="Добавить подписку">
                 <Image Source="Images/subscribe.png"></Image>
             </Button>
-            <ComboBox SelectedValue="{Binding SubEditionChoose }" SelectedValuePath="Content" Margin="0,4,0,5" Width="68">
+            <ComboBox SelectedValue="{Binding SubEditionChoose }" SelectedValuePath="Content" Margin="0,4,0,3" Width="128" Height="Auto">
                 <ComboBoxItem>Журнал 1-го издания</ComboBoxItem>
                 <ComboBoxItem>Журнал 2-го издания</ComboBoxItem>
                 <ComboBoxItem>Журнал 3-го издания</ComboBoxItem>
@@ -73,24 +73,24 @@
                 <ComboBoxItem>Газета 2-го издания</ComboBoxItem>
                 <ComboBoxItem>Газета 3-го издания</ComboBoxItem>
                 <ComboBoxItem>Газета 4-го издания</ComboBoxItem>
-               
+
             </ComboBox>
             <Separator/>
             <Button ToolTip="Отчёт об доставки газет" Command="{Binding Rep}" >
-                <Image Source="Images/list.png" Width="37"></Image>
+                <Image Source="Images/images.png" Width="37"></Image>
             </Button>
             <Separator/>
 
         </ToolBar>
         <ToolBar Grid.Row="1" Grid.Column="1">
             <ToggleButton ToolTip=" открыть Базу данных" Command="{Binding Database}">
-                <Image Source="Images/database.png"></Image>
+                <Image Source="Images/database@3x.png" Height="19" Width="21"></Image>
             </ToggleButton>
             <Separator/>
-<Label>Адресс:</Label>
+            <Label>Адресс:</Label>
 
             <TextBox Width="78" Margin="0,4,0,3" Text = "{Binding Address,Mode = TwoWay}"></TextBox>
-           
+
             <Separator/>
             <Label>ФИО:</Label>
 
@@ -102,12 +102,12 @@
                 <TabItem.Header>
                     <TextBlock >Почтальоны</TextBlock>
                 </TabItem.Header>
-                <DataGrid  Name="dgvPost" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
+                <DataGrid  Name="dgvPost" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" 
                    HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Postmans}"  SelectedItem="{Binding SelectedPostMan}" >
 
 
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Regions">
+                    <DataGrid.Columns >
+                        <DataGridTemplateColumn Header="Участки">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock  Text="{Binding Path=Regions}"  >Участки</TextBlock>
@@ -122,9 +122,11 @@
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
+
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                         </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="ИмяПочтальона"  Binding="{Binding Path=SurnameNPPost}" Width="300" />
                     </DataGrid.Columns>
 
                 </DataGrid>
@@ -135,7 +137,7 @@
                     <TextBlock >Заявки на подписку</TextBlock>
                 </TabItem.Header>
 
-                <DataGrid  Name="dgvSub" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
+                <DataGrid  Name="dgvSub" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" 
                            HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Subscribers}"
                            SelectedItem="{Binding SelectedSub}">
 
@@ -159,6 +161,11 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                         </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="ИмяКлиента"  Binding="{Binding Path=SurnameNP}"   Width="300"   />
+                        <DataGridTextColumn Header="Адресс"  Binding="{Binding Path=HomeAddress}" Width="300"   />
+                        <DataGridTextColumn Header="НачалоПодписки"  Binding="{Binding Path=DateStartSub }" Width="300"   />
+                        <DataGridTextColumn Header="КонецПодписки"  Binding="{Binding Path=DateEndSub}" Width="300"   />
+                        <DataGridTextColumn Header="Срок"  Binding="{Binding Path=Term}" Width="300"   />
                     </DataGrid.Columns>
 
                 </DataGrid>
@@ -167,11 +174,11 @@
                 <TabItem.Header>
                     <TextBlock >Заявки почтальонов</TextBlock>
                 </TabItem.Header>
-                <DataGrid  Name="dgvRequestPost" AutoGenerateColumns="True" VerticalScrollBarVisibility="Auto" 
+                <DataGrid  Name="dgvRequestPost" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" 
                            HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding RequestPostMen}"  SelectedItem="{Binding SelectedPostManRequest}" >
-
-
-
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Имя"  Binding="{Binding Path=SurnameNPPost}" Width="300"   />
+                    </DataGrid.Columns>
                 </DataGrid>
 
             </TabItem>

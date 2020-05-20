@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\CourseRepos\Course\Course\App.xaml
-6-352493862
+9-718200416
 51085822881
-33570974002
+33572887153
 1591900584091
-MainWindow.xaml;Views\About.xaml;Views\NewFolder1\LogInForm.xaml;Views\Reference.xaml;Views\Phantetic.xaml;Views\Requests.xaml;
+LogInForm.xaml;MainWindow.xaml;Themes\Brushes.xaml;Themes\Core.xaml;Themes\Icons.xaml;Views\About.xaml;Views\Reference.xaml;Views\Phantetic.xaml;Views\Requests.xaml;
 
 False
 

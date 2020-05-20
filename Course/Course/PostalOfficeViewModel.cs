@@ -705,7 +705,7 @@ namespace Course
                            Results.Clear();
                            GenerateResults();
                            tasks.OpenRep(Results);
-
+                     
                        }));
             }
         }

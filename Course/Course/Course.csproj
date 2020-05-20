@@ -305,6 +305,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DbController.cs" />
+    <Compile Include="LogInForm.xaml.cs">
+      <DependentUpon>LogInForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginModelView.cs" />
     <Compile Include="Model\ModelMail.Context.cs">
       <AutoGen>True</AutoGen>
@@ -352,9 +355,6 @@
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewFolder1\LogInForm.xaml.cs">
-      <DependentUpon>LogInForm.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Reference.xaml.cs">
       <DependentUpon>Reference.xaml</DependentUpon>
     </Compile>
@@ -364,6 +364,10 @@
     <Compile Include="Views\Requests.xaml.cs">
       <DependentUpon>Requests.xaml</DependentUpon>
     </Compile>
+    <Page Include="LogInForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -376,13 +380,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Core.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\NewFolder1\LogInForm.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Reference.xaml">
       <SubType>Designer</SubType>
@@ -476,6 +488,8 @@
       <DependentUpon>DB.mdf</DependentUpon>
     </Content>
     <Resource Include="Images\database.png" />
+    <Resource Include="Images\images.png" />
+    <Resource Include="Images\database%403x.png" />
     <Content Include="Model\ModelMail.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelMail.Context.cs</LastGenOutput>

@@ -26,9 +26,6 @@ D:\CourseRepos\Course\Course\bin\Debug\DB.mdf
 D:\CourseRepos\Course\Course\bin\Debug\DB_log.ldf
 D:\CourseRepos\Course\Course\bin\Debug\ru\EntityFramework.resources.dll
 D:\CourseRepos\Course\Course\obj\Debug\Course_Content.g.cs
-D:\CourseRepos\Course\Course\obj\Debug\App.baml
-D:\CourseRepos\Course\Course\obj\Debug\Views\NewFolder1\LogInForm.g.cs
-D:\CourseRepos\Course\Course\obj\Debug\Views\NewFolder1\LogInForm.baml
 D:\CourseRepos\Course\Course\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 D:\CourseRepos\Course\Course\bin\Debug\Microsoft.Bcl.HashCode.dll
 D:\CourseRepos\Course\Course\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -91,3 +88,9 @@ D:\CourseRepos\Course\Course\bin\Debug\System.Runtime.CompilerServices.Unsafe.xm
 D:\CourseRepos\Course\Course\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\CourseRepos\Course\Course\obj\Debug\Views\Phantetic.g.cs
 D:\CourseRepos\Course\Course\obj\Debug\Views\Phantetic.baml
+D:\CourseRepos\Course\Course\obj\Debug\App.baml
+D:\CourseRepos\Course\Course\obj\Debug\Themes\Brushes.baml
+D:\CourseRepos\Course\Course\obj\Debug\Themes\Core.baml
+D:\CourseRepos\Course\Course\obj\Debug\Themes\Icons.baml
+D:\CourseRepos\Course\Course\obj\Debug\LoginForm.g.cs
+D:\CourseRepos\Course\Course\obj\Debug\LoginForm.baml
