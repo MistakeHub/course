@@ -105,6 +105,12 @@ namespace Course
 
         }
 
+        private void Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true; 
+            
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
