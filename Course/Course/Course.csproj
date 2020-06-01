@@ -305,6 +305,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DbController.cs" />
+    <Compile Include="DefaultDialogService.cs" />
+    <Compile Include="IDialogService.cs" />
+    <Compile Include="IFileService.cs" />
     <Compile Include="LogInForm.xaml.cs">
       <DependentUpon>LogInForm.xaml</DependentUpon>
     </Compile>
@@ -364,6 +367,7 @@
     <Compile Include="Views\Requests.xaml.cs">
       <DependentUpon>Requests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XmlSereliazable.cs" />
     <Page Include="LogInForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

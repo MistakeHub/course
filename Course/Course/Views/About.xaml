@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course.Views"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="About" Height="235.934" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -12,11 +13,11 @@
             <RowDefinition Height="174*"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0"  VerticalAlignment="Top" Height="33" />
-        <StackPanel Grid.Row="1" >
-
-            <TextBlock Height="170" Margin="0,0,0,0"  ><Run Text=" Программная система, предназначеннуа для работников почтового отделения. "/><LineBreak/><Run Text="Такая система  обеспечивает хранение сведений о подписчиках газет и журналов, обслуживаемых отделением связи, "/><LineBreak/><Run Text="Возможны следующие запросы к БД: "/><LineBreak/><Run Text="-Определить наименование и количество экземпляров всех изданий, получаемых отделением связи."/><LineBreak/><Run Text="-По заданному адресу определить фамилию почтальона, обслуживающего подписчика. "/><LineBreak/><Run Text="-Какие газеты выписывает гражданин с указанной фамилией, именем, отчеством? "/><LineBreak/><Run Text="-Сколько почтальонов работает в почтовом отделении? "/><LineBreak/><Run Text="-На каком участке количество экземпляров подписных изданий максимально? "/><LineBreak/><Run Text="-Каков средний срок подписки по каждому изданию? "/><Run Text="и о почтальонах."/></TextBlock>
-
-        </StackPanel>
+        <FlowDocumentPageViewer Grid.Row="1" >
+            <FlowDocument>
+                <Paragraph  Margin="0,0,0,0"  ><Run Text=" Программная система, предназначеннуа для работников почтового отделения. "/><LineBreak/><Run Text="Такая система  обеспечивает хранение сведений о подписчиках газет и журналов, обслуживаемых отделением связи, "/><LineBreak/><Run Text="Возможны следующие запросы к БД: "/><LineBreak/><Run Text="-Определить наименование и количество экземпляров всех изданий, получаемых отделением связи."/><LineBreak/><Run Text="-По заданному адресу определить фамилию почтальона, обслуживающего подписчика. "/><LineBreak/><Run Text="-Какие газеты выписывает гражданин с указанной фамилией, именем, отчеством? "/><LineBreak/><Run Text="-Сколько почтальонов работает в почтовом отделении? "/><LineBreak/><Run Text="-На каком участке количество экземпляров подписных изданий максимально? "/><LineBreak/><Run Text="-Каков средний срок подписки по каждому изданию? "/><Run Text="и о почтальонах."/></Paragraph>
+            </FlowDocument>
+        </FlowDocumentPageViewer>
 
      
     </Grid>

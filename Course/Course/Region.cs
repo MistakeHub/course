@@ -4,18 +4,20 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Course
 {
+    [DataContract]
     //Работа с Участком
     public class Region
     {
         public  static int Max = 13;
         //Название Участка
         private string _titleReg;
-        
+        [DataMember]
         public string TitleReg
         {
             get { return _titleReg; }
@@ -24,9 +26,11 @@ namespace Course
                 _titleReg = value;
             }
         }
-       // Почтальон Участка
+        // Почтальон Участка
+        [DataMember]
         public PostMan Postman { get; set; }
         // Подписчики Участка
+        [DataMember]
         public List<Subscriber> Subscribers { get; set; }
         //Конструктор с параметрами 
         public Region(string title)

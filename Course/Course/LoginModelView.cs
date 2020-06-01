@@ -21,7 +21,7 @@ using Course.Views;
 namespace Course
 {
     // Работа с логирование в Приложение
-    class LoginModelView
+    public class LoginModelView
     {
 
         // Логин

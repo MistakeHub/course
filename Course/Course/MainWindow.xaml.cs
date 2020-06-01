@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Course.Model;
 using Course.Views;
+using Newtonsoft.Json;
+using System.Runtime.Serialization.Json;
+using MVVM_Example_04;
 
 
 namespace Course
@@ -41,10 +46,11 @@ namespace Course
             LogInForm log=new LogInForm();
            
             _logindModelView =new LoginModelView();
-            _postalOfficeViewModel = new PostalOfficeViewModel("отдел 1");
+            _postalOfficeViewModel = new PostalOfficeViewModel("отдел 1", new DefaultDialogService(), 
+                new XmlSereliazable());
             _logindModelView.Users = _postalOfficeViewModel.Users;
             log.DataContext = _logindModelView;
-            About ab=new About();
+      
             log.ShowDialog();
             _postalOfficeViewModel.UsernameLog = _logindModelView.UserName;
             _postalOfficeViewModel.PasswordLog = _logindModelView.Password;
@@ -54,13 +60,14 @@ namespace Course
             else if (_postalOfficeViewModel.UsernameLog == "Mag1824")
                 _postalOfficeViewModel.Names = "Авторизован как:Оператор почтового отдела";
             DataContext = _postalOfficeViewModel;
+          
 
-           
+
 
 
         }
+       
 
-        
 
     }
 }

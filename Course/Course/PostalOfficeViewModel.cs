@@ -11,15 +11,20 @@ using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations.Model;
 using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
+using System.IO;
 using System.Net.Mail;
+using System.Runtime.Serialization.Json;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
+using System.Xml.Serialization;
 using Course.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using MVVM_Example_04;
+using Newtonsoft.Json;
 
 namespace Course
 {
@@ -27,6 +32,8 @@ namespace Course
     // Работа с Основным ViewModel Приложения
     public class PostalOfficeViewModel
     {
+        IFileService _fileService;     // реализация файловых операций - "служба" файловых операций
+        IDialogService _dialogService;   // реализация диалогов - "служба" диалогов
         // Переменные, для работы с БД
         public SubscriberDB SubscriberDb { get; set; }
         public SubEditionDB SubEditionDb { get; set; }
@@ -218,10 +225,13 @@ namespace Course
         public int countJurnal { get; set; }
        public int countSub { get; set; }
        // Конструктор ViewModela
-        public PostalOfficeViewModel(string title)
+        public PostalOfficeViewModel(string title, IDialogService dialogService, IFileService fileService)
         {
+            this._dialogService = dialogService;
+            this._fileService = fileService;
 
-          // Установка значений по умолчанию
+
+            // Установка значений по умолчанию
             countBooks = 0;
             countJurnal = 0;
            
@@ -351,8 +361,9 @@ namespace Course
            };
             Results=new ObservableCollection<Result>();
             Receipts=new ObservableCollection<Receipt>();
-
+          
         }
+       
         // Генерация отчёта 
         public void GenerateResults()
         {
@@ -623,6 +634,7 @@ namespace Course
 
                                        }
                                    }
+                              
 
                                // Создание новой коллекции для перерисовки DataGrid
                                    ObservableCollection<Subscriber> subnew =
@@ -643,15 +655,18 @@ namespace Course
                                    
 
                            }
-                             
+                          
 
 
-                           },
+
+                       },
                            obj => Subscribers.Count > 0 && _selectedSub != null));
                 
             }
         } // RemoveCommand
         // Выход
+
+      
         private RelayCommand _quitCommand;
         public RelayCommand QuitCommand
         {
@@ -722,9 +737,63 @@ namespace Course
                            task.OpenReq(Address, Surname);
                        }));
             }
-        } 
+        }
 
+        private RelayCommand _savecommand;
 
+        public RelayCommand SaveCommand
+        {
+
+            get { return _savecommand ?? (_savecommand = new RelayCommand(obj =>
+            {
+                try
+                {
+                    if (_dialogService.SaveFileDialog())
+                    {
+                        // для сохранения передаем преобразованную в список коллекцию
+                        _fileService.Save(_dialogService.FilePath, Subscribers);
+                        _dialogService.ShowMessage("Файл сохранен");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _dialogService.ShowMessage(ex.Message);
+                }
+
+            })); }
+        }
+        private RelayCommand openCommand;
+        public RelayCommand OpenCommand
+        {
+            get
+            {
+                return openCommand ??
+                       (openCommand = new RelayCommand(obj => {
+                           try
+                           {
+                               if (_dialogService.OpenFileDialog())
+                               {
+                                   // прямой вызов возможен, но нежелателен
+                                   // MessageBox.Show("", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                                   // за счет использования вспомогательной переменной -
+                                   // реализована транзакция
+                                   // т.к. ошибки могут возникать только при работе с файлом
+                                   var phones = _fileService.Load(_dialogService.FilePath);
+
+                                   Subscribers.Clear();
+                                   foreach (var p in phones)
+                                       Subscribers.Add(p);
+                                   _dialogService.ShowMessage("Файл открыт, данные загружены");
+                               }
+                           }
+                           catch (Exception ex)
+                           {
+                               _dialogService.ShowMessage(ex.Message);
+                           } // try-catch
+                       }));
+            }
+        } // OpenCommand
 
 
 

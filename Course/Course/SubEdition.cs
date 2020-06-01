@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Course
 {
+    [DataContract]
     //Работа с Подписным изданием 
     public class SubEdition
     {
@@ -15,7 +17,7 @@ namespace Course
 
         //индекс подписного издания
         private static int _index = 0;
-
+        [DataMember]
         public static int Index
         {
             get { return _index; }
@@ -23,7 +25,7 @@ namespace Course
         }
         //Название Подписного издания
         private string _title;
-
+        [DataMember]
         public string Title
         {
             get { return _title;}
@@ -32,7 +34,7 @@ namespace Course
 
         //Цена подисного издания
         private double _price;
-
+        [DataMember]
         public double Price
         {
             get { return _price;}

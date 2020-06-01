@@ -4,17 +4,20 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Course
 {
     // Работа с подписчиками издания
+    [Serializable]
     public class Subscriber
     {
         //Фамилия, имя и отчество подписчика
+        [NonSerialized]
         private string _surnameNP;
-
+        
         public string SurnameNP
         {
             get { return _surnameNP; }
@@ -27,8 +30,11 @@ namespace Course
         }
 
         //Домашний Адресс Подписчика
+
+        [NonSerialized]
         private string _homeaddress;
 
+      
         public string HomeAddress
         {
             get { return _homeaddress; }
@@ -40,12 +46,12 @@ namespace Course
         }
 
         //Индексы Подписного издания
-       
+      
         public ObservableCollection<SubEdition>   IndexEdition { get  ; set; }
 
-      
+
         //Дата Оформления Подписки
-       
+      
         public DateTime DateStartSub { get; set; }
         //Дата окончание Подписки
       
@@ -54,6 +60,7 @@ namespace Course
           get; set;  
         }
         //Срок Подписки
+        [NonSerialized]
         public Double _term;
         public Double Term
         {
@@ -78,7 +85,7 @@ namespace Course
         }
 
         //Конструктор  Без параметров 
-        public Subscriber():this("ФИО", "Адресс", new DateTime(0,0,1),new DateTime(0,0,1) ) { }
+        public Subscriber():this("ФИО", "Адресс", new DateTime(),new DateTime() ) { }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "") =>

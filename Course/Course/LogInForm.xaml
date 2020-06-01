@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Course"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
         mc:Ignorable="d"
+        
       Title="LogInForm" Height="546" Width="466.4" 
        >
     <Window.Background>
@@ -33,7 +35,7 @@
         <StackPanel Grid.Column="1" Margin="0,0,0,0">
             <Button Height="39" Background="Red" FontFamily="Verdana" Foreground="Black" Content="Выход" FontSize="20" Grid.Column="1" Margin="141,2,0,0" VerticalAlignment="Top" Command="{Binding ClosedAll}" ></Button>
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  Margin="154,22,166,0" >
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"   Margin="121,22,130,0" >
             <Image Source="/Images/275-2754806_photo-logo-email-resume-email-icon-png-transparent.png" Height="136"  VerticalAlignment="Center" Margin="-60,0,-65,0"   />
 
         </StackPanel>
