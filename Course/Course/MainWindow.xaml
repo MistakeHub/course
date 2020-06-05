@@ -46,8 +46,8 @@
             </MenuItem>
             <MenuItem Header="Отчёт">
                 <MenuItem Header="Доставка почтовых газет" Command="{Binding Rep}"></MenuItem>
-
-
+<MenuItem Header="Формирование отчёта об почтальонах в файл" Command="{Binding RepPost}"></MenuItem>
+                <MenuItem Header="Формирование отчёта" Command="{Binding RepResult}"></MenuItem>
             </MenuItem>
             <MenuItem Header="О программе " Command="{Binding About}"></MenuItem>
             <MenuItem Header="Справка">
@@ -111,6 +111,7 @@
 
 
                     <DataGrid.Columns >
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=IDPostMan}"></DataGridTextColumn>
                         <DataGridTemplateColumn Header="Участки">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -131,6 +132,7 @@
                             </DataGridTemplateColumn.CellEditingTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="ИмяПочтальона"  Binding="{Binding Path=SurnameNPPost}" Width="300" />
+                  
                     </DataGrid.Columns>
 
                 </DataGrid>
@@ -181,7 +183,9 @@
                 <DataGrid  Name="dgvRequestPost" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto" 
                            HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding RequestPostMen}"  SelectedItem="{Binding SelectedPostManRequest}" >
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=IDPostMan}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Имя"  Binding="{Binding Path=SurnameNPPost}" Width="300"   />
+                    
                     </DataGrid.Columns>
                 </DataGrid>
 

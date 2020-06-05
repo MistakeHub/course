@@ -49,6 +49,9 @@ namespace Course
         public ObservableCollection<Result> Results { get; set; }
         public ObservableCollection<Receipt> Receipts { get; set; }
         public ObservableCollection<PostMan> RequestPostMen { get; set; }
+        public ObservableCollection<PostManResult> PostManResults { get; set; }
+        public ObservableCollection<ResultReport> ResultReports { get; set; }
+        public ObservableCollection<ReportResult> ReportResult { get; set; }
         private PostMan _selectedPostManRequest;
 
         // Переменная, для ввода данных в бп
@@ -312,7 +315,7 @@ namespace Course
            
             Postmans = new ObservableCollection<PostMan>
             {
-                new PostMan{SurnameNPPost = "Горшков Эрик Авксентьевич"},
+                new PostMan{SurnameNPPost = "Горшков Эрик Авксентьевич",},
                 new PostMan{SurnameNPPost = "Сергеев Гарри Георгиевич"},
                 new PostMan{SurnameNPPost = "Сафонов Натан Данилович"},
                 new PostMan{SurnameNPPost = "Орлов Леонард Олегович"},
@@ -361,9 +364,23 @@ namespace Course
            };
             Results=new ObservableCollection<Result>();
             Receipts=new ObservableCollection<Receipt>();
-          
+            PostManResults=new ObservableCollection<PostManResult>();
+            ResultReports=new ObservableCollection<ResultReport>();
+            ReportResult=new ObservableCollection<ReportResult>();
         }
-       
+
+
+        public void GenerateReportResult()
+        {
+
+            foreach (var item in Regions)
+            {
+                ReportResult rep=new ReportResult(item.Id, item.TitleReg, item.Postman.SurnameNPPost ,Subscribers.Average(x=> x.Term),item.Subscribers.Count, 4);
+                ReportResult.Add(rep);
+            }
+
+
+        }
         // Генерация отчёта 
         public void GenerateResults()
         {
@@ -399,11 +416,22 @@ namespace Course
 
 
             }
-
+            
 
         }
-        
-       
+
+        public void GeneratePostManResults()
+        {
+
+            foreach (var item in Postmans)
+            {
+                PostManResult postresul=new PostManResult(item.Id, item.SurnameNPPost);
+                PostManResults.Add(postresul);
+            }
+
+        }
+
+
         public  void GeneratePostaloficeDB()
         {
 
@@ -751,7 +779,7 @@ namespace Course
                     if (_dialogService.SaveFileDialog())
                     {
                         // для сохранения передаем преобразованную в список коллекцию
-                        _fileService.Save(_dialogService.FilePath, Subscribers);
+                        _fileService.SaveSubscriber(_dialogService.FilePath, Subscribers);
                         _dialogService.ShowMessage("Файл сохранен");
                     }
                 }
@@ -779,10 +807,10 @@ namespace Course
                                    // за счет использования вспомогательной переменной -
                                    // реализована транзакция
                                    // т.к. ошибки могут возникать только при работе с файлом
-                                   var phones = _fileService.Load(_dialogService.FilePath);
+                                   var subscribers = _fileService.Load(_dialogService.FilePath);
 
                                    Subscribers.Clear();
-                                   foreach (var p in phones)
+                                   foreach (var p in subscribers)
                                        Subscribers.Add(p);
                                    _dialogService.ShowMessage("Файл открыт, данные загружены");
                                }
@@ -795,6 +823,57 @@ namespace Course
             }
         } // OpenCommand
 
+        private RelayCommand repPost;
+
+        public RelayCommand RepPost
+        {
+            get
+            {
+                return repPost??
+                       (repPost = new RelayCommand(obj => {
+                           try
+                           {
+                               if (_dialogService.SaveFileDialog())
+                               {
+                                   GeneratePostManResults();
+                                   // для сохранения передаем преобразованную в список коллекцию
+                                   _fileService.SavePostResult(_dialogService.FilePath, PostManResults);
+                                   _dialogService.ShowMessage("Файл сохранен");
+                               }
+                           }
+                           catch (Exception ex)
+                           {
+                               _dialogService.ShowMessage(ex.Message);
+                           }
+                       }));
+            }
+        } // OpenCommand
+
+        private RelayCommand repResult;
+
+        public RelayCommand RepResult
+        {
+            get
+            {
+                return repResult ??
+                       (repResult = new RelayCommand(obj => {
+                           try
+                           {
+                               if (_dialogService.SaveFileDialog())
+                               {
+                                   GenerateReportResult();
+                                   // для сохранения передаем преобразованную в список коллекцию
+                                   _fileService.SaveResutlReport(_dialogService.FilePath, ReportResult);
+                                   _dialogService.ShowMessage("Файл сохранен");
+                               }
+                           }
+                           catch (Exception ex)
+                           {
+                               _dialogService.ShowMessage(ex.Message);
+                           }
+                       }));
+            }
+        } // OpenCommand
 
 
         // Основная геннерация Данных для БД
@@ -917,15 +996,7 @@ namespace Course
             PostalOfficeDbs.Insert(0, PostalOfficeDBNew);
             // Добавление PostalOfficeDbs в БД
             GeneratePostaloficeDB();
-           
-
-
-
-
-
-
-
-
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -10,7 +10,10 @@ namespace MVVM_Example_04
 {
    
     public interface IFileService {
-        ObservableCollection<Subscriber> Load(string filename);                    // загрузить коллекцию из файла
-        void Save(string filename, ObservableCollection<Subscriber> subscribers);   // сохранить коллекцию в файле
+        ObservableCollection<Subscriber> Load(string filename); // загрузить коллекцию из файла
+        void SaveSubscriber(string filename, ObservableCollection<Subscriber> subscribers);
+        void SaveResult(string filename, ObservableCollection<Result> subscribers);// сохранить коллекцию в файле
+        void SavePostResult(string filename, ObservableCollection<PostManResult> postManResults);
+        void SaveResutlReport(string filename, ObservableCollection<ReportResult> resultReports);
     } // IFileService
 }

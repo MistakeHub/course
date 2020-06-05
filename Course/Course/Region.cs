@@ -15,6 +15,13 @@ namespace Course
     public class Region
     {
         public  static int Max = 13;
+
+        private static int idregion;
+        public static int IDRegion { get => idregion++; set => idregion = value; }
+        public int Id
+        {
+            get => IDRegion;
+        }
         //Название Участка
         private string _titleReg;
         [DataMember]

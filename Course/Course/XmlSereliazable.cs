@@ -27,16 +27,50 @@ namespace Course
             }
 
             return subscribers;
-        } // Load
+        } // LoadSubscriber
 
         // сохранение коллекции в файл - сериализация
-        public void Save(string filename, ObservableCollection<Subscriber> subscribers)
+        public void SaveSubscriber(string filename, ObservableCollection<Subscriber> subscribers)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<Subscriber>));
             using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, subscribers);
             }
-        } // Save
+        } // SaveSubscriber
+
+        public void SaveResult(string filename, ObservableCollection<Result> results)
+        {
+            XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<Result>));
+            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, results);
+            }
+        } // SaveSubscriber
+
+       public void SavePostResult(string filename, ObservableCollection<PostManResult> resultpost)
+        {
+            XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<PostManResult>));
+            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, resultpost);
+            }
+            
+
+        }
+
+      public void SaveResutlReport(string filename, ObservableCollection<ReportResult> resultReports)
+       {
+           XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<ReportResult>));
+           using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+           {
+               formatter.Serialize(fs, resultReports);
+           }
+
+
+
+       }
+
+
     }
 }

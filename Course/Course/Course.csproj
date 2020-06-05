@@ -343,10 +343,12 @@
       <DependentUpon>ModelMail.tt</DependentUpon>
     </Compile>
     <Compile Include="PostalOfficeViewModel.cs" />
+    <Compile Include="PostManResult.cs" />
     <Compile Include="Receipt.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="PostMan.cs" />
+    <Compile Include="ReportResult.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="SubEdition.cs" />
     <Compile Include="Subscriber.cs" />

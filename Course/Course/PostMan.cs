@@ -11,13 +11,19 @@ using Course.Model;
 
 namespace Course
 {
-    [DataContract]
+    [Serializable]
     //Работа с Почтальоном
     public  class PostMan
     {
+        private static int idpostman;
+        public static int IDPostMan { get=> idpostman++; set=> idpostman=value; }
+        public int Id
+        {
+            get => IDPostMan;
+        }
         //ФИО Почтальона
         private string _surnameNPPost;
-        [DataMember]
+     
         public string SurnameNPPost
         {
             get { return _surnameNPPost; }
@@ -27,13 +33,15 @@ namespace Course
                 }
         }
         //Участок, Участки,  Обслуживаемые Почтальоном
-        [DataMember]
+       
         public List<Region> Regions { get; set; }
         //Конструктор с параметрами 
         public PostMan(string surname)
         {
+            
             _surnameNPPost = surname;
             Regions = new List<Region>();
+      
 
         }
         // Конструктор по умолчанию

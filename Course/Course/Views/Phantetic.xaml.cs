@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MVVM_Example_04;
 
 namespace Course
 {
@@ -26,7 +27,8 @@ namespace Course
         {
             InitializeComponent();
             
-            VmRep = new ViewModelReport(_results);
+            VmRep = new ViewModelReport(_results,  new XmlSereliazable(),
+            new DefaultDialogService());
             DataContext = VmRep;
 
         }

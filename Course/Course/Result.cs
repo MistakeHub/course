@@ -6,14 +6,18 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Course
 {
-  public   class Result
+    [Serializable]
+  public class Result
     {
         // Работа С отчётом
         // Имя Почтальона
-       public string SurnamePostmanst { get; set; }
+
+   
+        public string SurnamePostmanst { get; set; }
        // Кол-во участков, Обслуживающим почтальонов
        public int CountPostmansRegions { get; set; }
        // Количество Изданий
