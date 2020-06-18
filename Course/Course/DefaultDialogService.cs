@@ -35,7 +35,7 @@ namespace MVVM_Example_04
         }
 
         public void ShowMessage(string message) {
-            MessageBox.Show(message, "Работа с файлом", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(message, "Результат", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

@@ -47,6 +47,7 @@ namespace Course
             Subscribers = new List<Subscriber>();
 
         }
+        public Region() : this("Название") { }
 
        
 

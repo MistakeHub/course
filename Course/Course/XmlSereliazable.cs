@@ -71,6 +71,29 @@ namespace Course
 
        }
 
+      public void SavePostMan(string filename, ObservableCollection<PostMan> postMan)
+      {
 
+          XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<PostMan>));
+          using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+          {
+              formatter.Serialize(fs, postMan);
+          }
+
+        }
+
+      public ObservableCollection<PostMan> LoadPostMan(string filename)
+      {
+
+          ObservableCollection<PostMan> postmans = new ObservableCollection<PostMan>();
+          XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<PostMan>));
+          using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+          {
+
+              postmans = (ObservableCollection<PostMan>)formatter.Deserialize(fs);
+
+          }
+          return postmans;
+        }
     }
 }

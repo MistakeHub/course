@@ -45,7 +45,7 @@ namespace Course
             // Окно логирования
             LogInForm log=new LogInForm();
            
-            _logindModelView =new LoginModelView();
+            _logindModelView =new LoginModelView(new DefaultDialogService());
             _postalOfficeViewModel = new PostalOfficeViewModel("отдел 1", new DefaultDialogService(), 
                 new XmlSereliazable());
             _logindModelView.Users = _postalOfficeViewModel.Users;

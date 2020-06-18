@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<ArrayOfPostMan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PostMan>
+    <SurnameNPPost>Костин Денис Мэлсович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Галкин Оскар Борисович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Рожков Григорий Протасьевич</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Кудряшов Филипп Тимурович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Мамонтов Май Владимирович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Исаев Нисон Мэлсович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Григорьев Владлен Валерьевич</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Комиссаров Иван Ефимович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Гусев Валентин Германович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+  <PostMan>
+    <SurnameNPPost>Орехов Николай Антонович</SurnameNPPost>
+    <Regions />
+  </PostMan>
+</ArrayOfPostMan>

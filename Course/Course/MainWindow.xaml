@@ -26,8 +26,14 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0"  VerticalAlignment="Top" Height="25" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <MenuItem Header="Файл">
-                <MenuItem Header="Сохранить" Command="{Binding SaveCommand}"></MenuItem>
-                <MenuItem Header="Загрузить " Command="{Binding OpenCommand}"></MenuItem>
+                <MenuItem Header="Сохранить" >
+                    <MenuItem Header="Заявку Подписчиков" Command="{Binding SaveCommand}" ></MenuItem>
+                    <MenuItem Header="Заявку Почтальонов" Command="{Binding PostManSave}" ></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Загрузить" >
+                    <MenuItem Header=" Заявку Подписчиков" Command="{Binding  OpenCommand}"></MenuItem>
+                    <MenuItem Header=" Заявку Почтальонов" Command="{Binding OpenPostMan}"></MenuItem>
+                </MenuItem>
                 <Separator/>
                 <MenuItem Header="Выход" Command="{Binding QuitCommand}" ></MenuItem>
                

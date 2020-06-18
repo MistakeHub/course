@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Course.Model;
 using Course.Views;
+using MVVM_Example_04;
 
 
 namespace Course
@@ -27,6 +28,7 @@ namespace Course
         // Логин
         private string _username;
 
+        IDialogService _dialogService;   // реализация диалогов - "служба" диалогов
         public string UserName
         {
             get => _username;
@@ -54,10 +56,10 @@ namespace Course
         // Коллекция данных для получения 
         public ObservableCollection<User> Users;
 
-        public LoginModelView()
+        public LoginModelView(IDialogService dialogService)
         {
 
-          
+            this._dialogService = dialogService;
 
 
         }
@@ -70,17 +72,24 @@ namespace Course
                 return _login ??
                        (_login = new RelayCommand(obj =>
                        {
-
-                               if (UserName == Users[0].UserName && Password == Users[0].Password || UserName == Users[1].UserName && Password == Users[1].Password)
+                          
+                               if (UserName == Users[0].UserName && Password == Users[0].Password ||
+                                   UserName == Users[1].UserName && Password == Users[1].Password)
                                {
                                    Application.Current.Windows
                                        .Cast<Window>()
                                        .Single(w => w.DataContext == this)
                                        .Close();
 
-                                   
+
                                }
-                            
+                               else
+                               {
+
+                                   _dialogService.ShowMessage("Ошибка! Неверный логин или пароль!");
+                               }
+                           
+                         
 
                        }
                        ));

@@ -13,6 +13,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.IO;
 using System.Net.Mail;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization.Json;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -811,7 +812,11 @@ namespace Course
 
                                    Subscribers.Clear();
                                    foreach (var p in subscribers)
+                                   {
                                        Subscribers.Add(p);
+                               
+                                   }
+
                                    _dialogService.ShowMessage("Файл открыт, данные загружены");
                                }
                            }
@@ -873,8 +878,68 @@ namespace Course
                            }
                        }));
             }
-        } // OpenCommand
+        } //
 
+        private RelayCommand postSave;
+
+        public RelayCommand PostManSave
+        {
+            get
+            {
+                return postSave ??
+                       (postSave = new RelayCommand(obj => {
+                           try
+                           {
+                               if (_dialogService.SaveFileDialog())
+                               {
+                                 
+                                   // для сохранения передаем преобразованную в список коллекцию
+                                   _fileService.SavePostMan(_dialogService.FilePath,RequestPostMen);
+                                   _dialogService.ShowMessage("Файл сохранен");
+                               }
+                           }
+                           catch (Exception ex)
+                           {
+                               _dialogService.ShowMessage(ex.Message);
+                           }
+                       }));
+            }
+        } //
+
+
+        private RelayCommand openPostMan;
+        public RelayCommand OpenPostMan
+        {
+            get
+            {
+                return openPostMan ??
+                       (openPostMan = new RelayCommand(obj => {
+                           try
+                           {
+                               if (_dialogService.OpenFileDialog())
+                               {
+                                   // прямой вызов возможен, но нежелателен
+                                   // MessageBox.Show("", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                                   // за счет использования вспомогательной переменной -
+                                   // реализована транзакция
+                                   // т.к. ошибки могут возникать только при работе с файлом
+                                   var postMan = _fileService.LoadPostMan(_dialogService.FilePath);
+
+                                  RequestPostMen.Clear();
+                                   foreach (var p in postMan)
+                                      RequestPostMen.Add(p);
+                                   _dialogService.ShowMessage("Файл открыт, данные загружены");
+
+                               }
+                           }
+                           catch (Exception ex)
+                           {
+                               _dialogService.ShowMessage(ex.Message);
+                           } // try-catch
+                       }));
+            }
+        } // OpenCommand
 
         // Основная геннерация Данных для БД
         public  void GeneratePostaffice(Subscriber sub)
